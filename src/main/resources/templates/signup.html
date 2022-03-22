@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" type="text/css" href="/css/signup.css" title="style" />
+</head>
+<body>
+
+    <!-- PENDIENTE: -->
+    <!-- MODIFICAR ACTION HACIA CONTROLADOR -->
+    <!-- AÑADIR LINK HACIA PAGINA INICIO SESION -->
+
+    <form action="#" method="post">
+        <div id="form-header">
+            <img src="../img/logo.png"><br/>
+            <p id="title">Coral</p>
+            <p>Ya tienes cuenta? <a href="/">Inicia sesión</a></p>
+        </div>
+        <div id="form-body">
+            <div id="left-data">
+                <div>
+                    <label for="name">NOMBRE</label>
+                    <input id="name" type="text" name="name" placeholder="Escribe tu nombre">
+                </div>
+                <div>
+                    <label for="email">EMAIL</label>
+                    <input id="email" type="email" name="email" placeholder="Escribe tu email">
+                </div>
+                <div>
+                    <label for="password">CONTRASEÑA</label>
+                    <input id="password" type="password" name="password" placeholder="Escribe tu contraseña">
+                </div>
+                <div>
+                    <label for="password2">REPITE LA CONTRASEÑA</label>
+                    <input id="password2" type="password" name="password2" placeholder="Escribe tu contraseña">
+                </div>
+            </div>
+            <div id="right-data">
+                <div style="width: 56%">
+                    <label for="nif">NIF</label>
+                    <input id="nif" type="text" name="nif" placeholder="Escribe tu NIF">
+                </div>
+                <div style="width: 37%">
+                    <label for="phone">TELÉFONO</label>
+                    <input id="phone" type="text" name="phone" placeholder="Nº teléfono">
+                </div>
+                <div>
+                    <label for="adress">DIRECCIÓN</label>
+                    <input id="adress" type="text" name="adress" placeholder="Escribe tu dirección">
+                </div>
+                <div style="width: 56%">
+                    <label for="town">LOCALIDAD</label>
+                    <input id="town" type="text" name="town" placeholder="Escribe tu localidad">
+                </div>
+                <div style="width: 37%">
+                    <label for="zipcode">C. POSTAL</label>
+                    <input id="zipcode" type="text" name="zipcode" placeholder="Escribe tu código postal">
+                </div>
+                <div>
+                    <button id="submit" type="submit">INICIAR SESIÓN</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
