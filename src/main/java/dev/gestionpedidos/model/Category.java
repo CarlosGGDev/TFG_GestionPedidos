@@ -1,9 +1,13 @@
 package dev.gestionpedidos.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
+@Getter @Setter
 public class Category {
 
     // PROPERTIES
@@ -20,11 +24,6 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
-    }
-
-    // GETTERS & SETTERS
-    public String getName() {
-        return name;
     }
 
 }

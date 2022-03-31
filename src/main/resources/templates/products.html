@@ -1,35 +1,41 @@
 <!doctype html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Productos</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/products.css" title="style" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/products.css" title="style" />
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- JQUERY DATATABLE PLUGIN -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- JS -->
+    <script src="/js/products.js"></script>
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
-        <img src="../static/img/logo.png">
+        <img src="/img/logo.png">
     </header>
 
-    <!--
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Producto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.id}" />
-                <td th:text="${product.name}" />
-            </tr>
-        </tbody>
-    </table>
-    -->
+    <div id="table-container">
+        <table id="products-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio Kg</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JSON DATA -->
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

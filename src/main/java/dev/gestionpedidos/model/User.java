@@ -1,10 +1,14 @@
 package dev.gestionpedidos.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "users")
+@Getter @Setter
+public class User {
 
     // PROPERTIES
     @Id
@@ -35,10 +39,10 @@ public class Customer {
     private String password;
 
     // CONSTRUCTORS
-    public Customer() {
+    public User() {
     }
 
-    public Customer(String nif, String name, String email, String phone, String adress, int zipcode, String town, String password) {
+    public User(String nif, String name, String email, String phone, String adress, int zipcode, String town, String password) {
         this.nif = nif;
         this.name = name;
         this.email = email;

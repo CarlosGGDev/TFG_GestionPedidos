@@ -1,9 +1,13 @@
 package dev.gestionpedidos.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@Getter @Setter
 public class Product {
 
     // PROPERTIES
@@ -14,7 +18,7 @@ public class Product {
     @Column(length = 70, nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
 
@@ -29,15 +33,6 @@ public class Product {
         this.name = name;
         this.category = category;
         this.price = price;
-    }
-
-    // GETTERS & SETTERS
-    public String getName() {
-        return name;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 
 }
