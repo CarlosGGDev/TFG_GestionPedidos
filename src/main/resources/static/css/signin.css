@@ -44,3 +44,7 @@ form input {
     border: none !important;
     background-color: rgb(241, 243, 244) !important;
 }
+
+form input::placeholder {
+    color: rgb(155, 155, 155) !important;
+}

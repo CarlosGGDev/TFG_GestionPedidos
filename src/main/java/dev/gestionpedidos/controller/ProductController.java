@@ -39,8 +39,7 @@ public class ProductController {
 
     @PostMapping // http://localhost:8080/productos
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
-        Product productOpt = productService.saveProduct(product);
-        return ResponseEntity.ok(productOpt);
+        return ResponseEntity.ok(productService.saveProduct(product));
     }
 
     @DeleteMapping(value = "/{productId}") // http://localhost:8080/productos/1

@@ -45,8 +45,7 @@ public class OrderController {
 
 	@PostMapping // http://localhost:8080/pedidos
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order) {
-		Order orderOpt = orderService.saveOrder(order);
-		return ResponseEntity.ok(orderOpt);
+		return ResponseEntity.ok(orderService.saveOrder(order));
 	}
 
 	@DeleteMapping(value = "/{orderId}") // http://localhost:8080/pedidos/1

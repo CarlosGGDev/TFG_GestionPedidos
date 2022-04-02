@@ -15,16 +15,16 @@
     <!-- AÑADIR LINK HACIA PAGINA REGISTRO -->
 
     <form th:action="@{/acceso}" method="post" class="col-4 my-5 mx-auto p-5 d-flex flex-wrap flex-column">
-        <div class="my-1 text-center">
+        <div class="text-center">
             <img class="img-fluid" th:src="@{/img/logo.png}"><br/>
-            <p class="m-2 fs-1">Coral</p>
+            <p class="m-0 fs-1">Coral</p>
             <p>No tienes cuenta? <a href="registro">Regístrate</a></p>
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
             <label class="form-label" for="email" >EMAIL</label>
             <input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email aquí" required>
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
             <label class="form-label" for="password">CONTRASEÑA</label>
             <input id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña aquí" required>
         </div>

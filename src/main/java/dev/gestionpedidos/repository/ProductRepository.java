@@ -16,6 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
      * @param id Category ID
      * @return An optional list of products
      */
-    @Query("SELECT p from Product p WHERE p.category.id = ?1")
+    @Query("SELECT p FROM Product p WHERE p.category.id = ?1")
     Optional<List<Product>> getProductsByCategory(int id);
 }

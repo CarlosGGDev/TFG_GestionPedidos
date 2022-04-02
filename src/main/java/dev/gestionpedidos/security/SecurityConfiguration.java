@@ -1,3 +1,4 @@
+/*
 package dev.gestionpedidos.security;
 
 import javax.sql.DataSource;
@@ -11,20 +12,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+*/
+    /*
     @Autowired
     private DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*
         auth.jdbcAuthentication()
             .dataSource(dataSource)
             .usersByUsernameQuery("SELECT u from User u WHERE u.email = ?")
             .authoritiesByUsernameQuery("SELECT u from User u WHERE u.email = ?");
-        */
     }
+    */
 
+    /*
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -45,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .invalidateHttpSession(true)
                         .permitAll();
     }
+    */
 
     /*
     @Bean
@@ -52,5 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     */
-
+/*
 }
+
+ */

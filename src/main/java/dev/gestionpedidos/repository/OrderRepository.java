@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-	@Query("SELECT o from Order o WHERE o.user.id = ?1")
+	@Query("SELECT o FROM Order o WHERE o.user.id = ?1")
 	Optional<List<Order>> getCustomerOrders(int userId);
 }

@@ -1,5 +1,6 @@
 package dev.gestionpedidos.model;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +30,10 @@ public class Order {
     private String status;
 
     private String comment;
+
+    @Transient
+    @JoinColumn(referencedColumnName = "id")
+    private List<OrderDetail> orderDetails;
 
     private double total;
 
