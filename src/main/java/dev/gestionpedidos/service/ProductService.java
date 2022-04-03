@@ -10,5 +10,6 @@ public interface ProductService {
 	Optional<List<Product>> getProductsByCategory(int categoryId);
 	Product saveProduct(Product product);
 	Optional<Product> deleteProduct(int productId);
+	// TODO: metodo editProduct()
 	boolean editProduct(int productId);
 }

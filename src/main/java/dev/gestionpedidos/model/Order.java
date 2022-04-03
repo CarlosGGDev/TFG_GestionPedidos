@@ -27,12 +27,14 @@ public class Order {
 
     private LocalDateTime shippingDate;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     private String comment;
 
+    // TOREV: una lista con los detalles por cada factura
     @Transient
-    @JoinColumn(referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
     private double total;
@@ -41,7 +43,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(User user, LocalDateTime orderDate, String status, String comment, double total) {
+    // TOREV: STATUS ES DE TIPO ENUM (clase propia)
+    public Order(User user, LocalDateTime orderDate, Status status, String comment, double total) {
         this.user = user;
         this.orderDate = orderDate;
         this.status = status;

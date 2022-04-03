@@ -1,7 +1,6 @@
 package dev.gestionpedidos.controller;
 
 import dev.gestionpedidos.model.OrderDetail;
-import dev.gestionpedidos.model.Product;
 import dev.gestionpedidos.service.OrderDetailService;
 import java.util.List;
 import java.util.Optional;
@@ -25,13 +24,14 @@ public class OrderDetailController {
 		this.orderDetailService = orderDetailService;
 	}
 
-	// ATENCION: utiliza @RequestParam (parametro en la URL)
+	// TOREV: utiliza @RequestParam (parametro en la URL)
 	@GetMapping(params = "id_pedido") // http://localhost:8080/pedidos/detalle?id_pedido=1
 	public ResponseEntity<List<OrderDetail>> getOrderDetails(@RequestParam("id_pedido") int orderId) {
-		return ResponseEntity.of(orderDetailService.getOrderDetails(orderId));
+		Optional<List<OrderDetail>> orderDetailsOpt = orderDetailService.getOrderDetails(orderId);
+		return ResponseEntity.of(orderDetailsOpt);
 	}
 
-	// ATENCION: utiliza @RequestParam (parametro en la URL)
+	// TOREV: utiliza @RequestParam (parametro en la URL)
 	@GetMapping(params = {"id_pedido", "id_detalle"}) // http://localhost:8080/pedidos/detalle?id_pedido=1&id_detalle=1
 	public ResponseEntity<OrderDetail> getOrderDetail(@RequestParam("id_pedido") int orderId, @RequestParam("id_detalle") int orderDetailId) {
 		Optional<OrderDetail> orderDetailOpt = orderDetailService.getOrderDetail(orderId, orderDetailId);
@@ -41,6 +41,11 @@ public class OrderDetailController {
 	@PostMapping// http://localhost:8080/pedidos/detalle
 	public ResponseEntity<OrderDetail> saveOrderDetail(@RequestBody OrderDetail orderDetail) {
 		return ResponseEntity.ok(orderDetailService.saveOrderDetail(orderDetail));
+	}
+
+	@DeleteMapping(value = "/{orderId}") // http://localhost:8080/pedidos/detalle/1
+	public void deleteOrderDetails(@PathVariable("orderId") int orderId) {
+		orderDetailService.deleteOrderDetails(orderId);
 	}
 
 	@DeleteMapping(value = "/{orderId}/{orderDetailId}") // http://localhost:8080/pedidos/detalle/1/1

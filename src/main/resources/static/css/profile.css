@@ -1,0 +1,24 @@
+/* COMMON */
+
+* {
+    color: rgb(71, 71, 71) !important;
+}
+
+/* LOGO */
+
+#logo {
+    width: 50px;
+    height: 50px;
+}
+
+/* NAV BAR */
+
+nav {
+    background-color: rgba(243, 243, 243);
+}
+
+/* FOOTER */
+
+footer {
+    background-color: rgba(243, 243, 243);
+}

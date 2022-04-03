@@ -4,8 +4,10 @@ import dev.gestionpedidos.model.OrderDetail;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
@@ -16,9 +18,8 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
 	@Query("SELECT o FROM OrderDetail o WHERE o.order.id = ?1 AND o.id = ?2")
 	Optional<OrderDetail> getOrderDetail(int orderId, int orderDetailId);
 
+	@Transactional
+	@Modifying
 	@Query("DELETE FROM OrderDetail o WHERE o.order.id = ?1")
-	Optional<List<OrderDetail>> deleteOrderDetails(int orderId);
-
-	@Query("DELETE FROM OrderDetail o WHERE o.order.id = ?1 AND o.id = ?2")
-	Optional<OrderDetail> deleteOrderDetail(int orderId, int orderDetailId);
+	void deleteOrderDetails(int orderId);
 }

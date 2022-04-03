@@ -8,6 +8,6 @@ public interface OrderDetailService {
 	Optional<List<OrderDetail>> getOrderDetails(int orderId);
 	Optional<OrderDetail> getOrderDetail(int orderId, int orderDetailId);
 	OrderDetail saveOrderDetail(OrderDetail orderDetail);
-	Optional<List<OrderDetail>> deleteOrderDetails(int orderId);
+	void deleteOrderDetails(int orderId);
 	Optional<OrderDetail> deleteOrderDetail(int orderId, int orderDetailId);
 }

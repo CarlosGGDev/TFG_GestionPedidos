@@ -29,14 +29,14 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.getOrders());
 	}
 
-	// ATENCION: utiliza @RequestParam (parametro en la URL)
+	// TOREV: utiliza @RequestParam (parametro en la URL)
 	@GetMapping(params = "id_pedido") // http://localhost:8080/pedidos?id_pedido=1
 	public ResponseEntity<Order> getOrder(@RequestParam("id_pedido") int orderId) {
 		Optional<Order> orderOpt = orderService.getOrder(orderId);
 		return ResponseEntity.of(orderOpt);
 	}
 
-	// ATENCION: utiliza @RequestParam (parametro en la URL)
+	// TOREV: utiliza @RequestParam (parametro en la URL)
 	@GetMapping(params = "id_usuario") // http://localhost:8080/pedidos?id_usuario=1
 	public ResponseEntity<List<Order>> getCustomerOrders(@RequestParam("id_usuario") int userId) {
 		Optional<List<Order>> ordersOpt = orderService.getCustomerOrders(userId);

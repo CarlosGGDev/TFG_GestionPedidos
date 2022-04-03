@@ -35,12 +35,17 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public Optional<List<OrderDetail>> deleteOrderDetails(int orderId) {
-		return this.orderDetailRepository.deleteOrderDetails(orderId);
+	public void deleteOrderDetails(int orderId) {
+		orderDetailRepository.deleteOrderDetails(orderId);
 	}
 
+	// TODO: necesario??
 	@Override
 	public Optional<OrderDetail> deleteOrderDetail(int orderId, int orderDetailId) {
-		return this.orderDetailRepository.deleteOrderDetail(orderId, orderDetailId);
+		Optional<OrderDetail> orderDetailOpt = getOrderDetail(orderId, orderDetailId);
+		if (orderDetailOpt.isPresent()) {
+			orderDetailRepository.deleteById(orderDetailId);
+		}
+		return orderDetailOpt;
 	}
 }
