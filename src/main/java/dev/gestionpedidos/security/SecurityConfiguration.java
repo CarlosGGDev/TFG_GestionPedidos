@@ -1,6 +1,6 @@
-/*
 package dev.gestionpedidos.security;
 
+import dev.gestionpedidos.service.UserService;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-*/
+
+    private final UserService userService;
+
+    public SecurityConfiguration(UserService userService) {
+        this.userService = userService;
+    }
+
     /*
     @Autowired
     private DataSource dataSource;
@@ -26,28 +32,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     */
 
-    /*
+    // TODO: añadir redireccion a pagina de inicio, pagina de error y logout
+    //  .defaultSuccessUrl("/main").permitAll()
+    //  .failureUrl("/pruebaError").permitAll()
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                     .authorizeRequests()
-                        .antMatchers("/css/**",
+                        .antMatchers("/registro",
+                                                 "/css/**",
                                                  "/img/**",
-                                                 "/js/**",
-                                                 "/registro").permitAll()
+                                                 "/js/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
                         .loginPage("/acceso").permitAll()
                             .usernameParameter("email").passwordParameter("password")
-                        .defaultSuccessUrl("/main").permitAll()
-                        .failureUrl("/pruebaError").permitAll()
                         .and()
                     .logout()
                         .invalidateHttpSession(true)
+                        .clearAuthentication(true)
                         .permitAll();
     }
-    */
 
     /*
     @Bean
@@ -55,7 +61,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     */
-/*
-}
 
- */
+}
