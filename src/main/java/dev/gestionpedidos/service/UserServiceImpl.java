@@ -22,19 +22,23 @@ public class UserServiceImpl implements UserService {
 
     // TODO: que solo pueda acceder el administrador, o si eres el usuario que toca
 
+    @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public Optional<User> getUser(int userId) {
         return userRepository.findById(userId);
     }
 
+    @Override
     public User saveUser(User user) {
         userRepository.save(user);
         return user;
     }
 
+    @Override
     public Optional<User> deleteUser(int userId) {
         Optional<User> userOpt = getUser(userId);
         if (userOpt.isPresent()) {

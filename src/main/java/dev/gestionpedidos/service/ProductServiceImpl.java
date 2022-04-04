@@ -20,23 +20,28 @@ public class ProductServiceImpl implements ProductService {
 
     // CRUD METHODS
 
+    @Override
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
 
+    @Override
     public Optional<Product> getProduct(int productId) {
         return productRepository.findById(productId);
     }
 
+    @Override
     public Optional<List<Product>> getProductsByCategory(int categoryId) {
         return productRepository.getProductsByCategory(categoryId);
     }
 
+    @Override
     public Product saveProduct(Product product) {
         productRepository.save(product);
         return product;
     }
 
+    @Override
     public Optional<Product> deleteProduct(int productId) {
         Optional<Product> productOpt = getProduct(productId);
         if (productOpt.isPresent()) {
@@ -45,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
         return productOpt;
     }
 
+    @Override
     public boolean editProduct(int productId) {
         // TODO
         // editar tambien dato return firma metodo (boolean)
