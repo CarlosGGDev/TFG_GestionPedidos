@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class User {
 
     // PROPERTIES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -39,6 +40,7 @@ public class User {
     private String password;
 
     // CONSTRUCTORS
+
     public User() {
     }
 

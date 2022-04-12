@@ -1,36 +1,36 @@
 package dev.gestionpedidos.security;
 
-import dev.gestionpedidos.service.UserService;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration(UserService userService) {
-        this.userService = userService;
+    public SecurityConfiguration(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
-    /*
-    @Autowired
-    private DataSource dataSource;
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT u from User u WHERE u.email = ?")
-            .authoritiesByUsernameQuery("SELECT u from User u WHERE u.email = ?");
+        auth
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(this.passwordEncoder());
     }
-    */
 
     // TODO: añadir redireccion a pagina de inicio, pagina de error y logout
     //  .defaultSuccessUrl("/main").permitAll()
@@ -39,27 +39,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                     .authorizeRequests()
-                        .antMatchers("/registro",
+                        .antMatchers("/acceso",
+                                                 "/registro",
                                                  "/css/**",
                                                  "/img/**",
                                                  "/js/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
-                        .loginPage("/acceso").permitAll()
-                            .usernameParameter("email").passwordParameter("password")
+                        .loginPage("/acceso")
+                        .loginProcessingUrl("/acceso")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/acceso?error=true")
                         .and()
                     .logout()
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll();
     }
-
-    /*
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    */
 
 }

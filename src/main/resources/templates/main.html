@@ -36,10 +36,13 @@
                         <li class="nav-item">
                             <a class="nav-link">Perfil</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#"><i class="bi bi-box-arrow-right m-2"></i>Salir</a>
-                        </li>
                     </ul>
+
+                    <!-- USER NAME -->
+                    <div th:if="${session.user != null}" class="mx-3">Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
+					<form th:action="@{/logout}" method="post">
+						<button type="submit" class="btn btn-dark text-light">Cerrar sesión</button>
+					</form>
                 </div>
             </div>
         </nav>
@@ -47,6 +50,7 @@
 
     <!-- CONTENT -->
     <section>
+
         <div class="container d-flex flex-wrap justify-content-center p-4">
             <div class="col-10 mb-4 p-3 d-flex flex-wrap justify-content-between">
                 <h3>Pedidos en curso</h3>

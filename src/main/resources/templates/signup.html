@@ -16,55 +16,58 @@
     <!-- MODIFICAR ACTION HACIA CONTROLADOR -->
     <!-- AÑADIR LINK HACIA PAGINA INICIO SESION -->
 
-    <form th:action="@{/registro}" method="post" class="col-8 my-5 mx-auto p-5 px-2 d-flex flex-wrap">
+    <form th:action="@{/registro}" th:object="${user}" method="post" class="col-8 my-5 mx-auto p-5 px-2 d-flex flex-wrap">
         <div class="text-center col-12">
             <img class="img-fluid" th:src="@{/img/logo.png}"><br/>
             <p class="m-0 fs-1">Coral</p>
-            <p>Ya tienes cuenta? <a href="/">Inicia sesión</a></p>
+            <p>Ya tienes cuenta? <a th:href="@{/acceso}">Inicia sesión</a></p>
         </div>
         <div class="col-12 d-flex flex-wrap justify-content-evenly">
             <div class="col-5 d-flex flex-wrap justify-content-between">
                 <div class="col-12 mb-3">
                     <label class="form-label" for="name">NOMBRE</label>
-                    <input id="name" class="form-control" type="text" name="name" placeholder="Escribe tu nombre" required>
+                    <input th:field="*{name}" id="name" class="form-control" type="text" name="name" placeholder="Escribe tu nombre" required />
+
+                    <!-- AVISOS DE ERRORES?? -->
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="email">EMAIL</label>
-                    <input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email" required>
+                    <input th:field="*{email}" id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email" required />
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="password">CONTRASEÑA</label>
-                    <input id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required>
+                    <input th:field="*{password}" id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required />
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="password2">REPITE LA CONTRASEÑA</label>
-                    <input id="password2" class="form-control" type="password" name="password2" placeholder="Escribe tu contraseña" required>
+                    <input id="password2" class="form-control" type="password" name="password2" placeholder="Escribe tu contraseña" required />
                 </div>
             </div>
             <div class="col-5 d-flex flex-wrap justify-content-between">
                 <div class="col-5 mb-3">
                     <label class="form-label" for="nif">NIF</label>
-                    <input id="nif" class="form-control" type="text" name="nif" placeholder="Escribe tu NIF" required>
+                    <input th:field="*{nif}" id="nif" class="form-control" type="text" name="nif" placeholder="Escribe tu NIF" required />
                 </div>
                 <div class="col-6 mb-3">
                     <label class="form-label" for="phone">TELÉFONO</label>
-                    <input id="phone" class="form-control" type="text" name="phone" placeholder="Nº teléfono" required>
+                    <input th:field="*{phone}" id="phone" class="form-control" type="text" name="phone" placeholder="Nº teléfono" required />
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="adress">DIRECCIÓN</label>
-                    <input id="adress" class="form-control" type="text" name="adress" placeholder="Escribe tu dirección" required>
+                    <input th:field="*{adress}" id="adress" class="form-control" type="text" name="adress" placeholder="Escribe tu dirección" required />
                 </div>
                 <div class="col-7 mb-3">
                     <label class="form-label" for="town">LOCALIDAD</label>
-                    <input id="town" class="form-control" type="text" name="town" placeholder="Escribe tu localidad" required>
+                    <input th:field="*{town}" id="town" class="form-control" type="text" name="town" placeholder="Escribe tu localidad" required />
                 </div>
                 <div class="col-4 mb-3">
                     <label class="form-label" for="zipcode">C. POSTAL</label>
-                    <input id="zipcode" class="form-control" type="text" name="zipcode" placeholder="C.P." required>
+                    <input th:field="*{zipcode}" id="zipcode" class="form-control" type="text" name="zipcode" placeholder="C.P." required />
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="zipcode">&nbsp;</label>
-                    <button class="col-12 btn btn-dark" type="submit">INICIAR SESIÓN</button>
+                    <button class="col-12 btn btn-dark" type="submit">REGISTRARSE</button>
                 </div>
             </div>
         </div>

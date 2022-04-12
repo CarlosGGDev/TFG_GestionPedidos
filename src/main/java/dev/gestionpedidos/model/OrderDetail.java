@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class OrderDetail {
 
     // PROPERTIES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -33,6 +34,7 @@ public class OrderDetail {
     private double total;
 
     // CONSTRUCTORS
+
     public OrderDetail() {
     }
 

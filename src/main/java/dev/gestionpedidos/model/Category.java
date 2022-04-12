@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Category {
 
     // PROPERTIES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,6 +20,7 @@ public class Category {
     private String name;
 
     // CONSTRUCTORS
+
     public Category() {
     }
 

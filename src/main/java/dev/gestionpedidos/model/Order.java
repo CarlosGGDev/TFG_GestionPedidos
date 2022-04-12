@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Order {
 
     // PROPERTIES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
@@ -40,6 +41,7 @@ public class Order {
     private double total;
 
     // CONSTRUCTORS
+
     public Order() {
     }
 

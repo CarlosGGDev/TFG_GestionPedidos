@@ -12,9 +12,9 @@ form {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
 
-form img {
-    width: 70px;
-    height: 70px;
+#logo {
+    width: 70px !important;
+    height: 70px !important;
 }
 
 form a {
@@ -47,4 +47,11 @@ form input {
 
 form input::placeholder {
     color: rgb(155, 155, 155) !important;
+}
+
+#alert-error {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

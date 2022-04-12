@@ -2,8 +2,12 @@ package dev.gestionpedidos.controller;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.UserService;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,20 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/registro")
 public class SignupController {
 
-    private final UserService userService;
+    private UserService userService;
 
     public SignupController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping // http://localhost:8080/registro
-    public String showSignUpForm() {
+    public String showSignUpForm(Model model) {
+        model.addAttribute("user", new User());
         return "signup";
     }
 
     @PostMapping // http://localhost:8080/registro
-    public void signUpUser(User user) {
-        userService.saveUser(user);
+    public String signUp(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "redirect:/registro";
+        } else {
+            model.addAttribute("user", userService.saveUser(user));
+        }
+        return "redirect:/acceso";
     }
-
 }

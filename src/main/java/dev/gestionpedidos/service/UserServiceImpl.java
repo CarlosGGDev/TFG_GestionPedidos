@@ -2,6 +2,7 @@ package dev.gestionpedidos.service;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,12 +11,13 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    // CONSTRUCTORS
-
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // CRUD METHODS
@@ -33,9 +35,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByName(String name) {
+        return this.userRepository.findByName(name);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    @Override
     public User saveUser(User user) {
-        userRepository.save(user);
-        return user;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override

@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Product {
 
     // PROPERTIES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,6 +27,7 @@ public class Product {
     private double price;
 
     // CONSTRUCTORS
+
     public Product() {
     }
 

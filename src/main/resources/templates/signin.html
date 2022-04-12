@@ -14,15 +14,22 @@
     <!-- MODIFICAR ACTION HACIA CONTROLADOR -->
     <!-- AÑADIR LINK HACIA PAGINA REGISTRO -->
 
-    <form th:action="@{/acceso}" method="post" class="col-4 my-5 mx-auto p-5 d-flex flex-wrap flex-column">
+    <form th:action="@{/acceso}" method="post" class="col-4 mx-auto my-5 p-5 d-flex flex-wrap flex-column">
         <div class="text-center">
-            <img class="img-fluid" th:src="@{/img/logo.png}"><br/>
+            <img id="logo" class="img-fluid" th:src="@{/img/logo.png}"><br/>
             <p class="m-0 fs-1">Coral</p>
-            <p>No tienes cuenta? <a href="registro">Regístrate</a></p>
+            <p>No tienes cuenta? <a th:href="@{/registro}">Regístrate</a></p>
         </div>
+
+        <!-- AVISOS DE ERRORES???
+            ESTE AVISO DE LANZARÁ YA QUE ASÍ ESTA DEFINIDO EN LA CLASE SecurityConfiguration (.failureUrl("/acceso?error=true"))
+        -->
+        <div id="alert-error" th:if="${param.error}" class="alert alert-danger">Credenciales incorrectas</div>
         <div class="mb-3">
             <label class="form-label" for="email" >EMAIL</label>
-            <input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email aquí" required>
+
+            <!-- EL INPUT DE EMAIL TIENE QUE TENER COMO NOMBRE 'USERNAME' PARA QUE SPRING SECURITY LO RECONOZCA ??? -->
+            <input id="email" class="form-control" type="email" name="username" placeholder="Escribe tu email aquí" required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="password">CONTRASEÑA</label>
