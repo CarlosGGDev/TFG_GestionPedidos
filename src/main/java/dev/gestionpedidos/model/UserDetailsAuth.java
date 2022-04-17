@@ -27,6 +27,10 @@ public class UserDetailsAuth implements UserDetails {
 		return user.getName();
 	}
 
+	public String getEmail() {
+		return user.getEmail();
+	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

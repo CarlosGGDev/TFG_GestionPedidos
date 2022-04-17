@@ -35,6 +35,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public Optional<List<Order>> getCustomerPendingOrders(int userId) {
+		return this.orderRepository.getCustomerPendingOrders(userId);
+	}
+
+	@Override
+	public Optional<List<Order>> getCustomerPreviousOrders(int userId) {
+		return this.orderRepository.getCustomerPreviousOrders(userId);
+	}
+
+	@Override
 	public Order saveOrder(Order order) {
 		return this.orderRepository.save(order);
 	}

@@ -8,6 +8,8 @@ public interface OrderService {
 	List<Order> getOrders();
 	Optional<Order> getOrder(int orderId);
 	Optional<List<Order>> getCustomerOrders(int userId);
+	Optional<List<Order>> getCustomerPendingOrders(int userId);
+	Optional<List<Order>> getCustomerPreviousOrders(int userId);
 	Order saveOrder(Order order);
 	Optional<Order> deleteOrder(int orderId);
 }

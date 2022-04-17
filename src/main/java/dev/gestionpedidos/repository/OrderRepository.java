@@ -12,4 +12,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	@Query("SELECT o FROM Order o WHERE o.user.id = ?1")
 	Optional<List<Order>> getCustomerOrders(int userId);
+
+	@Query("SELECT o FROM Order o WHERE o.user.id = ?1 AND o.status = 'pendiente' OR o.status = 'enviado'")
+	Optional<List<Order>> getCustomerPendingOrders(int userId);
+
+	@Query("SELECT o FROM Order o WHERE o.user.id = ?1 AND o.status = 'entregado'")
+	Optional<List<Order>> getCustomerPreviousOrders(int userId);
 }

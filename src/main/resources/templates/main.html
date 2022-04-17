@@ -39,7 +39,10 @@
                     </ul>
 
                     <!-- USER NAME -->
-                    <div th:if="${session.user != null}" class="mx-3">Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
+                    <!--
+                    <div th:if="${user != null}" class="mx-3">Bienvenida/o <span class="font-italic" th:text="${user.getName()}"></span></div>
+                    -->
+                    <div>Bienvenida/o <span class="font-italic" th:text="${user.getName()}"></span></div>
 					<form th:action="@{/logout}" method="post">
 						<button type="submit" class="btn btn-dark text-light">Cerrar sesión</button>
 					</form>
@@ -52,12 +55,97 @@
     <section>
 
         <div class="container d-flex flex-wrap justify-content-center p-4">
-            <div class="col-10 mb-4 p-3 d-flex flex-wrap justify-content-between">
-                <h3>Pedidos en curso</h3>
+            <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
+                <h3>Pedidos en curso<span class="fs-5" th:text="| (${pendingOrders.size})|"></span></h3>
                 <button class="btn btn-new-order">Nuevo pedido</button>
+                <div class="col-12">
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th>REF.</th>
+                                <th>FECHA PEDIDO</th>
+                                <th>ESTADO</th>
+                                <th>TOTAL</th>
+                                <th>COMENTARIO</th>
+                                <th>DETALLE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:each="order : ${pendingOrders}">
+                                <tr>
+                                    <td th:text="${order.id}"></td>
+                                    <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
+                                    <td th:text="${order.status}"></td>
+                                    <td th:text="|${order.total} €|"></td>
+                                    <td th:text="${order.comment}"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-detail" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}">VER</button>
+                                    </td>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" th:attr="id='modal'+${order.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalLabel">Detalle de pedido</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="d-flex flex-wrap justify-content-between">
+                                                        <b class="col-5">PRODUCTO</b>
+                                                        <b class="col-3">CANTIDAD</b>
+                                                        <b class="col-2">PRECIO</b>
+                                                        <b class="col-2">TOTAL</b>
+                                                    </div>
+                                                    <div th:each="detail : ${order.orderDetails}" class="d-flex flex-wrap justify-content-between">
+                                                        <span th:text="${detail.product.name}" class="col-5"></span>
+                                                        <span th:text="${detail.quantity}" class="col-3"></span>
+                                                        <span th:text="${detail.price}" class="col-2"></span>
+                                                        <span th:text="${detail.total}" class="col-2"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <span><b>TOTAL:</b></span>
+                                                    <span th:text="|${order.total} €|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-10 mb-4 p-3">
-                <h4>Pedidos anteriores</h4>
+            <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
+                <h4>Pedidos anteriores<span class="fs-5" th:text="| (${previousOrders.size})|"></span></h4>
+                <div class="col-12">
+                    <p th:if="${previousOrders.size == 0}" class="my-3">No tienes pedidos anteriores</p>
+                    <table th:if="${previousOrders.size > 0}" class="table table-stripped">
+                        <thead>
+                        <tr>
+                            <th>REF.</th>
+                            <th>FECHA PEDIDO</th>
+                            <th>ESTADO</th>
+                            <th>TOTAL</th>
+                            <th>COMENTARIO</th>
+                            <th>DETALLE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="order : ${previousOrders}">
+                            <tr>
+                                <td th:text="${order.id}"></td>
+                                <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
+                                <td th:text="${order.status}"></td>
+                                <td th:text="|${order.total} €|"></td>
+                                <td th:text="${order.comment}"></td>
+                                <td><button class="btn btn-sm btn-detail">VER</button></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

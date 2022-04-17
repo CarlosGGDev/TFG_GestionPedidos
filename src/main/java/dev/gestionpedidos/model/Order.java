@@ -34,7 +34,6 @@ public class Order {
     private String comment;
 
     // TOREV: una lista con los detalles por cada factura
-    @Transient
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
