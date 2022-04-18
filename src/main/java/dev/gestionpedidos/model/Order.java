@@ -28,8 +28,8 @@ public class Order {
 
     private LocalDateTime shippingDate;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @Column(length = 9, nullable = false)
+    private String status;
 
     private String comment;
 
@@ -45,7 +45,7 @@ public class Order {
     }
 
     // TOREV: STATUS ES DE TIPO ENUM (clase propia)
-    public Order(User user, LocalDateTime orderDate, Status status, String comment, double total) {
+    public Order(User user, LocalDateTime orderDate, String status, String comment, double total) {
         this.user = user;
         this.orderDate = orderDate;
         this.status = status;

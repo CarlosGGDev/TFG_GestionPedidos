@@ -3,6 +3,7 @@ package dev.gestionpedidos.controller;
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.OrderService;
 import dev.gestionpedidos.service.UserService;
+import javax.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,10 @@ public class MainController {
 	}
 
 	@GetMapping
-	public String showMain(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+	public String showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session, Model model) {
 		User user = userService.findByName(userDetails.getUsername());
-		model.addAttribute("user", user);
+		// model.addAttribute("user", user);
+		session.setAttribute("user", user);
 		model.addAttribute("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
 		model.addAttribute("previousOrders", orderService.getCustomerPreviousOrders(user.getId()).get());
 		return "main";

@@ -1,5 +1,6 @@
 package dev.gestionpedidos.service;
 
+import dev.gestionpedidos.model.Role;
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.ROLE_USER);
         return userRepository.save(user);
     }
 

@@ -33,7 +33,6 @@ nav {
 table {
     margin-top: 40px;
     border: 1px solid #e7e7e7;
-    border-radius: 10px !important;
 }
 
 table th {
@@ -51,13 +50,12 @@ table tr:hover {
 }
 
 .btn-detail {
-    color: white !important;
     border-radius: 10px !important;
-    background-color: rgb(248, 193, 130) !important;
+    background-color: rgb(237, 237, 237) !important;
 }
 
 .btn-detail:hover {
-    background-color: rgb(245, 182, 107) !important;
+    background-color: rgb(255, 219, 176) !important;
 }
 
 .pending-order {

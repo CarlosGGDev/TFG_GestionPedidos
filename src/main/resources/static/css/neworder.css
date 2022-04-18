@@ -1,0 +1,74 @@
+/* COMMON */
+
+* {
+	color: rgb(71, 71, 71) !important;
+}
+
+/* LOGO */
+
+#logo {
+	width: 50px !important;
+	height: 50px !important;
+}
+
+/* NAV BAR */
+
+nav {
+	background-color: rgba(243, 243, 243);
+}
+
+/* PRODUCTS TABLE */
+
+table {
+	border: 1px solid #e7e7e7;
+}
+
+table th {
+	background-color: rgba(248, 248, 249) !important;
+}
+
+table th, td {
+	padding: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+table tr:hover {
+	background-color: rgba(255, 245, 233);
+}
+
+table input {
+	width: 45px;
+}
+
+.btn-add {
+	border-radius: 10px !important;
+	background-color: rgb(237, 237, 237) !important;
+}
+
+.btn-add:hover {
+	background-color: rgb(255, 219, 176) !important;
+}
+
+/* SHOPPING CART */
+
+#shopping-cart {
+	position: sticky;
+	top: 30px;
+	align-self: flex-start;
+}
+
+.btn-remove {
+	border-radius: 10px !important;
+	background-color: rgb(237, 237, 237) !important;
+}
+
+.btn-remove:hover i {
+	color: #b22e2e !important;
+}
+
+/* FOOTER */
+
+footer {
+	background-color: rgba(243, 243, 243);
+}
