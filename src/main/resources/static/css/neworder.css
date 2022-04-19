@@ -58,13 +58,18 @@ table input {
 	align-self: flex-start;
 }
 
+#cart-body {
+	max-height: 500px;
+	overflow: scroll;
+}
+
 .btn-remove {
 	border-radius: 10px !important;
 	background-color: rgb(237, 237, 237) !important;
 }
 
-.btn-remove:hover i {
-	color: #b22e2e !important;
+.btn-remove:hover {
+	background-color: rgb(255, 219, 176) !important;
 }
 
 /* FOOTER */
