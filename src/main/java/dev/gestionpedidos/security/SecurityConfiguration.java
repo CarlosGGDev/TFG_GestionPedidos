@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                  "/css/**",
                                                  "/img/**",
                                                  "/js/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/**").permitAll() // TOREV: modificar acceso peticiones POST por roles
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
@@ -57,7 +58,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .logoutSuccessUrl("/logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .permitAll();
+                        .permitAll()
+                        .and()
+                    .csrf().disable();
     }
 
 }
