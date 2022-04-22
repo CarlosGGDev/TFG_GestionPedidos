@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- TOKEN POST REQUESTS -->
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Nuevo pedido</title>
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -45,6 +49,8 @@
 
                     <!-- USER NAME -->
                     <div>Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
+
+                    <!-- LOGOUT -->
 					<form th:action="@{/logout}" method="post">
 						<button type="submit" class="btn btn-dark text-light">Cerrar sesión</button>
 					</form>
@@ -122,6 +128,22 @@
                 <button id="empty-cart" class="btn btn-dark text-light">VACIAR CESTA</button>
             </div>
         </div>
+
+        <!-- MODAL ORDER SUCCESS -->
+        <div id="order-success" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pedido realizado con éxito</h5>
+                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="fs-5">Gracias por tu compra!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- FOOTER -->

@@ -1,20 +1,30 @@
 package dev.gestionpedidos.service;
 
+import dev.gestionpedidos.DTO.OrderDetailDTO;
 import dev.gestionpedidos.model.OrderDetail;
 import dev.gestionpedidos.repository.OrderDetailRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
 
-	OrderDetailRepository orderDetailRepository;
+	private final OrderDetailRepository orderDetailRepository;
+	private final JdbcTemplate jdbcTemplate;
+	private final DataSource dataSource;
+
 
 	// CONSTRUCTOR
 
-	public OrderDetailServiceImpl(OrderDetailRepository orderDetailRepository) {
+	public OrderDetailServiceImpl(OrderDetailRepository orderDetailRepository, JdbcTemplate jdbcTemplate, DataSource dataSource) {
 		this.orderDetailRepository = orderDetailRepository;
+		this.jdbcTemplate = jdbcTemplate;
+		this.dataSource = dataSource;
+		jdbcTemplate.setDataSource(dataSource);
 	}
 
 	// CRUD METHODS
@@ -30,8 +40,18 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public OrderDetail saveOrderDetail(OrderDetail orderDetail) {
-		return this.orderDetailRepository.save(orderDetail);
+	@Transactional
+	public void saveOrderDetail(OrderDetailDTO orderDetailDTO) {
+		int orderId = orderDetailDTO.getOrder_id();
+		int productId = orderDetailDTO.getProduct_id();
+		int quantity = orderDetailDTO.getQuantity();
+		double price = orderDetailDTO.getPrice();
+		double total = orderDetailDTO.getTotal();
+		jdbcTemplate.update("INSERT INTO orders_details (order_id, product_id, quantity, price, total) VALUES (" + orderId + "," +
+																													    productId + "," +
+																													    quantity + "," +
+																														price + "," +
+																														total + ");");
 	}
 
 	@Override
@@ -48,4 +68,5 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		}
 		return orderDetailOpt;
 	}
+
 }

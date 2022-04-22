@@ -26,7 +26,6 @@ public class MainController {
 	@GetMapping
 	public String showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session, Model model) {
 		User user = userService.findByName(userDetails.getUsername());
-		// model.addAttribute("user", user);
 		session.setAttribute("user", user);
 		model.addAttribute("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
 		model.addAttribute("previousOrders", orderService.getCustomerPreviousOrders(user.getId()).get());

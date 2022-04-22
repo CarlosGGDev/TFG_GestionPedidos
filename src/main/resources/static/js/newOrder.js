@@ -89,35 +89,41 @@ $(document).ready(function() {
 			});
 			orderTotal = orderTotal.toFixed(2);
 
-			// GENERATE ORDER
-			let order = {
-				/* ****** PONER EL USER DESDE EL CONTROLADOR DE SPRING ****** */
-				"user": {
-					"id": 1,
-					"nif": "43218637G",
-					"name": "Carlos",
-					"email": "carlos@gmail.com",
-					"phone": "636123456",
-					"adress": "C/ Anonima, 23",
-					"zipcode": 7003,
-					"town": "Palma",
-					"password": "$2a$10$hwiDfYCKG0Fhnp90S4KAi.ExI0mdRnln5p20X0T34Pzug7dWhWPre",
-					"role": "ROLE_USER"
-				},
-				"orderDate": new Date(),
-				"shippingDate": null,
-				"status": "pendiente",
-				"comment": "Comentario de prueba",
-				"total": orderTotal
+			if (orderTotal > 0) {
+				// GENERATE ORDER
+				/* The user field is added by the controller */
+				let date = new Date();
+				date.setHours(date.getHours()+2);
+				let order = {
+					"orderDate": date,
+					"shippingDate": null,
+					"status": "pendiente",
+					"comment": null,
+					"total": orderTotal
+				}
+				requestOrder(order);
+
+				// GENERATE ORDER DETAILS
+				$('#cart-body').children().each(function() {
+					let id = $(this).children('#item-id').html();
+					let quantity = $(this).children('#item-quantity').html();
+					let price = $(this).children('#item-price').html();
+					let total = $(this).children('#item-total').html();
+
+					let detail = {
+						"product_id": id,
+						"quantity": quantity,
+						"price": price,
+						"total": parseFloat(total)
+					}
+					requestOrderDetail(detail);
+				});
 			}
-			requestOrder(order);
-
-			// GENERATE ORDER DETAILS
-
 		}
 	});
-
 });
+
+const token = $("meta[name='_csrf']").attr("content");
 
 // UPDATE ITEMS BAG COUNTER
 function updateCounter(num) {
@@ -137,12 +143,18 @@ function updateOrderTotal(productTotal) {
 function requestOrder(data) {
 	$.post({
 		type: "POST",
+		headers: {
+			"X-CSRF-Token": token
+		},
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
 		url: "/pedidos",
 		data: JSON.stringify(data),
 		success: function() {
-			window.location.href="orderSuccess.html";
+			$('#order-success').modal('show');
+			$('.modal').on('hidden.bs.modal', function () {
+				window.location.replace("http://localhost:8080")
+			});
 		},
 		error: function() {
 			alert("El pedido no se ha podido realizar");
@@ -151,3 +163,23 @@ function requestOrder(data) {
 }
 
 // REQUEST ORDER DETAIL
+function requestOrderDetail(data) {
+	$.post({
+		type: "POST",
+		headers: {
+			"X-CSRF-Token": token
+		},
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		url: "/pedidos/detalle",
+		data: JSON.stringify(data)
+		/*
+		success: function() {
+
+		},
+		error: function() {
+
+		}
+		*/
+	})
+}

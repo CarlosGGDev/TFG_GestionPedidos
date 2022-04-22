@@ -1,9 +1,11 @@
 package dev.gestionpedidos.controller;
 
+import dev.gestionpedidos.DTO.OrderDetailDTO;
 import dev.gestionpedidos.model.OrderDetail;
 import dev.gestionpedidos.service.OrderDetailService;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +41,10 @@ public class OrderDetailController {
 	}
 
 	@PostMapping// http://localhost:8080/pedidos/detalle
-	public ResponseEntity<OrderDetail> saveOrderDetail(@RequestBody OrderDetail orderDetail) {
-		return ResponseEntity.ok(orderDetailService.saveOrderDetail(orderDetail));
+	public void saveOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO, HttpSession session) {
+		int orderId = (int) session.getAttribute("orderId");
+		orderDetailDTO.setOrder_id(orderId);
+		orderDetailService.saveOrderDetail(orderDetailDTO);
 	}
 
 	@DeleteMapping(value = "/{orderId}") // http://localhost:8080/pedidos/detalle/1
