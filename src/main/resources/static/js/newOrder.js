@@ -102,22 +102,6 @@ $(document).ready(function() {
 					"total": orderTotal
 				}
 				requestOrder(order);
-
-				// GENERATE ORDER DETAILS
-				$('#cart-body').children().each(function() {
-					let id = $(this).children('#item-id').html();
-					let quantity = $(this).children('#item-quantity').html();
-					let price = $(this).children('#item-price').html();
-					let total = $(this).children('#item-total').html();
-
-					let detail = {
-						"product_id": id,
-						"quantity": quantity,
-						"price": price,
-						"total": parseFloat(total)
-					}
-					requestOrderDetail(detail);
-				});
 			}
 		}
 	});
@@ -151,6 +135,25 @@ function requestOrder(data) {
 		url: "/pedidos",
 		data: JSON.stringify(data),
 		success: function() {
+
+			// GENERATE ORDER DETAILS
+			$('#cart-body').children().each(function() {
+				let id = $(this).children('#item-id').html();
+				let quantity = $(this).children('#item-quantity').html();
+				let price = $(this).children('#item-price').html();
+				let total = $(this).children('#item-total').html();
+
+				let detail = {
+					"product_id": id,
+					"quantity": quantity,
+					"price": price,
+					"total": parseFloat(total)
+				}
+
+				// REQUEST METHOD CALL
+				requestOrderDetail(detail);
+			});
+
 			$('#order-success').modal('show');
 			$('.modal').on('hidden.bs.modal', function () {
 				window.location.replace("http://localhost:8080")

@@ -1,0 +1,41 @@
+/* LOGO */
+
+#logo {
+	width: 50px !important;
+	height: 50px !important;
+}
+
+/* NAV BAR */
+
+nav {
+	background-color: rgba(243, 243, 243);
+	box-shadow: 0px 2px 8px 3px rgba(143, 143, 143, .75);
+}
+
+ul a {
+	color: white !important;
+}
+
+ul a:hover {
+	color: antiquewhite !important;
+}
+
+#btn-profile {
+	font-size: 2em !important;
+}
+
+#btn-logout {
+	border-radius: 5px !important;
+}
+
+#btn-logout:hover {
+	background-color: rgb(240, 240, 240) !important;
+	color: black !important;
+}
+
+/* FOOTER */
+
+footer {
+	background-color: rgba(243, 243, 243);
+	box-shadow: 0px -2px 8px 3px rgba(143, 143, 143, .75);
+}

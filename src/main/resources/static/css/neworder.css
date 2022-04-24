@@ -11,20 +11,28 @@
 	height: 50px !important;
 }
 
-/* NAV BAR */
+/* BODY */
 
-nav {
-	background-color: rgba(243, 243, 243);
+body {
+	background-color: rgb(240, 240, 240) !important;
 }
 
 /* PRODUCTS TABLE */
 
 table {
-	border: 1px solid #e7e7e7;
+	background-color: white !important;
+	overflow: hidden;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-table th {
-	background-color: rgba(248, 248, 249) !important;
+table thead tr {
+	border-bottom: 1px solid #818181 !important;
+}
+
+table thead {
+	background-color: rgb(206, 206, 206) !important;
 }
 
 table th, td {
@@ -33,7 +41,11 @@ table th, td {
 	text-align: center;
 }
 
-table tr:hover {
+table tr:last-of-type {
+	border-bottom: hidden;
+}
+
+table tbody tr:hover {
 	background-color: rgba(255, 245, 233);
 }
 
@@ -42,7 +54,7 @@ table input {
 }
 
 .btn-add {
-	border-radius: 10px !important;
+	border-radius: 5px !important;
 	background-color: rgb(237, 237, 237) !important;
 }
 
@@ -58,22 +70,25 @@ table input {
 	align-self: flex-start;
 }
 
+#products-bag {
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#products-bag li {
+	border: none;
+}
+
 #cart-body {
 	max-height: 433px;
 	overflow: scroll;
 }
 
 .btn-remove {
-	border-radius: 10px !important;
+	border-radius: 5px !important;
 	background-color: rgb(237, 237, 237) !important;
 }
 
 .btn-remove:hover {
 	background-color: rgb(255, 219, 176) !important;
-}
-
-/* FOOTER */
-
-footer {
-	background-color: rgba(243, 243, 243);
 }

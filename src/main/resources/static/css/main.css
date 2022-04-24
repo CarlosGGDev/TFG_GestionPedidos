@@ -11,32 +11,48 @@
     height: 50px !important;
 }
 
-/* NAV BAR */
+/* BODY */
 
-nav {
-    background-color: rgba(243, 243, 243);
+body {
+    background-color: rgb(240, 240, 240) !important;
 }
 
 /* CONTENT */
 
 .btn-new-order {
     font-size: 1.1em !important;
+    padding: 3px 8px !important;
     background-color: lightcoral !important;
     color: white !important;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
+}
+
+.btn-new-order span {
+    color: white !important;
 }
 
 .btn-new-order:hover {
     background-color: #e57171 !important;
 }
 
+/* TABLE */
+
 table {
     margin-top: 40px;
     border: 1px solid #e7e7e7;
+    background-color: white !important;
+    overflow: hidden;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-table th {
-    background-color: rgba(248, 248, 249) !important;
+table thead tr {
+    border-bottom: 1px solid #818181 !important;
+}
+
+table thead {
+    background-color: rgb(206, 206, 206) !important;
 }
 
 table th, td {
@@ -45,12 +61,16 @@ table th, td {
     text-align: center;
 }
 
-table tr:hover {
+table tr:last-of-type {
+    border-bottom: hidden;
+}
+
+table tbody tr:hover {
     background-color: rgba(255, 245, 233);
 }
 
 .btn-detail {
-    border-radius: 10px !important;
+    border-radius: 5px !important;
     background-color: rgb(237, 237, 237) !important;
 }
 
@@ -62,21 +82,15 @@ table tr:hover {
     margin: 20px 0px;
     padding: 10px;
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 1.1em;
 }
 
-#order-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid lightgray;
-}
-
-#order-body {
-    padding-top: 10px;
-}
-
-/* FOOTER */
-
-footer {
-    background-color: rgba(243, 243, 243);
+@media screen and (max-width: 767px) {
+    #profile-icon {
+        margin: 10px 0px;
+    }
+    #btn-logout {
+        margin: 15px 0px 25px 0px;
+    }
 }

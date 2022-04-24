@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/fragments.css}" title="style" />
+	<title>Fragments</title>
+</head>
+<body>
+
+	<!-- HEADER -->
+	<header th:fragment="header" class="p-0 mb-3">
+		<!-- NAV BAR -->
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
+			<div class="container-fluid">
+				<img id="logo" class="me-3" th:src="@{/img/logo.png}">
+				<div class="collapse navbar-collapse" id="collapseMenu">
+					<ul class="navbar-nav mb-2 mb-md-0 fs-5">
+						<li class="nav-item">
+							<a th:href="@{/}" class="nav-link">Pedidos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link">Productos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link">Contacto</a>
+						</li>
+					</ul>
+					<ul class="ms-auto navbar-nav">
+						<li class="nav-item">
+							<!-- USER NAME -->
+							<!--
+							<div>Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
+							-->
+							<i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i>
+						</li>
+						<li class="nav-item d-flex align-items-center">
+							<!-- LOGOUT -->
+							<form th:action="@{/logout}" method="post">
+								<button id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+				<!-- COLLAPSE BUTTON -->
+				<button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+	<!-- FOOTER -->
+	<footer th:fragment="footer" class="mt-auto bg-dark">
+		<div class="container p-2 my-3">
+			<p class="text-center text-light">&copy; 2022 Coral</p>
+		</div>
+	</footer>
+
+</body>
+</html>
