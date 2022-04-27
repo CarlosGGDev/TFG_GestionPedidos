@@ -16,8 +16,8 @@ ul a {
 	color: white !important;
 }
 
-ul a:hover {
-	color: antiquewhite !important;
+ul a:hover, a i:hover {
+	color: lightcoral !important;
 }
 
 #btn-profile {
@@ -29,8 +29,9 @@ ul a:hover {
 }
 
 #btn-logout:hover {
-	background-color: rgb(240, 240, 240) !important;
+	background-color: lightcoral !important;
 	color: black !important;
+	border: 1px solid lightcoral;
 }
 
 /* FOOTER */

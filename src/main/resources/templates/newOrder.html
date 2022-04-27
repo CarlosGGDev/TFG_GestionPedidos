@@ -27,7 +27,7 @@
     <header th:replace="fragments/fragments :: header"></header>
 
     <!-- CONTENT -->
-    <section class="p-5 d-flex flex-wrap justify-content-around">
+    <section class="mt-3 p-5 d-flex flex-wrap justify-content-around">
         <div class="col-6">
             <h4 class="mb-3">Productos</h4>
             <table class="table">
@@ -56,14 +56,10 @@
         <div id="shopping-cart" class="col-5">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span>Tu cesta</span>
-                <span id="items-counter" class="badge bg-success text-light rounded-pill">0</span>
+                <span id="items-counter" class="badge text-light rounded-pill">0</span>
             </h4>
-            <ul id="products-bag" class="list-group list-group-flush mb-3">
-                <!--
-                PONER MENSAJE DE CESTA VACIA
-                <li th:if=""></li>
-                -->
-                <li class="list-group-item d-flex justify-content-between">
+            <ul id="products-bag" class="list-group list-group-flush mb-5">
+                <li id="cart-header" class="list-group-item d-flex justify-content-between">
                     <b class="col-4">PRODUCTO</b>
                     <b class="col-3 text-center">CANTIDAD</b>
                     <b class="col-3">PRECIO</b>
@@ -72,7 +68,7 @@
                 <div id="cart-body">
                     <!-- CART ITEMS -->
                 </div>
-                <div class="list-group-item d-flex justify-content-between">
+                <div class="list-group-item py-3 d-flex justify-content-between">
                     <b class="col-4">TOTAL</b>
                     <span class="col-3"></span>
                     <b class="col-3"><span id="order-total">0</span> €</b>
@@ -80,19 +76,30 @@
                 </div>
             </ul>
 
-            <!--
-            ***** CODIGO PROMOCION ?? *****
-            <form class="card p-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
-                    <button type="submit" class="btn btn-secondary">Redeem</button>
+            <div id="shipping-adress" class="col-12 d-flex">
+                <div class="col-7">
+                    <h4 class="col-12 m-0">Envío</h4>
+                    <div class="p-3">
+                        <div class="form-check">
+                            <input id="default-adress" name="shipping-adress" type="radio" class="form-check-input" checked="" required="">
+                            <label class="form-check-label" for="default-adress" th:text="${session.user.adress}"></label>
+                        </div>
+                        <div class="form-check d-flex align-items-center p-0 m-0 mt-1">
+                            <input id="new-adress" name="shipping-adress" type="radio" class="form-check-input m-0" required="">
+                            <label id="new-adress-field" class="form-check-label" for="new-adress">
+                                <input class="form-control" type="text" name="new-adress" placeholder="Otra dirección" maxlength="45">
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            -->
-
-            <div class="mt-2 float-end">
-                <button id="confirm-order" class="me-3 btn btn-dark text-light">REALIZAR PEDIDO</button>
-                <button id="empty-cart" class="btn btn-dark text-light">VACIAR CESTA</button>
+                <div class="col-5 d-flex flex-wrap">
+                    <div class="col-12 text-end">
+                        <button id="confirm-order" class="btn btn-dark text-light">REALIZAR PEDIDO</button>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button id="empty-cart" class="btn btn-dark text-light">VACIAR CESTA</button>
+                    </div>
+                </div>
             </div>
         </div>
 

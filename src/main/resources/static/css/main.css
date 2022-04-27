@@ -78,6 +78,15 @@ table tbody tr:hover {
     background-color: rgb(255, 219, 176) !important;
 }
 
+.btn-remove {
+    border-radius: 5px !important;
+    background-color: rgb(237, 237, 237) !important;
+}
+
+.btn-remove:hover {
+    background-color: rgb(255, 219, 176) !important;
+}
+
 .pending-order {
     margin: 20px 0px;
     padding: 10px;

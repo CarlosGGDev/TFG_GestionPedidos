@@ -1,7 +1,14 @@
 $(document).ready(function() {
 
+	if ($('#items-counter').text() == 0) {
+		let message = "<li id='empty' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>"
+		$('#cart-body').append(message);
+	}
+
 	// ADD ITEM CART
 	$(document).on('click', '#add', function() {
+
+		$('#empty').remove();
 
 		if ($(this).closest('tr').children('#td-quantity').children('input').val() > 0) {
 			let id = $(this).closest('tr').children('#td-id').text();
@@ -60,6 +67,11 @@ $(document).ready(function() {
 
 		// Decrease items cart counter
 		updateCounter(-1);
+
+		if ($('#items-counter').text() == 0) {
+			let message = "<li id='empty' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>"
+			$('#cart-body').append(message);
+		}
 	});
 
 	// EMPTY CART
@@ -78,30 +90,37 @@ $(document).ready(function() {
 	$(document).on('click', '#confirm-order', function() {
 		let orderTotal = 0;
 
-		if (confirm('¿Deseas confirmar el pedido?')) {
-			$('#cart-body').children().each(function() {
-				let id = $(this).children('#item-id').html();
-				let name = $(this).children('#item-name').html();
-				let quantity = $(this).children('#item-quantity').html();
-				let price = $(this).children('#item-price').html();
-				let total = $(this).children('#item-total').html();
-				orderTotal += parseFloat(total);
-			});
-			orderTotal = orderTotal.toFixed(2);
+		if ($('#items-counter').html() > 0) {
+			if (confirm('¿Deseas confirmar el pedido?')) {
+				$('#cart-body').children().each(function() {
+					let id = $(this).children('#item-id').html();
+					let name = $(this).children('#item-name').html();
+					let quantity = $(this).children('#item-quantity').html();
+					let price = $(this).children('#item-price').html();
+					let total = $(this).children('#item-total').html();
+					orderTotal += parseFloat(total);
+				});
+				orderTotal = orderTotal.toFixed(2);
 
-			if (orderTotal > 0) {
-				// GENERATE ORDER
-				/* The user field is added by the controller */
-				let date = new Date();
-				date.setHours(date.getHours()+2);
-				let order = {
-					"orderDate": date,
-					"shippingDate": null,
-					"status": "pendiente",
-					"comment": null,
-					"total": orderTotal
+				if (orderTotal > 0) {
+					// GENERATE ORDER
+					/* The user field is added by the controller */
+					let date = new Date();
+					var shippingAdress;
+					if ($('#new-adress').is(':checked')) {
+						shippingAdress = $('input[name="new-adress"]').val();
+					}
+					date.setHours(date.getHours()+2);
+					let order = {
+						"orderDate": date,
+						"shippingDate": null,
+						"shippingAdress": shippingAdress,
+						"status": "pendiente",
+						"comment": null,
+						"total": orderTotal
+					}
+					requestOrder(order);
 				}
-				requestOrder(order);
 			}
 		}
 	});

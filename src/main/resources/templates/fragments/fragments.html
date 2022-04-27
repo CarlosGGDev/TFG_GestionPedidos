@@ -8,7 +8,7 @@
 <body>
 
 	<!-- HEADER -->
-	<header th:fragment="header" class="p-0 mb-3">
+	<header th:fragment="header" class="p-0">
 		<!-- NAV BAR -->
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
 			<div class="container-fluid">
@@ -31,7 +31,7 @@
 							<!--
 							<div>Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
 							-->
-							<i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i>
+							<a th:href="@{/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
 						</li>
 						<li class="nav-item d-flex align-items-center">
 							<!-- LOGOUT -->
@@ -51,7 +51,7 @@
 
 	<!-- FOOTER -->
 	<footer th:fragment="footer" class="mt-auto bg-dark">
-		<div class="container p-2 my-3">
+		<div class="container p-2 mt-3">
 			<p class="text-center text-light">&copy; 2022 Coral</p>
 		</div>
 	</footer>

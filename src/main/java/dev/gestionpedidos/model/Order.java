@@ -28,13 +28,16 @@ public class Order {
 
     private LocalDateTime shippingDate;
 
+    @Column(name = "shipping_adress", length = 45)
+    private String shippingAdress;
+
     @Column(length = 9, nullable = false)
     private String status;
 
     private String comment;
 
     // TOREV: una lista con los detalles por cada factura
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<OrderDetail> orderDetails;
 
     private double total;

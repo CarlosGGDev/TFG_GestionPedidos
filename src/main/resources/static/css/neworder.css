@@ -70,6 +70,10 @@ table input {
 	align-self: flex-start;
 }
 
+#items-counter {
+	background-color: lightcoral;
+}
+
 #products-bag {
 	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -77,10 +81,16 @@ table input {
 
 #products-bag li {
 	border: none;
+	border-bottom: 1px solid rgba(222, 222, 222);
+}
+
+#cart-header {
+	background-color: rgb(206, 206, 206) !important;
+	border-bottom: 2px solid rgb(71, 71, 71) !important;
 }
 
 #cart-body {
-	max-height: 433px;
+	max-height: 290px;
 	overflow: scroll;
 }
 
@@ -91,4 +101,21 @@ table input {
 
 .btn-remove:hover {
 	background-color: rgb(255, 219, 176) !important;
+}
+
+#cart-body li:hover {
+	background-color: rgba(255, 245, 233);
+}
+
+#shipping-adress {
+	border-radius: 5px;
+}
+
+#new-adress-field {
+	margin-left: 7px !important;
+}
+
+input[type='radio']:checked {
+	background: lightcoral;
+	border: none;
 }
