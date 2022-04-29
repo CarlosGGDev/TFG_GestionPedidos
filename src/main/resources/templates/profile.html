@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Perfil</title>
+	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}" title="style" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/fragments.css}" title="style" />
 	<!-- BOOTSTRAP CSS -->
@@ -19,54 +20,87 @@
 
 	<!-- CONTENT -->
 	<section>
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mx-auto m-5 p-4">
-				<h2>Perfil</h2>
-				<div class="my-5">
-					<h5>Datos de usuario</h5>
+		<div class="container mt-5 p-3">
+			<div class="col-11 mx-auto d-flex flex-wrap justify-content-between">
+				<div class="col-12 mb-3">
+					<h2>Perfil</h2>
 				</div>
-				<div>
+				<div class="col-4">
+					<h5>Datos de usuario</h5>
+					<div id="user-data" class="mt-4 d-flex flex-wrap">
+						<div class="col-12">
+							<span class="float-start"><b>Nombre de usuario</b></span>
+							<span class="float-end" th:text="${session.user.name}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>NIF</b></span>
+							<span class="float-end" th:text="${session.user.nif}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>Email</b></span>
+							<span class="float-end" th:text="${session.user.email}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>Teléfono</b></span>
+							<span class="float-end" th:text="${session.user.phone}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>Dirección</b></span>
+							<span class="float-end" th:text="${session.user.adress}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>C.P.</b></span>
+							<span class="float-end" th:text="${session.user.zipcode}"></span>
+						</div>
+						<div class="col-12">
+							<span class="float-start"><b>Localidad</b></span>
+							<span class="float-end" th:text="${session.user.town}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-7">
 					<h5>Actualizar datos</h5>
-					<form th:action="@{/#}" method="post" class="col-12 my-5 d-flex flex-wrap justify-content-around">
-						<div class="col-12 col-md-5 mb-3">
+					<form th:action="@{/#}" method="post" class="mt-4 d-flex flex-wrap justify-content-between">
+						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="name">NOMBRE</label>
 							<input id="name" class="form-control" type="text" name="name" placeholder="Escribe tu nombre" required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
-							<label class="form-label" for="email">EMAIL</label>
-							<input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email" required>
-						</div>
-						<div class="col-12 col-md-5 mb-3">
-							<label class="form-label" for="password">CONTRASEÑA</label>
-							<input id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required>
-						</div>
-						<div class="col-12 col-md-5 mb-3">
-							<label class="form-label" for="password2">REPITE LA CONTRASEÑA</label>
-							<input id="password2" class="form-control" type="password" name="password2" placeholder="Escribe tu contraseña" required>
-						</div>
-						<div class="col-12 col-md-5 mb-3">
+						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="nif">NIF</label>
 							<input id="nif" class="form-control" type="text" name="nif" placeholder="Escribe tu NIF" required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
+						<div class="col-12 col-md-4 mb-2">
+							<label class="form-label" for="email">EMAIL</label>
+							<input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email" required>
+						</div>
+						<div class="col-12 col-md-4 mb-2">
+							<label class="form-label" for="password">CONTRASEÑA</label>
+							<input id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required>
+						</div>
+						<div class="col-12 col-md-4 mb-2">
+							<label class="form-label" for="password2">REPITE LA CONTRASEÑA</label>
+							<input id="password2" class="form-control" type="password" name="password2" placeholder="Escribe tu contraseña" required>
+						</div>
+						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="phone">TELÉFONO</label>
 							<input id="phone" class="form-control" type="text" name="phone" placeholder="Nº teléfono" required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
+						<div class="col-12 col-md-5 mb-2">
 							<label class="form-label" for="adress">DIRECCIÓN</label>
 							<input id="adress" class="form-control" type="text" name="adress" placeholder="Escribe tu dirección" required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
+						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="town">LOCALIDAD</label>
 							<input id="town" class="form-control" type="text" name="town" placeholder="Escribe tu localidad" required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
+						<div class="col-12 col-md-2 mb-2">
 							<label class="form-label" for="zipcode">C. POSTAL</label>
 							<input id="zipcode" class="form-control" type="text" name="zipcode" placeholder="C.P." required>
 						</div>
-						<div class="col-12 col-md-5 mb-3">
-							<label class="form-label" for="zipcode">&nbsp;</label>
-							<button class="col-12 text-light btn btn-dark" type="submit">ACTUALIZAR</button>
+						<div class="col-12">
+							<div class="col-12 col-md-5 mx-auto mt-3 mb-2">
+								<button class="col-12 text-light btn btn-dark" type="submit">ACTUALIZAR</button>
+							</div>
 						</div>
 					</form>
 				</div>
