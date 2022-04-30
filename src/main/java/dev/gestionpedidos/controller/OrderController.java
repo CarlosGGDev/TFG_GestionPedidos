@@ -49,8 +49,8 @@ public class OrderController {
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		order.setUser(user);
-		if (order.getShippingAdress() == null) {
-			order.setShippingAdress(user.getAdress());
+		if (order.getShippingAddress() == null) {
+			order.setShippingAddress(user.getAddress());
 		}
 		Order savedOrder = orderService.saveOrder(order);
 		session.setAttribute("orderId", savedOrder.getId());

@@ -29,7 +29,7 @@ public class Order {
     private LocalDateTime shippingDate;
 
     @Column(name = "shipping_adress", length = 45)
-    private String shippingAdress;
+    private String shippingAddress;
 
     @Column(length = 9, nullable = false)
     private String status;

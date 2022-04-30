@@ -76,18 +76,18 @@
                 </div>
             </ul>
 
-            <div id="shipping-adress" class="col-12 d-flex">
+            <div id="shipping-address" class="col-12 d-flex">
                 <div class="col-7">
                     <h4 class="col-12 m-0">Envío</h4>
                     <div class="p-3">
                         <div class="form-check">
-                            <input id="default-adress" name="shipping-adress" type="radio" class="form-check-input" checked="" required="">
-                            <label class="form-check-label" for="default-adress" th:text="${session.user.adress}"></label>
+                            <input id="default-address" name="shipping-address" type="radio" class="form-check-input" checked="" required="">
+                            <label class="form-check-label" for="default-address" th:text="${session.user.getAddress}"></label>
                         </div>
                         <div class="form-check d-flex align-items-center p-0 m-0 mt-1">
-                            <input id="new-adress" name="shipping-adress" type="radio" class="form-check-input m-0" required="">
-                            <label id="new-adress-field" class="form-check-label" for="new-adress">
-                                <input class="form-control" type="text" name="new-adress" placeholder="Otra dirección" maxlength="45">
+                            <input id="new-address" name="shipping-address" type="radio" class="form-check-input m-0" required="">
+                            <label id="new-address-field" class="form-check-label" for="new-address">
+                                <input class="form-control" type="text" name="new-address" placeholder="Otra dirección" maxlength="45">
                             </label>
                         </div>
                     </div>

@@ -106,15 +106,15 @@ $(document).ready(function() {
 					// GENERATE ORDER
 					/* The user field is added by the controller */
 					let date = new Date();
-					var shippingAdress;
-					if ($('#new-adress').is(':checked')) {
-						shippingAdress = $('input[name="new-adress"]').val();
+					var shippingAddress;
+					if ($('#new-address').is(':checked')) {
+						shippingAddress = $('input[name="new-address"]').val();
 					}
 					date.setHours(date.getHours()+2);
 					let order = {
 						"orderDate": date,
 						"shippingDate": null,
-						"shippingAdress": shippingAdress,
+						"shippingAddress": shippingAddress,
 						"status": "pendiente",
 						"comment": null,
 						"total": orderTotal

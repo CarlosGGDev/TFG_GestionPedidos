@@ -29,7 +29,7 @@ public class User {
     private String phone;
 
     @Column(length = 70, nullable = false)
-    private String adress;
+    private String address;
 
     private int zipcode;
 
@@ -41,19 +41,19 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role = Role.ROLE_USER;
 
     // CONSTRUCTORS
 
     public User() {
     }
 
-    public User(String nif, String name, String email, String phone, String adress, int zipcode, String town, String password) {
+    public User(String nif, String name, String email, String phone, String address, int zipcode, String town, String password) {
         this.nif = nif;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.adress = adress;
+        this.address = address;
         this.zipcode = zipcode;
         this.town = town;
         this.password = password;

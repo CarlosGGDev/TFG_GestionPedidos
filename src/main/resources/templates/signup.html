@@ -41,8 +41,8 @@
                     <input th:field="*{password}" id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required />
                 </div>
                 <div class="col-12 mb-3">
-                    <label class="form-label" for="password2">REPITE LA CONTRASEÑA</label>
-                    <input id="password2" class="form-control" type="password" name="password2" placeholder="Escribe tu contraseña" required />
+                    <label class="form-label" for="confirm-password">REPITE LA CONTRASEÑA</label>
+                    <input id="confirm-password" class="form-control" type="password" name="confirm-password" placeholder="Escribe tu contraseña" required />
                 </div>
             </div>
             <div class="col-5 d-flex flex-wrap justify-content-between">
@@ -55,8 +55,8 @@
                     <input th:field="*{phone}" id="phone" class="form-control" type="text" name="phone" placeholder="Nº teléfono" required />
                 </div>
                 <div class="col-12 mb-3">
-                    <label class="form-label" for="adress">DIRECCIÓN</label>
-                    <input th:field="*{adress}" id="adress" class="form-control" type="text" name="adress" placeholder="Escribe tu dirección" required />
+                    <label class="form-label" for="address">DIRECCIÓN</label>
+                    <input th:field="*{address}" id="address" class="form-control" type="text" name="address" placeholder="Escribe tu dirección" required />
                 </div>
                 <div class="col-7 mb-3">
                     <label class="form-label" for="town">LOCALIDAD</label>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="zipcode">&nbsp;</label>
-                    <button onclick="signupUser()" class="col-12 btn btn-dark" type="submit">REGISTRARSE</button>
+                    <button class="col-12 btn btn-dark" type="submit">REGISTRARSE</button>
                 </div>
             </div>
         </div>
