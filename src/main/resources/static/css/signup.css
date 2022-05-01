@@ -48,3 +48,17 @@ form input {
 form input::placeholder {
     color: rgb(155, 155, 155) !important;
 }
+
+#icon-check {
+    position: absolute;
+    margin-right: 10px;
+    font-size: 1.4em;
+    color: green;
+}
+
+#icon-alert {
+    position: absolute;
+    margin-right: 10px;
+    font-size: 1.4em;
+    color: red;
+}

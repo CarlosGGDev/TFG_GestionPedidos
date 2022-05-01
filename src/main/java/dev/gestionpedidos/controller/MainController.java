@@ -25,7 +25,16 @@ public class MainController {
 
 	@GetMapping
 	public String showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session, Model model) {
-		User user = userService.findByName(userDetails.getUsername());
+		// Si no hay un usuario guardado en la sesion, lo guarda (solo cuando se inicia sesion por primera vez).
+		// Si hay un usuario guardado, no lo vuelve a guardar, de esta forma cuando se actualizan los datos del perfil y se guarda
+		// el nuevo usuario en la sesion, puede recuperar los datos del usuario, si no da error, ya que intenta recuperar los datos del usuario
+		// que habia iniciado sesion, pero al cambiar los datos del perfil da error.
+		User user;
+		if (session.getAttribute("user") == null) {
+			user = userService.findByName(userDetails.getUsername());
+		} else {
+			user = (User) session.getAttribute("user");
+		}
 		session.setAttribute("user", user);
 		model.addAttribute("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
 		model.addAttribute("previousOrders", orderService.getCustomerPreviousOrders(user.getId()).get());

@@ -50,7 +50,7 @@
 						</div>
 						<div class="col-12">
 							<span class="float-start"><b>C.P.</b></span>
-							<span class="float-end" th:text="${session.user.zipcode}"></span>
+							<span class="float-end" th:text="${#numbers.formatInteger(session.user.zipcode, 5)}"></span>
 						</div>
 						<div class="col-12">
 							<span class="float-start"><b>Localidad</b></span>
@@ -60,42 +60,67 @@
 				</div>
 				<div class="col-7">
 					<h5>Actualizar datos</h5>
-					<form th:action="@{/#}" method="post" class="mt-4 d-flex flex-wrap justify-content-between">
+					<form th:action="@{/perfil}" method="post" class="mt-4 d-flex flex-wrap justify-content-between">
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="name">NOMBRE</label>
-							<input id="name" class="form-control" type="text" name="name" placeholder="Escribe tu nombre" required>
+							<input id="name" class="form-control" type="text" name="name"
+								   maxlength="50"
+								   pattern="^[A-Za-z0-9\.-]{1,50}$"
+								   oninput="this.setCustomValidity('')"
+								   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras sin acentos\nNúmeros\nPuntos o guiones')"
+								   placeholder="Escribe tu nombre" required />
 						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="nif">NIF</label>
-							<input id="nif" class="form-control" type="text" name="nif" placeholder="Escribe tu NIF" required>
+							<input id="nif" class="form-control" type="text" name="nif"
+								   maxlength="9"
+								   pattern="^[A-Z][0-9]{7}[A-Z0-9]$"
+								   oninput="this.setCustomValidity('')"
+								   oninvalid="this.setCustomValidity('NIF empresa:\nEmpieza por letra mayúscula\nSeguido de 7 números\nLetra o número final')"
+								   placeholder="Escribe tu NIF" required />
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="email">EMAIL</label>
-							<input id="email" class="form-control" type="email" name="email" placeholder="Escribe tu email" required>
+							<input id="email" class="form-control" type="email" name="email" maxlength="50" placeholder="Escribe tu email" required />
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="password">CONTRASEÑA</label>
-							<input id="password" class="form-control" type="password" name="password" placeholder="Escribe tu contraseña" required>
+							<input id="password" class="form-control" type="password" name="password" maxlength="100" placeholder="Escribe tu contraseña" required />
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="confirm-password">REPITE LA CONTRASEÑA</label>
-							<input id="confirm-password" class="form-control" type="password" name="confirm-password" placeholder="Escribe tu contraseña" required>
+							<input id="confirm-password" class="form-control" type="password" name="confirm-password" maxlength="100" placeholder="Escribe tu contraseña" required />
 						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="phone">TELÉFONO</label>
-							<input id="phone" class="form-control" type="text" name="phone" placeholder="Nº teléfono" required>
+							<input id="phone" class="form-control" type="text" name="phone"
+								   maxlength="9"
+								   pattern="^[0-9]{9}$"
+								   oninput="this.setCustomValidity('')"
+								   oninvalid="this.setCustomValidity('Solo puede contener:\n9 números')"
+								   placeholder="Nº teléfono" required />
 						</div>
 						<div class="col-12 col-md-5 mb-2">
 							<label class="form-label" for="address">DIRECCIÓN</label>
-							<input id="address" class="form-control" type="text" name="address" placeholder="Escribe tu dirección" required>
+							<input id="address" class="form-control" type="text" name="address" maxlength="70" placeholder="Escribe tu dirección" required />
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="town">LOCALIDAD</label>
-							<input id="town" class="form-control" type="text" name="town" placeholder="Escribe tu localidad" required>
+							<input id="town" class="form-control" type="text" name="town"
+								   maxlength="50"
+								   pattern="^[A-Za-zÀÈÌÒÙÁÉÍÓÚÜüÇç']{1,50}$"
+								   oninput="this.setCustomValidity('')"
+								   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras\nEspacios en blanco')"
+								   placeholder="Escribe tu localidad" required />
 						</div>
 						<div class="col-12 col-md-2 mb-2">
 							<label class="form-label" for="zipcode">C. POSTAL</label>
-							<input id="zipcode" class="form-control" type="text" name="zipcode" placeholder="C.P." required>
+							<input id="zipcode" class="form-control" type="text" name="zipcode"
+								   maxlength="5"
+								   pattern="^[0-9]{5}$"
+								   oninput="this.setCustomValidity('')"
+								   oninvalid="this.setCustomValidity('Solo puede contener:\n5 números')"
+								   placeholder="C.P." required />
 						</div>
 						<div class="col-12">
 							<div class="col-12 col-md-5 mx-auto mt-3 mb-2">
