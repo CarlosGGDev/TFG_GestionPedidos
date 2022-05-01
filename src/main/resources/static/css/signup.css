@@ -60,5 +60,12 @@ form input::placeholder {
     position: absolute;
     margin-right: 10px;
     font-size: 1.4em;
-    color: red;
+    color: #d50606;
+}
+
+.field-error {
+    color: #d50606;
+    font-style: italic;
+    padding-top: 4px;
+    padding-left: 2px;
 }

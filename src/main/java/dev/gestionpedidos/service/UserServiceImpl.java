@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByNif(String nif) {
+        return this.userRepository.findByNif(nif);
+    }
+
+    @Override
     public User findByName(String name) {
         return this.userRepository.findByName(name);
     }

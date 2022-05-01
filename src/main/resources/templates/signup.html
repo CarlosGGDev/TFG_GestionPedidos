@@ -28,7 +28,6 @@
             <img class="img-fluid" th:src="@{/img/logo.png}"><br/>
             <p class="m-0 fs-1">Coral</p>
             <p>Ya tienes cuenta? <a th:href="@{/acceso}">Inicia sesión</a></p>
-            <p th:each="error : ${#fields.errors('password')}" th:text="${error}">Error de contraseña</p>
         </div>
         <div class="col-12 d-flex flex-wrap justify-content-evenly">
             <div class="col-5 d-flex flex-wrap justify-content-between">
@@ -40,10 +39,16 @@
                            oninput="this.setCustomValidity('')"
                            oninvalid="this.setCustomValidity('Solo puede contener:\nLetras sin acentos\nNúmeros\nPuntos o guiones')"
                            placeholder="Escribe tu nombre" required />
+                    <div th:if="${nameError}" class="field-error">
+                        <small th:text="${nameError}"></small>
+                    </div>
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="email">EMAIL</label>
                     <input th:field="*{email}" id="email" class="form-control" type="email" name="email" maxlength="50" placeholder="Escribe tu email" required />
+                    <div th:if="${emailError}" class="field-error">
+                        <small th:text="${emailError}"></small>
+                    </div>
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="password">CONTRASEÑA</label>
@@ -67,6 +72,9 @@
                            oninput="this.setCustomValidity('')"
                            oninvalid="this.setCustomValidity('NIF empresa:\nEmpieza por letra mayúscula\nSeguido de 7 números\nLetra o número final')"
                            placeholder="Escribe tu NIF" required />
+                    <div th:if="${nifError}" class="field-error">
+                        <small th:text="${nifError}"></small>
+                    </div>
                 </div>
                 <div class="col-6 mb-3">
                     <label class="form-label" for="phone">TELÉFONO</label>

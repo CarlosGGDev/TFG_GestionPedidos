@@ -2,6 +2,7 @@ package dev.gestionpedidos.controller;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.UserService;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +30,26 @@ public class SignupController {
 
     @PostMapping // http://localhost:8080/registro
     public String signUp(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+        User nameEntry = userService.findByName(user.getName());
+        User emailEntry = userService.findByEmail(user.getEmail());
+        User nifEntry = userService.findByNif(user.getNif());
+
         if (result.hasErrors()) {
             return "redirect:/registro";
-        } else {
-            model.addAttribute("user", userService.saveUser(user));
         }
-        return "redirect:/acceso";
+        if (nameEntry != null) {
+            model.addAttribute("nameError", "El nombre de usuario ya existe");
+        }
+        if (emailEntry != null) {
+            model.addAttribute("emailError", "El email ya existe");
+        }
+        if (nifEntry != null) {
+            model.addAttribute("nifError", "El NIF ya existe");
+        }
+        if (nameEntry == null && emailEntry == null && nifEntry == null){
+            userService.saveUser(user);
+            return "signupSuccess";
+        }
+        return "signup";
     }
 }
