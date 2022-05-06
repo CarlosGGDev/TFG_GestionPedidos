@@ -9,7 +9,7 @@
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- JS -->
-    <script th:src="@{/js/signup.js}"></script>
+    <script th:src="@{/js/form.js}"></script>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/signup.css}" title="style" />
     <!-- BOOTSTRAP CSS -->
@@ -23,7 +23,7 @@
     <!-- MODIFICAR ACTION HACIA CONTROLADOR -->
     <!-- AÑADIR LINK HACIA PAGINA INICIO SESION -->
 
-    <form id="signup-form" th:action="@{/registro}" th:object="${user}" method="post" class="col-8 my-5 mx-auto p-5 px-2 d-flex flex-wrap">
+    <form id="form" th:action="@{/registro}" th:object="${user}" method="post" class="col-8 my-5 mx-auto p-5 px-2 d-flex flex-wrap">
         <div class="text-center col-12">
             <img class="img-fluid" th:src="@{/img/logo.png}"><br/>
             <p class="m-0 fs-1">Coral</p>
@@ -82,7 +82,7 @@
                            maxlength="9"
                            pattern="^[0-9]{9}$"
                            oninput="this.setCustomValidity('')"
-                           oninvalid="this.setCustomValidity('Solo puede contener:\n9 números')"
+                           oninvalid="this.setCustomValidity('Debe contener:\n9 números')"
                            placeholder="Nº teléfono" required />
                 </div>
                 <div class="col-12 mb-3">

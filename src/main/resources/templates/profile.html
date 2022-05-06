@@ -5,6 +5,10 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Perfil</title>
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<!-- JS -->
+	<script th:src="@{/js/form.js}"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}" title="style" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/fragments.css}" title="style" />
@@ -60,7 +64,7 @@
 				</div>
 				<div class="col-7">
 					<h5>Actualizar datos</h5>
-					<form th:action="@{/perfil}" method="post" class="mt-4 d-flex flex-wrap justify-content-between">
+					<form id="form" th:action="@{/perfil}" method="post" class="mt-4 d-flex flex-wrap justify-content-between">
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="name">NOMBRE</label>
 							<input id="name" class="form-control" type="text" name="name"
@@ -69,6 +73,9 @@
 								   oninput="this.setCustomValidity('')"
 								   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras sin acentos\nNúmeros\nPuntos o guiones')"
 								   placeholder="Escribe tu nombre" required />
+							<div th:if="${nameError}" class="field-error">
+								<small th:text="${nameError}"></small>
+							</div>
 						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="nif">NIF</label>
@@ -78,10 +85,16 @@
 								   oninput="this.setCustomValidity('')"
 								   oninvalid="this.setCustomValidity('NIF empresa:\nEmpieza por letra mayúscula\nSeguido de 7 números\nLetra o número final')"
 								   placeholder="Escribe tu NIF" required />
+							<div th:if="${nifError}" class="field-error">
+								<small th:text="${nifError}"></small>
+							</div>
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="email">EMAIL</label>
 							<input id="email" class="form-control" type="email" name="email" maxlength="50" placeholder="Escribe tu email" required />
+							<div th:if="${emailError}" class="field-error">
+								<small th:text="${emailError}"></small>
+							</div>
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="password">CONTRASEÑA</label>
@@ -89,7 +102,11 @@
 						</div>
 						<div class="col-12 col-md-4 mb-2">
 							<label class="form-label" for="confirm-password">REPITE LA CONTRASEÑA</label>
-							<input id="confirm-password" class="form-control" type="password" name="confirm-password" maxlength="100" placeholder="Escribe tu contraseña" required />
+							<div class="d-flex justify-content-end align-items-center">
+								<input id="confirm-password" class="form-control" type="password" name="confirm-password" maxlength="100" placeholder="Escribe tu contraseña" required />
+								<i id="icon-check" class="bi bi-check" hidden></i>
+								<i id="icon-alert" class="bi bi-exclamation-lg" hidden></i>
+							</div>
 						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<label class="form-label" for="phone">TELÉFONO</label>
@@ -97,7 +114,7 @@
 								   maxlength="9"
 								   pattern="^[0-9]{9}$"
 								   oninput="this.setCustomValidity('')"
-								   oninvalid="this.setCustomValidity('Solo puede contener:\n9 números')"
+								   oninvalid="this.setCustomValidity('Debe contener:\n9 números')"
 								   placeholder="Nº teléfono" required />
 						</div>
 						<div class="col-12 col-md-5 mb-2">

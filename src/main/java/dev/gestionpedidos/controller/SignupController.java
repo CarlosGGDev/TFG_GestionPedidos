@@ -38,7 +38,7 @@ public class SignupController {
             return "redirect:/registro";
         }
         if (nameEntry != null) {
-            model.addAttribute("nameError", "El nombre de usuario ya existe");
+            model.addAttribute("nameError", "El nombre ya existe");
         }
         if (emailEntry != null) {
             model.addAttribute("emailError", "El email ya existe");

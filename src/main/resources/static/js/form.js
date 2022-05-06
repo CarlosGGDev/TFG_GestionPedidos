@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('#signup-form').submit(function(event) {
+	$('#form').submit(function(event) {
 
 		let password = $('#password').val();
 		let confirmPassword = $('#confirm-password').val();
@@ -8,7 +8,9 @@ $(document).ready(function() {
 		if (password != confirmPassword) {
 			event.preventDefault();
 		} else {
-			$(this).unbind('submit').submit();
+			if (confirm('¿Quieres actualizar tus datos?')) {
+				$(this).unbind('submit').submit();
+			}
 		}
 
 	});

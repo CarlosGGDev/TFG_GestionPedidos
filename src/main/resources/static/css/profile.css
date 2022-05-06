@@ -22,3 +22,29 @@ body {
 #user-data div {
     margin-bottom: 10px;
 }
+
+/* FORM */
+
+#icon-check {
+    position: absolute;
+    margin-right: 10px;
+    font-size: 1.4em;
+    color: green !important;
+}
+
+#icon-alert {
+    position: absolute;
+    margin-right: 10px;
+    font-size: 1.4em;
+    color: #d50606 !important;
+}
+
+.field-error {
+    font-style: italic;
+    padding-top: 4px;
+    padding-left: 2px;
+}
+
+.field-error small {
+    color: #d50606 !important;
+}
