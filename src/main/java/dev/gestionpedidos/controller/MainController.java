@@ -38,7 +38,7 @@ public class MainController {
 		session.setAttribute("user", user);
 		model.addAttribute("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
 		model.addAttribute("previousOrders", orderService.getCustomerPreviousOrders(user.getId()).get());
-		return "main";
+		return user.getRole().name() == "ROLE_ADMIN" ? "mainAdmin" : "main";
 	}
 
 }

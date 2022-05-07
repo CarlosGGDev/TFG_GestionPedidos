@@ -8,8 +8,13 @@ $(document).ready(function() {
 		if (password != confirmPassword) {
 			event.preventDefault();
 		} else {
-			if (confirm('¿Quieres actualizar tus datos?')) {
-				$(this).unbind('submit').submit();
+			// This includes check if the users is in sign up page.
+			// If so, then we can show confirmation message.
+			// All this process allows us to re-use the same javscript file for two pages
+			if (window.location.toString().includes('perfil')) {
+				if (confirm('¿Quieres actualizar tus datos?')) {
+					$(this).unbind('submit').submit();
+				}
 			}
 		}
 
