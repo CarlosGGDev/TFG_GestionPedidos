@@ -31,8 +31,9 @@ public class Order {
     @Column(name = "shipping_adress", length = 45)
     private String shippingAddress;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 9, nullable = false)
-    private String status;
+    private Status status = Status.pendiente;
 
     private String comment;
 
@@ -47,8 +48,7 @@ public class Order {
     public Order() {
     }
 
-    // TOREV: STATUS ES DE TIPO ENUM (clase propia)
-    public Order(User user, LocalDateTime orderDate, String status, String comment, double total) {
+    public Order(User user, LocalDateTime orderDate, Status status, String comment, double total) {
         this.user = user;
         this.orderDate = orderDate;
         this.status = status;

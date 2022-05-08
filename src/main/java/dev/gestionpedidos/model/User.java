@@ -40,7 +40,7 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(length = 10, nullable = false)
     private Role role = Role.ROLE_USER;
 
     // CONSTRUCTORS

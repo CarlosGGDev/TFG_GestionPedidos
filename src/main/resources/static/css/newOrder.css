@@ -119,3 +119,9 @@ input[type='radio']:checked {
 	background: lightcoral;
 	border: none;
 }
+
+/* MODAL ORDER SUCCESS */
+
+#modal-content {
+	width: 30%;
+}
