@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
+	@Query("SELECT o FROM Order o WHERE o.status IN ('pendiente','enviado')")
+	Optional<List<Order>> getPendingOrders();
+
+	@Query("SELECT o FROM Order o WHERE o.status = 'entregado'")
+	Optional<List<Order>> getDeliveredOrders();
+
 	@Query("SELECT o FROM Order o WHERE o.user.id = ?1")
 	Optional<List<Order>> getCustomerOrders(int userId);
 
@@ -17,5 +23,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	Optional<List<Order>> getCustomerPendingOrders(int userId);
 
 	@Query("SELECT o FROM Order o WHERE o.user.id = ?1 AND o.status = 'entregado'")
-	Optional<List<Order>> getCustomerPreviousOrders(int userId);
+	Optional<List<Order>> getCustomerDeliveredOrders(int userId);
 }

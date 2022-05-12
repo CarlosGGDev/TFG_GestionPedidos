@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-	// REMOVE ORDER (only with status 'pendiente' or 'enviado')
+	// Inserts system date into a <span>
+	$('#current-time').html(new Date().toLocaleDateString());
+
+	// REMOVE ORDER
 	$(document).on('click', '#btn-remove', function() {
 		if (confirm("¿Seguro que quieres borrar el pedido?\nEsta opción no se puede deshacer")) {
 			let orderId = $(this).closest('tr').children('#order-id').text();

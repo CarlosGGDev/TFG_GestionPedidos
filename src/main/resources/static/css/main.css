@@ -19,12 +19,24 @@ body {
 
 /* CONTENT */
 
+.custom-title {
+    background-color: rgba(90, 90, 90);
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.custom-title h4, .custom-title span {
+    color: rgb(243, 243, 243) !important;
+}
+
 .btn-new-order {
     font-size: 1.1em !important;
-    padding: 3px 8px !important;
+    padding: 5px 10px !important;
     background-color: lightcoral !important;
     color: white !important;
-    border-radius: 5px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .btn-new-order span {

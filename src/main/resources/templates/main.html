@@ -32,11 +32,19 @@
     <section>
         <div class="container mt-5 d-flex flex-wrap justify-content-center">
             <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
-                <h3>Pedidos en curso<span class="fs-5" th:text="| (${pendingOrders.size})|"></span></h3>
-                <a th:href="@{/nuevo_pedido}"><button class="btn btn-new-order"><span class="fs-4 m-0 p-0">+ </span> NUEVO PEDIDO</button></a>
+                <div class="d-flex align-items-center">
+                    <h4 class="d-inline m-0">Pedidos en curso</h4><span>&nbsp;</span>
+                    <span class="fs-5" th:text="|(${pendingOrders.size})|"></span>
+                </div>
+                <a th:href="@{/nuevo_pedido}">
+                    <button class="btn btn-new-order m-0 px-2 py-0">
+                        <span class="fs-4 m-0 p-0">+</span>
+                        <span>NUEVO PEDIDO</span>
+                    </button>
+                </a>
                 <div class="col-12">
-                    <p th:if="${pendingOrders.size == 0}" class="my-3">No tienes pedidos en curso</p>
-                    <table th:if="${pendingOrders.size > 0}" class="table table-stripped">
+                    <p th:if="${pendingOrders.size == 0}" class="my-3">No tienes pedidos pendientes</p>
+                    <table th:if="${pendingOrders.size > 0}" class="table table-stripped mt-4">
                         <thead>
                             <tr>
                                 <th>REF.</th>
@@ -126,14 +134,17 @@
 
     </section>
 
-    <!-- PREVIOUS ORDERS -->
+    <!-- DELIVERED ORDERS -->
     <section>
         <div class="container mb-5 d-flex flex-wrap justify-content-center">
             <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
-                <h4>Pedidos anteriores<span class="fs-5" th:text="| (${previousOrders.size})|"></span></h4>
+                <div>
+                    <h4 class="d-inline">Pedidos entregados</h4>
+                    <span class="fs-5" th:text="| (${pendingOrders.size})|"></span>
+                </div>
                 <div class="col-12">
-                    <p th:if="${previousOrders.size == 0}" class="my-3">No tienes pedidos anteriores</p>
-                    <table th:if="${previousOrders.size > 0}" class="table table-stripped">
+                    <p th:if="${deliveredOrders.size == 0}" class="my-3">No tienes pedidos entregados</p>
+                    <table th:if="${deliveredOrders.size > 0}" class="table table-stripped mt-4">
                         <thead>
                         <tr>
                             <th>REF.</th>
@@ -146,7 +157,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="order : ${previousOrders}">
+                        <th:block th:each="order : ${deliveredOrders}">
                             <tr>
                                 <td th:text="${order.id}"></td>
                                 <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
@@ -155,16 +166,16 @@
                                 <td th:text="|${order.total} €|"></td>
                                 <td th:text="${order.comment}"></td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-detail" data-bs-toggle="modal" th:attr="data-bs-target='#modalPrevious'+${order.id}"><i class="bi bi-search"></i></button>
+                                    <button type="button" class="btn btn-sm btn-detail" data-bs-toggle="modal" th:attr="data-bs-target='#modalDelivered'+${order.id}"><i class="bi bi-search"></i></button>
                                 </td>
                             </tr>
 
                             <!-- Modal -->
-                            <div class="modal fade" th:attr="id='modalPrevious'+${order.id}" tabindex="-1" aria-labelledby="modalPreviousLabel" aria-hidden="true">
+                            <div class="modal fade" th:attr="id='modalDelivered'+${order.id}" tabindex="-1" aria-labelledby="modalDeliveredLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header px-4">
-                                            <h5 class="modal-title" id="modalPreviousLabel">Detalle de pedido <span th:text="${order.id}"></span></h5>
+                                            <h5 class="modal-title" id="modalDeliveredLabel">Detalle de pedido <span th:text="${order.id}"></span></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body px-4 pt-4 pb-2">

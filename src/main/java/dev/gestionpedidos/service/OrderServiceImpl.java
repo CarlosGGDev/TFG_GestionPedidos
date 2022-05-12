@@ -20,13 +20,23 @@ public class OrderServiceImpl implements OrderService {
 	// CRUD METHODS
 
 	@Override
+	public Optional<Order> getOrder(int orderId) {
+		return this.orderRepository.findById(orderId);
+	}
+
+	@Override
 	public List<Order> getOrders() {
 		return this.orderRepository.findAll();
 	}
 
 	@Override
-	public Optional<Order> getOrder(int orderId) {
-		return this.orderRepository.findById(orderId);
+	public Optional<List<Order>> getPendingOrders() {
+		return this.orderRepository.getPendingOrders();
+	}
+
+	@Override
+	public Optional<List<Order>> getDeliveredOrders() {
+		return this.orderRepository.getDeliveredOrders();
 	}
 
 	@Override
@@ -40,8 +50,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Optional<List<Order>> getCustomerPreviousOrders(int userId) {
-		return this.orderRepository.getCustomerPreviousOrders(userId);
+	public Optional<List<Order>> getCustomerDeliveredOrders(int userId) {
+		return this.orderRepository.getCustomerDeliveredOrders(userId);
 	}
 
 	@Override

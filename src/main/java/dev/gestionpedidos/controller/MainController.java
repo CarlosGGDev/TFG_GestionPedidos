@@ -7,16 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/")
 public class MainController {
 
-	private UserService userService;
-	private OrderService orderService;
+	final private UserService userService;
+	final private OrderService orderService;
 
 	public MainController(UserService userService, OrderService orderService) {
 		this.userService = userService;
@@ -24,7 +24,7 @@ public class MainController {
 	}
 
 	@GetMapping
-	public String showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session, Model model) {
+	public ModelAndView showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session) {
 		// Si no hay un usuario guardado en la sesion, lo guarda (solo cuando se inicia sesion por primera vez).
 		// Si hay un usuario guardado, no lo vuelve a guardar, de esta forma cuando se actualizan los datos del perfil y se guarda
 		// el nuevo usuario en la sesion, puede recuperar los datos del usuario, si no da error, ya que intenta recuperar los datos del usuario
@@ -36,9 +36,17 @@ public class MainController {
 			user = (User) session.getAttribute("user");
 		}
 		session.setAttribute("user", user);
-		model.addAttribute("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
-		model.addAttribute("previousOrders", orderService.getCustomerPreviousOrders(user.getId()).get());
-		return user.getRole().name() == "ROLE_ADMIN" ? "mainAdmin" : "main";
+		ModelAndView main;
+
+		if (user.getRole().name().equals("ROLE_ADMIN")) {
+			main = new ModelAndView("mainAdmin");
+			main.addObject("pendingOrders", orderService.getPendingOrders().get());
+		} else {
+			main = new ModelAndView("main");
+			main.addObject("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
+			main.addObject("deliveredOrders", orderService.getCustomerDeliveredOrders(user.getId()).get());
+		}
+		return main;
 	}
 
 }

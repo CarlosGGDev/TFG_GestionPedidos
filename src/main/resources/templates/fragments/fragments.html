@@ -26,15 +26,16 @@
 						</li>
 					</ul>
 					<ul class="ms-auto navbar-nav">
+						<!-- ADMIN TAG NAME -->
+						<li class="nav-item d-flex align-items-center" th:if="${session.user.role.toString() == 'ROLE_ADMIN'}">
+							<span id="admin-tag">ADMINISTRADOR</span>
+						</li>
+						<!-- PROFILE -->
 						<li class="nav-item">
-							<!-- USER NAME -->
-							<!--
-							<div>Bienvenida/o <span class="font-italic" th:text="${session.user.name}"></span></div>
-							-->
 							<a th:href="@{/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
 						</li>
+						<!-- LOGOUT -->
 						<li class="nav-item d-flex align-items-center">
-							<!-- LOGOUT -->
 							<form th:action="@{/logout}" method="post">
 								<button id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
 							</form>
