@@ -81,22 +81,21 @@ table tbody tr:hover {
     background-color: rgba(255, 245, 233);
 }
 
-.btn-detail {
+.btn-custom {
     border-radius: 5px !important;
     background-color: rgb(237, 237, 237) !important;
 }
 
-.btn-detail:hover {
+.btn-custom:hover {
     background-color: rgb(255, 219, 176) !important;
 }
 
-.btn-remove {
-    border-radius: 5px !important;
-    background-color: rgb(237, 237, 237) !important;
+#dropdown-status {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.btn-remove:hover {
-    background-color: rgb(255, 219, 176) !important;
+#dropdown-status a {
+    color: rgb(71, 71, 71) !important;
 }
 
 .pending-order {

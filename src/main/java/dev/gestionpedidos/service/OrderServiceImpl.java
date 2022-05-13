@@ -60,6 +60,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public void editOrderStatus(int orderId, String status) {
+		this.orderRepository.editOrderStatus(orderId, status);
+	}
+
+	@Override
+	public void editOrderComment(int orderId, String comment) {
+		this.orderRepository.editOrderComment(orderId, comment);
+	}
+
+	@Override
 	public Optional<Order> deleteOrder(int orderId) {
 		Optional<Order> orderOpt = getOrder(orderId);
 		if (orderOpt.isPresent()) {

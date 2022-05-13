@@ -40,7 +40,7 @@ $(document).ready(function() {
 							<span id="item-name" class="col-4">${name}</span>
 							<span id="item-quantity" class="col-3 text-center">${quantity}</span>
 							<span id="item-total" class="col-3">${productTotal} €</span>
-							<button id="remove" class="btn btn-sm btn-remove col-1"><i class="bi bi-trash3"></i></button>
+							<button id="remove" class="btn btn-sm btn-custom col-1"><i class="bi bi-trash3"></i></button>
 						</li>`;
 
 				// Add element <li>
@@ -113,7 +113,6 @@ $(document).ready(function() {
 					date.setHours(date.getHours()+2);
 					let order = {
 						"orderDate": date,
-						"shippingDate": null,
 						"shippingAddress": shippingAddress,
 						"status": "pendiente",
 						"comment": null,

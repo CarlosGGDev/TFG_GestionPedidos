@@ -24,7 +24,50 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- HEADER -->
-    <header th:replace="fragments/fragments :: header"></header>
+    <header class="p-0">
+        <!-- NAV BAR -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
+            <div class="container-fluid">
+                <img id="logo" class="me-3" th:src="@{/img/logo.png}">
+                <div class="collapse navbar-collapse" id="collapseMenu">
+                    <ul class="navbar-nav mb-2 mb-md-0 fs-5">
+                        <li class="nav-item">
+                            <a th:href="@{/}" class="nav-link">Hoy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Clientes</a>
+                        </li>
+                    </ul>
+                    <ul class="ms-auto navbar-nav">
+                        <!-- ADMIN TAG NAME -->
+                        <li class="nav-item d-flex align-items-center">
+                            <span id="admin-tag">ADMINISTRADOR</span>
+                        </li>
+                        <!-- PROFILE -->
+                        <li class="nav-item">
+                            <a th:href="@{/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
+                        </li>
+                        <!-- LOGOUT -->
+                        <li class="nav-item d-flex align-items-center">
+                            <form th:action="@{/logout}" method="post">
+                                <button id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- COLLAPSE BUTTON -->
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <!-- CONTENT -->
 
@@ -44,9 +87,15 @@
                         <tr>
                             <th>REF.</th>
                             <th>FECHA PEDIDO</th>
-                            <th>ESTADO</th>
+                            <th>
+                                <span>ESTADO</span>
+                                <button type="button" style="visibility: hidden;"><i class="bi bi-pencil ms-2"></i></button>
+                            </th>
                             <th>TOTAL</th>
-                            <th>COMENTARIO</th>
+                            <th>
+                                <span>COMENTARIO</span>
+                                <button type="button" style="visibility: hidden;"><i class="bi bi-pencil ms-2"></i></button>
+                            </th>
                             <th>DETALLE</th>
                             <th></th>
                         </tr>
@@ -56,14 +105,36 @@
                             <tr>
                                 <td id="order-id" th:text="${order.id}"></td>
                                 <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
-                                <td th:text="${order.status}"></td>
-                                <td th:text="|${order.total} €|"></td>
-                                <td th:text="${order.comment}"></td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-detail" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}"><i class="bi bi-search"></i></button>
+                                    <form th:action="@{/pedidos/editar}" method="post">
+                                        <div class="d-flex">
+                                            <input type="text" th:value="${order.id}" th:name="orderId" hidden>
+                                            <select type="text" class="form-select form-select-sm" th:name="status">
+                                                <option th:text="${order.status}" selected></option>
+                                                <option th:if="${order.status.toString() != 'enviado'}">enviado</option>
+                                                <option th:if="${order.status.toString() != 'entregado'}">entregado</option>
+                                                <option th:if="${order.status.toString() != 'pendiente'}">pendiente</option>
+                                                <option th:if="${order.status.toString() != 'cancelado'}">cancelado</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-sm btn-custom ms-2"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td th:text="|${order.total} €|"></td>
+                                <td>
+                                    <form th:action="@{/pedidos/editar}" method="post">
+                                        <div class="d-flex">
+                                            <input type="text" th:value="${order.id}" th:name="orderId" hidden>
+                                            <input type="text" class="form-control form-control-sm" th:value="${order.comment}" th:name="comment">
+                                            <button type="submit" class="btn btn-sm btn-custom ms-2"><i class="bi bi-chat-left-text"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                                 <td>
-                                    <button id="btn-remove" class="btn btn-sm btn-remove"><i class="bi bi-trash3"></i></button>
+                                    <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}"><i class="bi bi-search"></i></button>
+                                </td>
+                                <td>
+                                    <button id="btn-remove" class="btn btn-sm btn-custom"><i class="bi bi-trash3"></i></button>
                                 </td>
 
                                 <!-- Modal -->

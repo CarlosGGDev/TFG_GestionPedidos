@@ -53,12 +53,12 @@ table input {
 	width: 45px;
 }
 
-.btn-add {
+.btn-custom {
 	border-radius: 5px !important;
 	background-color: rgb(237, 237, 237) !important;
 }
 
-.btn-add:hover {
+.btn-custom:hover {
 	background-color: rgb(255, 219, 176) !important;
 }
 
@@ -92,15 +92,6 @@ table input {
 #cart-body {
 	max-height: 290px;
 	overflow: scroll;
-}
-
-.btn-remove {
-	border-radius: 5px !important;
-	background-color: rgb(237, 237, 237) !important;
-}
-
-.btn-remove:hover {
-	background-color: rgb(255, 219, 176) !important;
 }
 
 #cart-body li:hover {

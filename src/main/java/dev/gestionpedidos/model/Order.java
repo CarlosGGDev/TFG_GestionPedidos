@@ -26,14 +26,11 @@ public class Order {
     @Column(nullable = false)
     private LocalDateTime orderDate;
 
-    private LocalDateTime shippingDate;
-
     @Column(name = "shipping_adress", length = 45)
     private String shippingAddress;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 9, nullable = false)
-    private Status status = Status.pendiente;
+    private String status = "pendiente";
 
     private String comment;
 
@@ -48,7 +45,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(User user, LocalDateTime orderDate, Status status, String comment, double total) {
+    public Order(User user, LocalDateTime orderDate, String status, String comment, double total) {
         this.user = user;
         this.orderDate = orderDate;
         this.status = status;

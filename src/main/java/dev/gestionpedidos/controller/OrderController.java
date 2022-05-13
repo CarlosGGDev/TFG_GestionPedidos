@@ -3,8 +3,10 @@ package dev.gestionpedidos.controller;
 import dev.gestionpedidos.model.Order;
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.OrderService;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,5 +63,23 @@ public class OrderController {
 	public ResponseEntity<Order> deleteOrder(@PathVariable("orderId") int orderId) {
 		Optional<Order> orderOpt = orderService.deleteOrder(orderId);
 		return ResponseEntity.of(orderOpt);
+	}
+
+	// TOREV: poner en documentacion que estos dos metodos se llaman en funcion de los parametros de la request.
+	//  Los dos son de tipo POST pero segun los parametros entrara por uno u otro
+	@PostMapping(value = "/editar", params = {"orderId", "status"}) // http://localhost:8080/pedidos/editar
+	public void editOrderStatus(HttpServletResponse response,
+								@RequestParam(value = "orderId") int orderId,
+								@RequestParam(value = "status") String status) throws IOException {
+		this.orderService.editOrderStatus(orderId, status);
+		response.sendRedirect("/");
+	}
+
+	@PostMapping(value = "/editar", params = {"orderId", "comment"}) // http://localhost:8080/pedidos/editar
+	public void editOrderComment(HttpServletResponse response,
+								@RequestParam(value = "orderId") int orderId,
+								@RequestParam(value = "comment") String comment) throws IOException {
+		this.orderService.editOrderComment(orderId, comment);
+		response.sendRedirect("/");
 	}
 }
