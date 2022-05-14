@@ -4,9 +4,58 @@
 	color: rgb(71, 71, 71) !important;
 }
 
-/* LOGO */
+/* BODY */
 
-#logo {
-	width: 50px !important;
-	height: 50px !important;
+body {
+	background-color: rgb(240, 240, 240) !important;
+}
+
+/* TABLE */
+
+table {
+	background-color: white !important;
+	overflow: hidden;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-bottom: 15px !important;
+}
+
+/* input background color */
+div.dataTables_length, div.dataTables_filter {
+	margin-bottom: 15px;
+}
+
+select[name='products-table_length'], #products-table_filter input {
+	background-color: white !important;
+}
+
+table.dataTable {
+	border-collapse: collapse !important;
+}
+
+table thead {
+	background-color: rgb(206, 206, 206) !important;
+	border-bottom: 2px solid rgb(71, 71, 71) !important;
+}
+
+table th, td {
+	padding: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+table tbody tr {
+	border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+table tbody tr:hover {
+	background-color: rgba(255, 245, 233) !important;
+}
+
+table tr:last-of-type {
+	border-bottom: none;
+}
+
+table tbody td {
+	padding: 12px 8px !important;
 }

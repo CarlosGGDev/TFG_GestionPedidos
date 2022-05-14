@@ -8,6 +8,7 @@ public interface OrderService {
 	Optional<Order> getOrder(int orderId);
 	List<Order> getOrders();
 	Optional<List<Order>> getPendingOrders();
+	Optional<List<Order>> getSentOrders();
 	Optional<List<Order>> getDeliveredOrders();
 	// TODO: pedidos cancelados? Se borran o se ponen como cancelado
 

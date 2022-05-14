@@ -62,7 +62,7 @@
                                     <td id="order-id" th:text="${order.id}"></td>
                                     <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
                                     <td th:text="${order.status}"></td>
-                                    <td th:text="|${order.total} €|"></td>
+                                    <td th:text="${order.total} + ' €'"></td>
                                     <td th:text="${order.comment}"></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}"><i class="bi bi-search"></i></button>
@@ -97,7 +97,7 @@
                                                 <div class="modal-body px-4 pt-2 pb-4">
                                                     <div class="col-12">
                                                         <span class="float-start"><b>TOTAL</b></span>
-                                                        <span class="float-end col-2 text-end" th:text="|${order.total} €|"></span>
+                                                        <span class="float-end col-2 text-end" th:text="${order.total} + ' €'"></span>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer p-4">
@@ -161,7 +161,7 @@
                                 <td th:text="${order.id}"></td>
                                 <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
                                 <td th:text="${order.status}"></td>
-                                <td th:text="|${order.total} €|"></td>
+                                <td th:text="${order.total} + ' €'"></td>
                                 <td th:text="${order.comment}"></td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modalDelivered'+${order.id}"><i class="bi bi-search"></i></button>
@@ -193,7 +193,7 @@
                                         <div class="modal-body px-4 pt-2 pb-4">
                                             <div class="col-12">
                                                 <span class="float-start"><b>TOTAL</b></span>
-                                                <span class="float-end col-2 text-end" th:text="|${order.total} €|"></span>
+                                                <span class="float-end col-2 text-end" th:text="${order.total} + ' €'"></span>
                                             </div>
                                         </div>
                                         <div class="modal-footer p-4">

@@ -41,6 +41,7 @@ public class MainController {
 		if (user.getRole().name().equals("ROLE_ADMIN")) {
 			main = new ModelAndView("mainAdmin");
 			main.addObject("pendingOrders", orderService.getPendingOrders().get());
+			main.addObject("sentOrders", orderService.getSentOrders().get());
 		} else {
 			main = new ModelAndView("main");
 			main.addObject("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());

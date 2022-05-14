@@ -4,13 +4,6 @@
     color: rgb(71, 71, 71) !important;
 }
 
-/* LOGO */
-
-#logo {
-    width: 50px !important;
-    height: 50px !important;
-}
-
 /* BODY */
 
 body {
@@ -51,7 +44,6 @@ body {
 
 table {
     margin-top: 40px;
-    border: 1px solid #e7e7e7;
     background-color: white !important;
     overflow: hidden;
     border-radius: 5px;
@@ -65,6 +57,10 @@ table thead tr {
 
 table thead {
     background-color: rgb(206, 206, 206) !important;
+}
+
+table tbody td {
+    padding: 12px 8px !important;
 }
 
 table th, td {

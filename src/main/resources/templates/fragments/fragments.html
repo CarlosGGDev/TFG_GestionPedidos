@@ -19,10 +19,7 @@
 							<a th:href="@{/}" class="nav-link">Pedidos</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link">Productos</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link">Contacto</a>
+							<a th:href="@{/listado}" class="nav-link">Productos</a>
 						</li>
 					</ul>
 					<ul class="ms-auto navbar-nav">
@@ -47,9 +44,35 @@
 	</header>
 
 	<!-- FOOTER -->
-	<footer th:fragment="footer" class="mt-auto bg-dark">
-		<div class="container p-2 mt-3">
-			<p class="text-center text-light">&copy; 2022 Coral</p>
+	<footer th:fragment="footer" class="mt-auto bg-dark d-flex text-center">
+		<div class="col-4 py-5 d-flex flex-column">
+			<span>HORARIO</span>
+			<span>L a V de 7:00h a 13:00h</span>
+			<br />
+			<span>Atención telefónica:</span>
+			<span>De L a V de 7:00h a 16:00h</span>
+		</div>
+		<div class="col-4 py-5">
+			<p>&copy; 2022 Coral</p>
+		</div>
+		<div class="col-4 py-5 d-flex flex-column">
+			<div>
+				<i class="bi bi-telephone-fill"></i>&nbsp;&nbsp;<span>871257639</span><br />
+			</div>
+			<div>
+				<i class="bi bi-whatsapp"></i></i>&nbsp;&nbsp;<span>636192084</span><br />
+			</div>
+			<div>
+				<i class="bi bi-envelope"></i>&nbsp;&nbsp;<span>mercafrutas@gmail.com</span>
+			</div>
+			<br />
+			<div class="d-flex justify-content-center">
+				<i class="bi bi-geo-alt me-2 my-auto"></i>
+				<div>
+					<span>Carrer del Cardenal Rossell, 182</span><br />
+					<span>07007 Coll d´en Rebassa, Palma</span>
+				</div>
+			</div>
 		</div>
 	</footer>
 

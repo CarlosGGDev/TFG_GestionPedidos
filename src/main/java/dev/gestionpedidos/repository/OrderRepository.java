@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-	@Query("SELECT o FROM Order o WHERE o.status IN ('pendiente','enviado')")
+	@Query("SELECT o FROM Order o WHERE o.status LIKE 'pendiente'")
 	Optional<List<Order>> getPendingOrders();
+
+	@Query("SELECT o FROM Order o WHERE o.status LIKE 'enviado'")
+	Optional<List<Order>> getSentOrders();
 
 	@Query("SELECT o FROM Order o WHERE o.status = 'entregado'")
 	Optional<List<Order>> getDeliveredOrders();

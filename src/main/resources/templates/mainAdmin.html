@@ -38,7 +38,7 @@
                             <a class="nav-link">Pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Productos</a>
+                            <a th:href="@{/listado}" class="nav-link">Productos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">Clientes</a>
@@ -73,14 +73,17 @@
 
     <!-- PENDING ORDERS -->
     <section>
-        <div class="container my-5 d-flex flex-wrap justify-content-center">
+        <div class="container mt-5 d-flex flex-wrap justify-content-center">
             <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
-                <div class="custom-title">
+                <div class="custom-title mb-5">
                     <h4 class="d-inline">Pedidos para hoy</h4>
-                    <span class="fs-5" th:text="| (${pendingOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
                     <span class="fs-5 m-auto" id="current-time"></span>
                 </div>
                 <div class="col-12">
+                    <div>
+                        <h4 class="d-inline">Pedidos pendientes</h4>
+                        <span class="fs-5" th:text="| (${pendingOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
+                    </div>
                     <p th:if="${pendingOrders.size == 0}" class="my-3">No hay pedidos pendientes</p>
                     <table th:if="${pendingOrders.size > 0}" class="table table-stripped mt-4">
                         <thead>
@@ -103,7 +106,7 @@
                         <tbody>
                         <th:block th:each="order : ${pendingOrders}">
                             <tr>
-                                <td id="order-id" th:text="${order.id}"></td>
+                                <td th:id="order-id" th:text="${order.id}"></td>
                                 <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
                                 <td>
                                     <form th:action="@{/pedidos/editar}" method="post">
@@ -135,6 +138,133 @@
                                 </td>
                                 <td>
                                     <button id="btn-remove" class="btn btn-sm btn-custom"><i class="bi bi-trash3"></i></button>
+                                </td>
+
+                                <!-- Modal -->
+                                <div class="modal fade" th:attr="id='modal'+${order.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header flex-wrap px-4">
+                                                <h5 class="modal-title my-2" th:id="modalLabel">Detalle de pedido</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <div class="col-12"><b>Referencia: </b><span th:text="${order.id}"></span></div>
+                                            </div>
+                                            <div class="modal-body px-4 pt-4 pb-2">
+                                                <div class="d-flex flex-wrap justify-content-between">
+                                                    <b class="col-5">PRODUCTO</b>
+                                                    <b class="col-3 text-center">CANTIDAD</b>
+                                                    <b class="col-2 text-center">PRECIO</b>
+                                                    <b class="col-2 text-end">TOTAL</b>
+                                                </div>
+                                                <div th:each="detail : ${order.orderDetails}" class="d-flex flex-wrap justify-content-between">
+                                                    <span th:text="${detail.product.name}" class="col-5"></span>
+                                                    <span th:text="${detail.quantity}" class="col-3 text-center"></span>
+                                                    <span th:text="${detail.price}" class="col-2 text-center"></span>
+                                                    <span th:text="${detail.total}" class="col-2 text-end"></span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body px-4 pt-2 pb-4">
+                                                <div class="col-12">
+                                                    <span class="float-start"><b>TOTAL</b></span>
+                                                    <span class="float-end col-2 text-end" th:text="|${order.total} €|"></span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer p-4">
+                                                <div class="col-12 m-0">
+                                                    <span class="float-start"><b>Dirección envío</b></span>
+                                                    <span class="float-end" th:text="${order.shippingAddress}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ORDER REMOVED -->
+        <div th:id="order-removed" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="fs-5">El pedido se ha eliminado correctamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SENT ORDERS -->
+    <section>
+        <div class="container mt-2 mb-5 d-flex flex-wrap justify-content-center">
+            <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
+                <div class="col-12">
+                    <div>
+                        <h4 class="d-inline">Pedidos enviados</h4>
+                        <span class="fs-5" th:text="| (${sentOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <p th:if="${sentOrders.size == 0}" class="my-3">No hay pedidos enviados</p>
+                    <table th:if="${sentOrders.size > 0}" class="table table-stripped mt-4">
+                        <thead>
+                        <tr>
+                            <th>REF.</th>
+                            <th>FECHA PEDIDO</th>
+                            <th>
+                                <span>ESTADO</span>
+                                <button type="button" style="visibility: hidden;"><i class="bi bi-pencil ms-2"></i></button>
+                            </th>
+                            <th>TOTAL</th>
+                            <th>
+                                <span>COMENTARIO</span>
+                                <button type="button" style="visibility: hidden;"><i class="bi bi-pencil ms-2"></i></button>
+                            </th>
+                            <th>DETALLE</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="order : ${sentOrders}">
+                            <tr>
+                                <td th:id="order-id" th:text="${order.id}"></td>
+                                <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
+                                <td>
+                                    <form th:action="@{/pedidos/editar}" method="post">
+                                        <div class="d-flex">
+                                            <input type="text" th:value="${order.id}" th:name="orderId" hidden>
+                                            <select type="text" class="form-select form-select-sm" th:name="status">
+                                                <option th:text="${order.status}" selected></option>
+                                                <option th:if="${order.status.toString() != 'enviado'}">enviado</option>
+                                                <option th:if="${order.status.toString() != 'entregado'}">entregado</option>
+                                                <option th:if="${order.status.toString() != 'pendiente'}">pendiente</option>
+                                                <option th:if="${order.status.toString() != 'cancelado'}">cancelado</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-sm btn-custom ms-2"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td th:text="|${order.total} €|"></td>
+                                <td>
+                                    <form th:action="@{/pedidos/editar}" method="post">
+                                        <div class="d-flex">
+                                            <input type="text" th:value="${order.id}" th:name="orderId" hidden>
+                                            <input type="text" class="form-control form-control-sm" th:value="${order.comment}" th:name="comment">
+                                            <button type="submit" class="btn btn-sm btn-custom ms-2"><i class="bi bi-chat-left-text"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}"><i class="bi bi-search"></i></button>
+                                </td>
+                                <td>
+                                    <button th:id="btn-remove" class="btn btn-sm btn-custom"><i class="bi bi-trash3"></i></button>
                                 </td>
 
                                 <!-- Modal -->

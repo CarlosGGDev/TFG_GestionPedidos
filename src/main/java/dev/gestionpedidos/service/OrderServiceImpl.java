@@ -35,6 +35,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public Optional<List<Order>> getSentOrders() {
+		return this.orderRepository.getSentOrders();
+	}
+
+	@Override
 	public Optional<List<Order>> getDeliveredOrders() {
 		return this.orderRepository.getDeliveredOrders();
 	}
