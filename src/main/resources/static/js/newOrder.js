@@ -194,13 +194,5 @@ function requestOrderDetail(data) {
 		dataType: "json",
 		url: "/pedidos/detalle",
 		data: JSON.stringify(data)
-		/*
-		success: function() {
-
-		},
-		error: function() {
-
-		}
-		*/
 	})
 }

@@ -24,50 +24,7 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- HEADER -->
-    <header class="p-0">
-        <!-- NAV BAR -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
-            <div class="container-fluid">
-                <img id="logo" class="me-3" th:src="@{/img/logo.png}">
-                <div class="collapse navbar-collapse" id="collapseMenu">
-                    <ul class="navbar-nav mb-2 mb-md-0 fs-5">
-                        <li class="nav-item">
-                            <a th:href="@{/}" class="nav-link">Hoy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Pedidos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{/listado}" class="nav-link">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Clientes</a>
-                        </li>
-                    </ul>
-                    <ul class="ms-auto navbar-nav">
-                        <!-- ADMIN TAG NAME -->
-                        <li class="nav-item d-flex align-items-center">
-                            <span id="admin-tag">ADMINISTRADOR</span>
-                        </li>
-                        <!-- PROFILE -->
-                        <li class="nav-item">
-                            <a th:href="@{/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
-                        </li>
-                        <!-- LOGOUT -->
-                        <li class="nav-item d-flex align-items-center">
-                            <form th:action="@{/logout}" method="post">
-                                <button id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- COLLAPSE BUTTON -->
-                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="fragments/fragments :: header"></header>
 
     <!-- CONTENT -->
 
@@ -123,7 +80,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td th:text="|${order.total} €|"></td>
+                                <td th:text="${order.total} + ' €'"></td>
                                 <td>
                                     <form th:action="@{/pedidos/editar}" method="post">
                                         <div class="d-flex">
@@ -166,7 +123,7 @@
                                             <div class="modal-body px-4 pt-2 pb-4">
                                                 <div class="col-12">
                                                     <span class="float-start"><b>TOTAL</b></span>
-                                                    <span class="float-end col-2 text-end" th:text="|${order.total} €|"></span>
+                                                    <span class="float-end col-2 text-end" th:text="${order.total} + ' €'"></span>
                                                 </div>
                                             </div>
                                             <div class="modal-footer p-4">
@@ -250,7 +207,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td th:text="|${order.total} €|"></td>
+                                <td th:text="${order.total} + ' €'"></td>
                                 <td>
                                     <form th:action="@{/pedidos/editar}" method="post">
                                         <div class="d-flex">
@@ -293,7 +250,7 @@
                                             <div class="modal-body px-4 pt-2 pb-4">
                                                 <div class="col-12">
                                                     <span class="float-start"><b>TOTAL</b></span>
-                                                    <span class="float-end col-2 text-end" th:text="|${order.total} €|"></span>
+                                                    <span class="float-end col-2 text-end" th:text="${order.total} + ' €'"></span>
                                                 </div>
                                             </div>
                                             <div class="modal-footer p-4">

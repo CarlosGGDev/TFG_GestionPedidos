@@ -20,26 +20,31 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping // http://localhost:8080/productos
+    @PostMapping(value = "/listado") // http://localhost:8080/productos/listado
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok(productService.getProducts());
     }
 
-    @GetMapping(value = "/{productId}") // http://localhost:8080/productos/1
+    /*@GetMapping(value = "/{productId}") // http://localhost:8080/productos/1
     public ResponseEntity<Product> getProduct(@PathVariable("productId") int productId) {
         Optional<Product> productOpt = productService.getProduct(productId);
         return ResponseEntity.of(productOpt);
-    }
+    }*/
 
-    @GetMapping(value = "/categoria/{categoryId}") // http://localhost:8080/productos/categoria/1
+    /*@GetMapping(value = "/categoria/{categoryId}") // http://localhost:8080/productos/categoria/1
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
         Optional<List<Product>> productsOpt = productService.getProductsByCategory(categoryId);
         return ResponseEntity.of(productsOpt);
-    }
+    }*/
 
-    @PostMapping // http://localhost:8080/productos
+    @PostMapping(value = "/nuevo") // http://localhost:8080/productos/nuevo
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.saveProduct(product));
+    }
+
+    @PostMapping(value = "/editar") // http://localhost:8080/productos/editar
+    public void editProduct(@ModelAttribute Product product) {
+        productService.editProduct(product);
     }
 
     @DeleteMapping(value = "/{productId}") // http://localhost:8080/productos/1

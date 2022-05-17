@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- TOKEN POST REQUESTS -->
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Productos</title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/products.css}" title="style" />
@@ -31,15 +35,75 @@
             <table id="products-table">
                 <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Precio Kg</th>
+                    <th>REF.</th>
+                    <th>PRODUCTO</th>
+                    <th>CATEGORÍA</th>
+                    <th>PRECIO KG</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- JSON DATA -->
                 </tbody>
             </table>
+        </div>
+
+        <!-- MODAL EDIT PRODUCT -->
+        <div id="edit-product-modal" class="modal fade" tabindex="-1" aria-labelledby="edit-product-modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content mx-auto w-50">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="edit-product-modalLabel">EDITAR PRODUCTO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form th:action="@{/productos/editar}" method="post" th:object="${product}">
+                        <div class="modal-body">
+                            <input id="product-id" th:field="*{id}" hidden>
+                            <div class="col-12 mb-2">
+                                <label for="product-name" class="form-label"><b>NOMBRE</b></label>
+                                <input th:field="*{name}" id="product-name" class="form-control form-control-sm" type="text" th:name="name"
+                                       maxlength="70"
+                                       pattern="^[A-Za-zÀÈÌÒÙÁÉÍÓÚàèìòùáéíóúÇçÜü ]{2,70}$"
+                                       oninput="this.setCustomValidity('')"
+                                       oninvalid="this.setCustomValidity('Solo puede contener:\nLetras')" required/>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <label for="product-category" class="form-label"><b>CATEGORÍA</b></label>
+                                <select th:field="*{category.name}"  id="product-category" class="form-select form-select-sm" th:name="category">
+                                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <label for="product-price" class="form-label"><b>PRECIO</b></label>
+                                <input th:field="*{price}" id="product-price" class="form-control form-control-sm" type="text" th:name="price"
+                                       maxlength="10"
+                                       pattern="^[0-9]+([\.][0-9]+)?$"
+                                       oninput="this.setCustomValidity('')"
+                                       oninvalid="this.setCustomValidity('Solo puede contener:\nNúmeros\nDecimales con punto')" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn w-100 btn-dark text-light">ACTUALIZAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL PRODUCT REMOVED -->
+        <div id="product-removed" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Producto eliminado</h5>
+                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="fs-5">El producto ha sido eliminado de la base de datos.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

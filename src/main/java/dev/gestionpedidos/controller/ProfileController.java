@@ -49,7 +49,9 @@ public class ProfileController {
 			valid = false;
 		}
 		if (valid){
+			// El metodo save actualiza el usuario
 			userService.saveUser(user);
+
 			// Es necesario volver a guardar el usuario en la sesion, ya que ahora el usuario ha cambiado,
 			// si no al ir al menu no encuentra los datos del usuario "original" y da error
 			session.setAttribute("user", user);

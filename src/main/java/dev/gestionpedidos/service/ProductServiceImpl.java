@@ -37,8 +37,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
-        productRepository.save(product);
-        return product;
+        return productRepository.save(product);
+    }
+
+    @Override
+    public void editProduct(Product product) {
+        this.productRepository.save(product);
     }
 
     @Override
@@ -48,13 +52,6 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById(productId);
         }
         return productOpt;
-    }
-
-    @Override
-    public boolean editProduct(int productId) {
-        // TODO
-        // editar tambien dato return firma metodo (boolean)
-        return true;
     }
 
 }
