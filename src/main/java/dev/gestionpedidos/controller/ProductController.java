@@ -1,5 +1,6 @@
 package dev.gestionpedidos.controller;
 
+import dev.gestionpedidos.model.Order;
 import dev.gestionpedidos.model.Product;
 import dev.gestionpedidos.service.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class ProductController {
     }
 
     @PostMapping(value = "/editar") // http://localhost:8080/productos/editar
-    public void editProduct(@ModelAttribute Product product) {
-        productService.editProduct(product);
+    public ResponseEntity<Product> editProduct(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.editProduct(product));
     }
 
     @DeleteMapping(value = "/{productId}") // http://localhost:8080/productos/1

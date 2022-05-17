@@ -1,6 +1,5 @@
 package dev.gestionpedidos.controller;
 
-import dev.gestionpedidos.model.Product;
 import dev.gestionpedidos.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ public class ProductsListController {
 
     @GetMapping // http://localhost:8080/productos
     public String showProductsList(Model model) {
-        model.addAttribute("product", new Product());
         model.addAttribute("categories", this.categoryService.getCategories());
         return "products";
     }

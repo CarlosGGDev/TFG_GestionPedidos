@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     const token = $("meta[name='_csrf']").attr("content");
+    const role = $("meta[name='_is_admin']").attr("content");
 
     $('#products-table').DataTable({
         language: {
@@ -18,35 +19,40 @@ $(document).ready(function () {
             {
                 title: "REF.",
                 data: "id"
-            },
-            {
-            title: "NOMBRE",
-            data: "name"
+            },{
+                title: "NOMBRE",
+                data: "name"
             }, {
-            title: "CATEGORÍA",
-            data: "category.name"
+                title: "CATEGORÍA",
+                data: "category.name"
             }, {
-            title: "PRECIO KG",
-            data: "price"
+                title: "PRECIO KG",
+                data: "price"
             }
         ],
-        /* Se editan las columnas 3 y 4 añadidas en HTML. Si se insertan desde JSON les añade un icono de ordenacion */
+        /* Se editan las columnas 5 y 6 añadidas en HTML. Si se insertan desde JSON les añade un icono de ordenacion */
         aoColumnDefs: [
             {
             aTargets: [4],
             mData: "EDITAR",
             mRender: function() {
-                return "<button id='btn-edit' type='submit' class='btn btn-sm btn-custom ms-2' data-bs-toggle='modal' "
-                    + "data-bs-target='#edit-product-modal'><i class='bi bi-pencil'></i></button>";
+                if (role == 'ROLE_ADMIN') {
+                    return "<button id='btn-edit' type='submit' class='btn btn-sm btn-custom ms-2' data-bs-toggle='modal' "
+                        + "data-bs-target='#edit-product-modal'><i class='bi bi-pencil'></i></button>";
                 }
-            },
-            {
-                aTargets: [5],
-                mData: "BORRAR",
-                mRender: function() {
+                return "";
+            }
+        },
+        {
+            aTargets: [5],
+            mData: "BORRAR",
+            mRender: function() {
+                if (role == 'ROLE_ADMIN') {
                     return "<button id='btn-remove' class='btn btn-sm btn-custom'><i class='bi bi-trash3'></i></button>";
                 }
+                return "";
             }
+        }
         ]
     });
 
@@ -70,9 +76,43 @@ $(document).ready(function () {
         $('#product-price').val(productPrice);
     });
 
+    $(document).on('click', '#btn-update', function() {
+        let product = {
+            "id": $('#product-id').val(),
+            "name": $('#product-name').val(),
+            "category": {
+                "id": $('#product-category').find('option:selected').attr('id'),
+                "name": $('#product-category').val()
+            },
+            "price": $('#product-price').val()
+        }
+
+        requestUpdateProduct(product);
+    });
+
 });
 
 const token = $("meta[name='_csrf']").attr("content");
+
+// REQUEST ORDER
+function requestUpdateProduct(data) {
+    $.post({
+        type: "POST",
+        headers: {
+            "X-CSRF-Token": token
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/productos/editar",
+        data: JSON.stringify(data),
+        success: function() {
+            window.location.replace("http://localhost:8080/productos")
+        },
+        error: function() {
+            alert("El producto no se ha podido actualizar");
+        }
+    })
+}
 
 // REQUEST REMOVE ORDER
 function requestRemoveProduct(productId) {

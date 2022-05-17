@@ -9,6 +9,6 @@ public interface ProductService {
 	Optional<Product> getProduct(int productId);
 	Optional<List<Product>> getProductsByCategory(int categoryId);
 	Product saveProduct(Product product);
-	void editProduct(Product product);
+	Product editProduct(Product product);
 	Optional<Product> deleteProduct(int productId);
 }
