@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface CategoryService {
 	List<Category> getCategories();
+	Category saveCategory(Category category);
 }

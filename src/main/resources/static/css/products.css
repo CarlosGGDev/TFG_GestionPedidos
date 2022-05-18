@@ -60,6 +60,23 @@ table tbody td {
 	padding: 12px 8px !important;
 }
 
+.btn-new {
+	font-size: 1.1em !important;
+	padding: 5px 10px !important;
+	background-color: lightcoral !important;
+	color: white !important;
+	border-radius: 10px !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-new span {
+	color: white !important;
+}
+
+.btn-new:hover {
+	background-color: #e57171 !important;
+}
+
 .btn-custom {
 	border-radius: 5px !important;
 	background-color: rgb(237, 237, 237) !important;

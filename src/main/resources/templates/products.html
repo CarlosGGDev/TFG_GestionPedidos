@@ -8,7 +8,6 @@
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <meta th:name="_is_admin" th:content="${session.user.role}"/>
     <title>Productos</title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/products.css}" title="style" />
@@ -23,7 +22,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <!-- JS -->
-    <script th:src="@{/js/products.js}"></script>
+    <script th:if="${session.user.role.toString() == 'ROLE_USER'}" th:src="@{/js/products.js}"></script>
+    <script th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" th:src="@{/js/productsAdmin.js}"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -40,14 +40,78 @@
                     <th>PRODUCTO</th>
                     <th>CATEGORÍA</th>
                     <th>PRECIO KG</th>
-                    <th></th>
-                    <th></th>
+                    <th th:if="${session.user.role.toString() == 'ROLE_ADMIN'}"></th>
+                    <th th:if="${session.user.role.toString() == 'ROLE_ADMIN'}"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- JSON DATA -->
                 </tbody>
             </table>
+        </div>
+
+        <!-- MODAL NEW PRODUCT -->
+        <div id="new-product-modal" class="modal fade" tabindex="-1" aria-labelledby="new-product-modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content mx-auto w-50">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="new-product-modalLabel">NUEVO PRODUCTO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12 mb-2">
+                            <label for="new-product-name" class="form-label"><b>NOMBRE</b></label>
+                            <input id="new-product-name" class="form-control form-control-sm" type="text"
+                                   maxlength="70"
+                                   pattern="^[A-Za-zÀÈÌÒÙÁÉÍÓÚàèìòùáéíóúÇçÜü ]{2,70}$"
+                                   oninput="this.setCustomValidity('')"
+                                   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras')" required/>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label for="new-product-category" class="form-label"><b>CATEGORÍA</b></label>
+                            <select id="new-product-category" class="form-select form-select-sm" >
+                                <option th:each="category : ${categories}" th:text="${category.name}" th:id="${category.id}" th:value="${category.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label for="new-product-price" class="form-label"><b>PRECIO</b></label>
+                            <input id="new-product-price" class="form-control form-control-sm" type="text"
+                                   maxlength="10"
+                                   pattern="^[0-9]+([\.][0-9]+)?$"
+                                   oninput="this.setCustomValidity('')"
+                                   oninvalid="this.setCustomValidity('Solo puede contener:\nNúmeros\nDecimales con punto')" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-new-product" class="btn w-100 btn-dark text-light">AÑADIR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NEW CATEGORY -->
+        <div id="new-category-modal" class="modal fade" tabindex="-1" aria-labelledby="new-category-modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content mx-auto w-50">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="new-category-modalLabel">NUEVA CATEGORÍA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12 mb-2">
+                            <label for="new-category-name" class="form-label"><b>NOMBRE</b></label>
+                            <input id="new-category-name" class="form-control form-control-sm" type="text"
+                                   maxlength="70"
+                                   pattern="^[A-Za-zÀÈÌÒÙÁÉÍÓÚàèìòùáéíóúÇçÜü ]{2,70}$"
+                                   oninput="this.setCustomValidity('')"
+                                   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras')" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-new-category" class="btn w-100 btn-dark text-light">AÑADIR</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- MODAL EDIT PRODUCT -->
