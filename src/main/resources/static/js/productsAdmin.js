@@ -106,12 +106,17 @@ $(document).ready(function () {
     });
 
     // NEW CATEGORY
-    $(document).on('click', '#btn-new-category', function() {
+    $('#new-category-form').submit(function(event) {
         let category = {
             "name": $('#new-category-name').val()
         }
-
         requestNewCategory(category);
+    });
+
+    // REMOVE CATEGORY
+    $('#remove-category-form').submit(function(event) {
+        let categoryId = $('#remove-category-name').find('option:selected').attr('id');
+        requestRemoveCategory(categoryId);
     });
 });
 
@@ -172,7 +177,7 @@ function requestRemoveProduct(productId) {
     });
 }
 
-// REQUEST NEW PRODUCT
+// REQUEST NEW CATEGORY
 function requestNewCategory(data) {
     $.post({
         type: "POST",
@@ -184,10 +189,21 @@ function requestNewCategory(data) {
         url: "/categorias/nueva",
         data: JSON.stringify(data),
         success: function() {
-            window.location.replace("http://localhost:8080/productos")
+            window.location.replace("http://localhost:8080/productos");
         },
         error: function() {
             alert("La categoría no se ha podido añadir");
         }
+    })
+}
+
+// REQUEST REMOVE CATEGORY
+function requestRemoveCategory(categoryId) {
+    $.ajax({
+        type: "DELETE",
+        headers: {
+            "X-CSRF-Token": token
+        },
+        url: "/categorias/" + categoryId
     })
 }

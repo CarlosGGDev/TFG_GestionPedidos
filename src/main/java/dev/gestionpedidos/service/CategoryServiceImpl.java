@@ -1,8 +1,10 @@
 package dev.gestionpedidos.service;
 
 import dev.gestionpedidos.model.Category;
+import dev.gestionpedidos.model.Product;
 import dev.gestionpedidos.repository.CategoryRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
+	public Optional<Category> getCategory(int categoryId) {
+		return this.categoryRepository.findById(categoryId);
+	}
+
+	@Override
 	public List<Category> getCategories() {
 		return this.categoryRepository.findAll();
 	}
@@ -22,5 +29,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category saveCategory(Category category) {
 		return this.categoryRepository.save(category);
+	}
+
+	@Override
+	public void deleteCategory(int categoryId) {
+		Optional<Category> categoryOpt = getCategory(categoryId);
+		if (categoryOpt.isPresent()) {
+			categoryRepository.deleteById(categoryId);
+		}
 	}
 }

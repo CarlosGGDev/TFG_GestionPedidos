@@ -66,7 +66,7 @@ public class OrderController {
 	}
 
 	// TOREV: poner en documentacion que estos dos metodos se llaman en funcion de los parametros de la request.
-	//  Los dos son de tipo POST pero segun los parametros entrara por uno u otro
+	//  Los dos son de tipo POST pero segun los parametros entrara por uno u otro, y devuelve una redireccion
 	@PostMapping(value = "/editar", params = {"orderId", "status"}) // http://localhost:8080/pedidos/editar
 	public void editOrderStatus(HttpServletResponse response,
 								@RequestParam(value = "orderId") int orderId,
