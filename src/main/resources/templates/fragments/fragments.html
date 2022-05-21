@@ -25,7 +25,7 @@
 							<a th:href="@{/productos}" class="nav-link">Productos</a>
 						</li>
 						<li th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" class="nav-item">
-							<a class="nav-link">Clientes</a>
+							<a th:href="@{/clientes}" class="nav-link">Clientes</a>
 						</li>
 					</ul>
 					<ul class="ms-auto navbar-nav">

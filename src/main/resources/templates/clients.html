@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- TOKEN POST REQUESTS -->
+	<meta th:name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+	<title>Clientes</title>
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<!-- JS -->
+	<script th:src="@{/js/clients.js}"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/clients.css}" title="style" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/fragments.css}" title="style" />
+	<!-- BOOTSTRAP CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<!-- BOOTSTRAP ICONS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+	<!-- HEADER -->
+	<header th:replace="fragments/fragments :: header"></header>
+
+	<!-- CONTENT -->
+
+	<!-- CLIENTS LIST -->
+	<section>
+		<div class="container col-9 my-5">
+			<div class="pt-3 pb-5 d-flex flex-wrap justify-content-between">
+				<div class="custom-title">
+					<h4 class="d-inline">Clientes</h4>
+					<span class="fs-5" th:text="| (${clients.size})|"></span>
+				</div>
+				<div class="col-12">
+					<p th:if="${clients.size == 0}" class="my-3">No hay clientes en el sistema</p>
+					<table th:if="${clients.size > 0}" class="table table-stripped mt-4">
+						<thead>
+							<tr>
+								<th>ID.</th>
+								<th>NIF</th>
+								<th>NOMBRE</th>
+								<th>EMAIL</th>
+								<th>TELÉFONO</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="client : ${clients}">
+								<tr>
+									<td th:id="client-id" th:text="${client.id}"></td>
+									<td th:text="${client.nif}"></td>
+									<td th:text="${client.name}"></td>
+									<td th:text="${client.email}"></td>
+									<td th:text="${client.phone}"></td>
+									<td>
+										<button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${client.id}"><i class="bi bi-search"></i></button>
+									</td>
+									<td>
+										<button id="btn-remove" class="btn btn-sm btn-custom"><i class="bi bi-trash3"></i></button>
+									</td>
+								</tr>
+
+								<!-- MODAL CLIENT INFO -->
+								<div class="modal fade" th:attr="id='modal'+${client.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header flex-wrap px-4">
+												<h5 class="modal-title my-2" id="modalLabel">DATOS DE CLIENTE</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												<div class="col-12"><b>ID: </b><span th:text="${client.id}"></span></div>
+												<div class="col-12"><b>ROL: </b><span th:text="${client.role}"></span></div>
+											</div>
+											<div class="modal-body p-4 d-flex flex-wrap">
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>NIF</b></span>
+													<span class="float-end" th:text="${client.nif}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>NOMBRE</b></span>
+													<span class="float-end" th:text="${client.name}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>EMAIL</b></span>
+													<span class="float-end" th:text="${client.email}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>TElÉFONO</b></span>
+													<span class="float-end" th:text="${client.phone}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>DIRECCIÓN</b></span>
+													<span class="float-end" th:text="${client.address}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>CP</b></span>
+													<span class="float-end" th:text="${#numbers.formatInteger(client.zipcode, 5)}"></span>
+												</div>
+												<div class="col-12 mb-1">
+													<span class="float-start"><b>LOCALIDAD</b></span>
+													<span class="float-end" th:text="${client.town}"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</th:block>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- MODAL CLIENT REMOVED -->
+	<div th:id="client-removed" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Usuario eliminado</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p class="fs-5">El usuario se ha eliminado de la base de datos, pero su historial de pedidos sigue estando disponible</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FOOTER -->
+	<footer th:replace="fragments/fragments :: footer"></footer>
+
+	<!-- BOOTSTRAP JS/POPPER -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

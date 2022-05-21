@@ -8,7 +8,7 @@
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <title>Panel de administrador</title>
+    <title>Inicio</title>
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- JS -->
@@ -148,7 +148,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p class="fs-5">El pedido se ha eliminado correctamente.</p>
@@ -161,7 +161,7 @@
 
     <!-- SENT ORDERS -->
     <section>
-        <div class="container mt-2 mb-5 d-flex flex-wrap justify-content-center">
+        <div class="container mt-2 mb-5 pb-5 d-flex flex-wrap justify-content-center">
             <div class="col-10 p-3 d-flex flex-wrap justify-content-between">
                 <div class="col-12">
                     <div>
@@ -266,20 +266,6 @@
                         </th:block>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- MODAL ORDER REMOVED -->
-        <div id="order-removed" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="fs-5">El pedido se ha eliminado correctamente.</p>
-                    </div>
                 </div>
             </div>
         </div>

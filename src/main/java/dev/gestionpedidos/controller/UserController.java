@@ -12,10 +12,6 @@ import java.util.Optional;
 @RequestMapping(value = "/usuarios")
 public class UserController {
 
-    // TODO: redirección según roles de usuario
-    // TODO: anotacion @valid para validar campos
-    // TODO: metodo editar usuario
-
     private final UserService userService;
 
     public UserController(UserService userService) {
