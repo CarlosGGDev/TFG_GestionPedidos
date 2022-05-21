@@ -7,9 +7,9 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +24,8 @@ public class CategoryController {
 	}
 
 	@PostMapping(value = "/nueva") // http://localhost:8080/categorias/nueva
-	public void saveCategory(HttpServletResponse response, @RequestBody Category category) throws IOException {
-		this.categoryService.saveCategory(category);
+	public void saveCategory(HttpServletResponse response, @ModelAttribute Category category) throws IOException {
+		Optional<Category> categoryOpt = this.categoryService.saveCategory(category);
 		response.sendRedirect("/productos");
 	}
 

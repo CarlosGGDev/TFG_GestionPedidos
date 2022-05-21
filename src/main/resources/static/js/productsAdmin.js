@@ -106,15 +106,16 @@ $(document).ready(function () {
     });
 
     // NEW CATEGORY
-    $('#new-category-form').submit(function(event) {
+    /*$('#new-category-form').submit(function(event) {
+        event.preventDefault();
         let category = {
             "name": $('#new-category-name').val()
         }
         requestNewCategory(category);
-    });
+    });*/
 
     // REMOVE CATEGORY
-    $('#remove-category-form').submit(function(event) {
+    $(document).on('click', '#btn-remove-category', function() {
         let categoryId = $('#remove-category-name').find('option:selected').attr('id');
         requestRemoveCategory(categoryId);
     });
@@ -134,7 +135,7 @@ function requestNewProduct(data) {
         url: "/productos/nuevo",
         data: JSON.stringify(data),
         success: function() {
-            window.location.replace("http://localhost:8080/productos")
+            window.location.replace("http://localhost:8080/productos");
         },
         error: function() {
             alert("El producto no se ha podido añadir");
@@ -154,7 +155,7 @@ function requestUpdateProduct(data) {
         url: "/productos/editar",
         data: JSON.stringify(data),
         success: function() {
-            window.location.replace("http://localhost:8080/productos")
+            window.location.replace("http://localhost:8080/productos");
         },
         error: function() {
             alert("El producto no se ha podido actualizar");
@@ -173,7 +174,7 @@ function requestRemoveProduct(productId) {
     })
     $('#product-removed').modal('show');
     $('.modal').on('hidden.bs.modal', function () {
-        window.location.replace("http://localhost:8080/productos")
+        window.location.replace("http://localhost:8080/productos");
     });
 }
 
@@ -187,14 +188,9 @@ function requestNewCategory(data) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         url: "/categorias/nueva",
-        data: JSON.stringify(data),
-        success: function() {
-            window.location.replace("http://localhost:8080/productos");
-        },
-        error: function() {
-            alert("La categoría no se ha podido añadir");
-        }
+        data: JSON.stringify(data)
     })
+    window.location.replace("http://localhost:8080/productos");
 }
 
 // REQUEST REMOVE CATEGORY
@@ -206,4 +202,9 @@ function requestRemoveCategory(categoryId) {
         },
         url: "/categorias/" + categoryId
     })
+    $('#new-category-modal').modal('toggle');
+    $('#category-removed').modal('show');
+    $('#category-removed').on('hidden.bs.modal', function () {
+        window.location.replace("http://localhost:8080/productos");
+    });
 }
