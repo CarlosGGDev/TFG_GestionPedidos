@@ -57,7 +57,7 @@ $(document).ready(function () {
     }
 
     // NEW PRODUCT
-    $(document).on('click', '#btn-new-product', function() {
+    $('#new-product-form').submit(function(event) {
         let product = {
             "name": $('#new-product-name').val(),
             "category": {
@@ -91,7 +91,7 @@ $(document).ready(function () {
     });
 
     // UPDATE PRODUCT
-    $(document).on('click', '#btn-update', function() {
+    $('#edit-product-form').submit(function(event) {
         let product = {
             "id": $('#product-id').val(),
             "name": $('#product-name').val(),

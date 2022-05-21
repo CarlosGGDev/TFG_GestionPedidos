@@ -24,13 +24,14 @@ public class CategoryController {
 	}
 
 	@PostMapping(value = "/nueva") // http://localhost:8080/categorias/nueva
-	public ResponseEntity<Category> saveCategory(@RequestBody Category category) {
-		return ResponseEntity.ok(this.categoryService.saveCategory(category));
+	public void saveCategory(HttpServletResponse response, @RequestBody Category category) throws IOException {
+		this.categoryService.saveCategory(category);
+		response.sendRedirect("/productos");
 	}
 
 	@DeleteMapping(value = "/{categoryId}") // http://localhost:8080/categorias/1
-	public void deleteCategory(HttpServletResponse response, @PathVariable("categoryId") int categoryId) throws IOException {
-		this.categoryService.deleteCategory(categoryId);
-		response.sendRedirect("/categorias");
+	public ResponseEntity<Category> deleteCategory(@PathVariable("categoryId") int categoryId) {
+		Optional<Category> categoryOpt = this.categoryService.deleteCategory(categoryId);
+		return ResponseEntity.of(categoryOpt);
 	}
 }
