@@ -2,7 +2,8 @@ $(document).ready(function() {
 
 	// REMOVE CLIENT
 	$(document).on('click', '#btn-remove', function() {
-		if (confirm("¿Seguro que quieres borrar el cliente?\nEsta opción no se puede deshacer")) {
+		if (confirm("¿Seguro que quieres borrar el cliente?\n"
+			+ "Se borrará también su historial de pedidos. Esta opción no se puede deshacer.")) {
 			let clientId = $(this).closest('tr').children('#client-id').text();
 			requestRemoveClient(clientId);
 		}

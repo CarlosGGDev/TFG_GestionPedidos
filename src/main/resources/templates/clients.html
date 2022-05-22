@@ -9,6 +9,7 @@
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<title>Clientes</title>
+	<link rel="icon" type="image/png" th:href="@{/img/favicon.png}" sizes="32x32">
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- JS -->
@@ -74,7 +75,7 @@
 												<h5 class="modal-title my-2" id="modalLabel">DATOS DE CLIENTE</h5>
 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												<div class="col-12"><b>ID: </b><span th:text="${client.id}"></span></div>
-												<div class="col-12"><b>ROL: </b><span th:text="${client.role}"></span></div>
+												<div class="col-12"><b>ROL: </b><span th:text="${#strings.substringAfter(client.role, '_').equals('USER') ? 'USUARIO' : 'ADMIN'}"></span></div>
 											</div>
 											<div class="modal-body p-4 d-flex flex-wrap">
 												<div class="col-12 mb-1">
@@ -126,7 +127,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p class="fs-5">El usuario se ha eliminado de la base de datos, pero su historial de pedidos sigue estando disponible</p>
+					<p class="fs-5">El usuario y su historial de pedidos se han eliminado de la base de datos.</p>
 				</div>
 			</div>
 		</div>

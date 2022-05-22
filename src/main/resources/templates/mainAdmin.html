@@ -9,6 +9,7 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Inicio</title>
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.png}" sizes="32x32">
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- JS -->
@@ -102,9 +103,9 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header flex-wrap px-4">
-                                                <h5 class="modal-title my-2" th:id="modalLabel">Detalle de pedido</h5>
+                                                <h5 class="modal-title my-2" th:id="modalLabel">DETALLE DE PEDIDO</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                <div class="col-12"><b>Referencia: </b><span th:text="${order.id}"></span></div>
+                                                <div class="col-12"><b>REFERENCIA: </b><span th:text="${order.id}"></span></div>
                                             </div>
                                             <div class="modal-body px-4 pt-4 pb-2">
                                                 <div class="d-flex flex-wrap justify-content-between">
@@ -127,8 +128,16 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer p-4">
+                                                <div class="col-12 m-0 mb-1">
+                                                    <span class="float-start"><b>CLIENTE</b></span>
+                                                    <span class="float-end" th:text="${order.user.id}"></span>
+                                                </div>
+                                                <div class="col-12 m-0 mb-1">
+                                                    <span class="float-start"><b>TELÉFONO</b></span>
+                                                    <span class="float-end" th:text="${order.user.phone}"></span>
+                                                </div>
                                                 <div class="col-12 m-0">
-                                                    <span class="float-start"><b>Dirección envío</b></span>
+                                                    <span class="float-start"><b>DIRECCIÓN ENVÍO</b></span>
                                                     <span class="float-end" th:text="${order.shippingAddress}"></span>
                                                 </div>
                                             </div>
@@ -254,8 +263,16 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer p-4">
+                                                <div class="col-12 m-0 mb-1">
+                                                    <span class="float-start"><b>CLIENTE</b></span>
+                                                    <span class="float-end" th:text="${order.user.id}"></span>
+                                                </div>
+                                                <div class="col-12 m-0 mb-1">
+                                                    <span class="float-start"><b>TELÉFONO</b></span>
+                                                    <span class="float-end" th:text="${order.user.phone}"></span>
+                                                </div>
                                                 <div class="col-12 m-0">
-                                                    <span class="float-start"><b>Dirección envío</b></span>
+                                                    <span class="float-start"><b>DIRECCIÓN ENVÍO</b></span>
                                                     <span class="float-end" th:text="${order.shippingAddress}"></span>
                                                 </div>
                                             </div>
