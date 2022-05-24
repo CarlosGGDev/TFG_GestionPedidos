@@ -59,12 +59,6 @@ public class OrderController {
 		return ResponseEntity.ok(savedOrder);
 	}
 
-	@DeleteMapping(value = "/{orderId}") // http://localhost:8080/pedidos/1
-	public ResponseEntity<Order> deleteOrder(@PathVariable("orderId") int orderId) {
-		Optional<Order> orderOpt = orderService.deleteOrder(orderId);
-		return ResponseEntity.of(orderOpt);
-	}
-
 	// TOREV: poner en documentacion que estos dos metodos se llaman en funcion de los parametros de la request.
 	//  Los dos son de tipo POST pero segun los parametros entrara por uno u otro, y devuelve una redireccion
 	@PostMapping(value = "/editar", params = {"orderId", "status"}) // http://localhost:8080/pedidos/editar
@@ -81,5 +75,11 @@ public class OrderController {
 								@RequestParam(value = "comment") String comment) throws IOException {
 		this.orderService.editOrderComment(orderId, comment);
 		response.sendRedirect("/");
+	}
+
+	@DeleteMapping(value = "/{orderId}") // http://localhost:8080/pedidos/1
+	public ResponseEntity<Order> deleteOrder(@PathVariable("orderId") int orderId) {
+		Optional<Order> orderOpt = orderService.deleteOrder(orderId);
+		return ResponseEntity.of(orderOpt);
 	}
 }

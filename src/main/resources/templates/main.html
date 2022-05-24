@@ -52,7 +52,6 @@
                                 <th>FECHA PEDIDO</th>
                                 <th>ESTADO</th>
                                 <th>TOTAL</th>
-                                <th>COMENTARIO</th>
                                 <th>DETALLE</th>
                                 <th></th>
                             </tr>
@@ -64,7 +63,6 @@
                                     <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
                                     <td th:text="${order.status}"></td>
                                     <td th:text="${order.total} + ' €'"></td>
-                                    <td th:text="${order.comment}"></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modal'+${order.id}"><i class="bi bi-search"></i></button>
                                     </td>
@@ -152,7 +150,6 @@
                             <th>FECHA PEDIDO</th>
                             <th>ESTADO</th>
                             <th>TOTAL</th>
-                            <th>COMENTARIO</th>
                             <th>DETALLE</th>
                         </tr>
                         </thead>
@@ -163,7 +160,6 @@
                                 <td th:text="${#temporals.format(order.orderDate, 'dd MMMM yyyy, HH:mm')}"></td>
                                 <td th:text="${order.status}"></td>
                                 <td th:text="${order.total} + ' €'"></td>
-                                <td th:text="${order.comment}"></td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-custom" data-bs-toggle="modal" th:attr="data-bs-target='#modalDelivered'+${order.id}"><i class="bi bi-search"></i></button>
                                 </td>

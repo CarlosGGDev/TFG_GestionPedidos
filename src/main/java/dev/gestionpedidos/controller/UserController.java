@@ -29,13 +29,6 @@ public class UserController {
         return ResponseEntity.of(userOpt);
     }
 
-    // TOREV: not used?
-    /*@PostMapping // http://localhost:8080/usuarios
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        User userOpt = userService.saveUser(user);
-        return ResponseEntity.ok(userOpt);
-    }*/
-
     @DeleteMapping(value = "/{userId}") // http://localhost:8080/usuarios/1
     public ResponseEntity<User> deleteUser(@PathVariable("userId") int userId) {
         Optional<User> userOpt = userService.deleteUser(userId);

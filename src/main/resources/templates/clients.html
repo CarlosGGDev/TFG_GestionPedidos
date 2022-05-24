@@ -33,13 +33,13 @@
 	<section>
 		<div class="container col-9 my-5">
 			<div class="pt-3 pb-5 d-flex flex-wrap justify-content-between">
-				<div class="custom-title">
+				<div class="custom-title mb-5">
 					<h4 class="d-inline">Clientes</h4>
 					<span class="fs-5" th:text="| (${clients.size})|"></span>
 				</div>
 				<div class="col-12">
 					<p th:if="${clients.size == 0}" class="my-3">No hay clientes en el sistema</p>
-					<table th:if="${clients.size > 0}" class="table table-stripped mt-4">
+					<table th:if="${clients.size > 0}" class="table table-stripped mt-2">
 						<thead>
 							<tr>
 								<th>ID.</th>
@@ -78,31 +78,31 @@
 												<div class="col-12"><b>ROL: </b><span th:text="${#strings.substringAfter(client.role, '_').equals('USER') ? 'USUARIO' : 'ADMIN'}"></span></div>
 											</div>
 											<div class="modal-body p-4 d-flex flex-wrap">
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>NIF</b></span>
 													<span class="float-end" th:text="${client.nif}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>NOMBRE</b></span>
 													<span class="float-end" th:text="${client.name}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>EMAIL</b></span>
 													<span class="float-end" th:text="${client.email}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>TElÉFONO</b></span>
 													<span class="float-end" th:text="${client.phone}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>DIRECCIÓN</b></span>
 													<span class="float-end" th:text="${client.address}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>CP</b></span>
 													<span class="float-end" th:text="${#numbers.formatInteger(client.zipcode, 5)}"></span>
 												</div>
-												<div class="col-12 mb-1">
+												<div class="col-12">
 													<span class="float-start"><b>LOCALIDAD</b></span>
 													<span class="float-end" th:text="${client.town}"></span>
 												</div>
