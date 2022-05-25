@@ -25,7 +25,7 @@ public class CategoryController {
 	@PostMapping(value = "/categorias/nueva") // http://localhost:8080/categorias/nueva
 	public void saveCategory(HttpServletResponse response, @ModelAttribute Category category) throws IOException {
 		Optional<Category> categoryOpt = this.categoryService.saveCategory(category);
-		response.sendRedirect("/productos");
+		response.sendRedirect("/admin/productos");
 	}
 
 	@DeleteMapping(value = "/categorias/{categoryId}") // http://localhost:8080/categorias/1

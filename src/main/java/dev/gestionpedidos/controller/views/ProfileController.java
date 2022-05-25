@@ -30,10 +30,11 @@ public class ProfileController {
 		return "admin/profile";
 	}
 
-	@PostMapping // http://localhost:8080/registro
+	@PostMapping(value = "/perfil") // http://localhost:8080/registro
 	public String updateProfile(@Valid @ModelAttribute User user, HttpSession session, Model model) {
 		User sessionUser = (User) session.getAttribute("user");
 		user.setId(sessionUser.getId());
+		user.setRole(sessionUser.getRole());
 
 		User nameEntry = userService.findByName(user.getName());
 		User emailEntry = userService.findByEmail(user.getEmail());

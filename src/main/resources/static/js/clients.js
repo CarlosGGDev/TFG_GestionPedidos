@@ -24,6 +24,6 @@ function requestRemoveClient(clientId) {
 	})
 	$('#client-removed').modal('show');
 	$('.modal').on('hidden.bs.modal', function () {
-		window.location.replace("http://localhost:8080/clientes")
+		window.location.replace("http://localhost:8080/admin/clientes")
 	});
 }

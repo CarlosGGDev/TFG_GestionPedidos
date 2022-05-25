@@ -3,9 +3,9 @@ $(document).ready(function() {
 	// ADD ITEM CART
 	$(document).on('click', '#add', function() {
 
-		$('#empty').remove();
-
 		if ($(this).closest('tr').children('#td-quantity').children('input').val() > 0) {
+		    $('#empty').remove();
+
 			let id = $(this).closest('tr').children('#td-id').text();
 			let name = $(this).closest('tr').children('#td-name').text();
 			let price = $(this).closest('tr').children('#td-price').text();

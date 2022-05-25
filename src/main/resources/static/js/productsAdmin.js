@@ -49,12 +49,13 @@ $(document).ready(function () {
     });
 
     // ADD NEW PRODUCT & CATEGORY BUTTONS TO DATATABLE
-    let newProduct = "<button id='new-product' type='button' class='btn btn-new m-0 me-3 mb-4 px-2 py-0' data-bs-toggle='modal' data-bs-target='#new-product-modal'><span class='fs-4 m-0 me-1 p-0'>+</span><span>PRODUCTO</span></button>";
-    let newCategory = "<button id='new-category' type='button' class='btn btn-new m-0 mb-4 px-2 py-0' data-bs-toggle='modal' data-bs-target='#new-category-modal'><span class='fs-4 m-0 me-1 p-0'>+</span><span>CATEGORÍA</span></button>";
-    let newButtonsDiv = `<div class='ms-4 d-inline'>${newProduct}${newCategory}</div>`;
-    window.onload = function() {
+    // Add a 20ms delay to allow time until the DataTable is created
+    setTimeout(function() {
+        let newProduct = "<button id='new-product' type='button' class='btn btn-new m-0 me-3 mb-4 px-2 py-0' data-bs-toggle='modal' data-bs-target='#new-product-modal'><span class='fs-4 m-0 me-1 p-0'>+</span><span>PRODUCTO</span></button>";
+        let newCategory = "<button id='new-category' type='button' class='btn btn-new m-0 mb-4 px-2 py-0' data-bs-toggle='modal' data-bs-target='#new-category-modal'><span class='fs-4 m-0 me-1 p-0'>+</span><span>CATEGORÍA</span></button>";
+        let newButtonsDiv = `<div class='ms-4 d-inline'>${newProduct}${newCategory}</div>`;
         $('#products-table_length').after(newButtonsDiv);
-    }
+    }, 10);
 
     // NEW PRODUCT
     $('#new-product-form').submit(function(event) {
@@ -105,15 +106,6 @@ $(document).ready(function () {
         requestUpdateProduct(product);
     });
 
-    // NEW CATEGORY
-    /*$('#new-category-form').submit(function(event) {
-        event.preventDefault();
-        let category = {
-            "name": $('#new-category-name').val()
-        }
-        requestNewCategory(category);
-    });*/
-
     // REMOVE CATEGORY
     $(document).on('click', '#btn-remove-category', function() {
         let categoryId = $('#remove-category-name').find('option:selected').attr('id');
@@ -135,7 +127,7 @@ function requestNewProduct(data) {
         url: "/productos/nuevo",
         data: JSON.stringify(data),
         success: function() {
-            window.location.replace("http://localhost:8080/productos");
+            window.location.replace("http://localhost:8080/admin/productos");
         },
         error: function() {
             alert("El producto no se ha podido añadir");
@@ -143,7 +135,7 @@ function requestNewProduct(data) {
     })
 }
 
-// REQUEST UPDATE PRODUCT
+// REQUEST EDIT PRODUCT
 function requestUpdateProduct(data) {
     $.post({
         type: "POST",
@@ -155,7 +147,7 @@ function requestUpdateProduct(data) {
         url: "/productos/editar",
         data: JSON.stringify(data),
         success: function() {
-            window.location.replace("http://localhost:8080/productos");
+            window.location.replace("http://localhost:8080/admin/productos");
         },
         error: function() {
             alert("El producto no se ha podido actualizar");
@@ -174,7 +166,7 @@ function requestRemoveProduct(productId) {
     })
     $('#product-removed').modal('show');
     $('.modal').on('hidden.bs.modal', function () {
-        window.location.replace("http://localhost:8080/productos");
+        window.location.replace("http://localhost:8080/admin/productos");
     });
 }
 
@@ -190,7 +182,7 @@ function requestNewCategory(data) {
         url: "/categorias/nueva",
         data: JSON.stringify(data)
     })
-    window.location.replace("http://localhost:8080/productos");
+    window.location.replace("http://localhost:8080/admin/productos");
 }
 
 // REQUEST REMOVE CATEGORY
@@ -205,6 +197,6 @@ function requestRemoveCategory(categoryId) {
     $('#new-category-modal').modal('toggle');
     $('#category-removed').modal('show');
     $('#category-removed').on('hidden.bs.modal', function () {
-        window.location.replace("http://localhost:8080/productos");
+        window.location.replace("http://localhost:8080/admin/productos");
     });
 }
