@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.rest;
 
 import dev.gestionpedidos.model.Category;
 import dev.gestionpedidos.service.CategoryService;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/categorias")
 public class CategoryController {
 
 	private final CategoryService categoryService;
@@ -23,13 +22,13 @@ public class CategoryController {
 		this.categoryService = categoryService;
 	}
 
-	@PostMapping(value = "/nueva") // http://localhost:8080/categorias/nueva
+	@PostMapping(value = "/categorias/nueva") // http://localhost:8080/categorias/nueva
 	public void saveCategory(HttpServletResponse response, @ModelAttribute Category category) throws IOException {
 		Optional<Category> categoryOpt = this.categoryService.saveCategory(category);
 		response.sendRedirect("/productos");
 	}
 
-	@DeleteMapping(value = "/{categoryId}") // http://localhost:8080/categorias/1
+	@DeleteMapping(value = "/categorias/{categoryId}") // http://localhost:8080/categorias/1
 	public ResponseEntity<Category> deleteCategory(@PathVariable("categoryId") int categoryId) {
 		Optional<Category> categoryOpt = this.categoryService.deleteCategory(categoryId);
 		return ResponseEntity.of(categoryOpt);

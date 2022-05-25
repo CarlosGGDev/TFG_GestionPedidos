@@ -1,8 +1,7 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.UserService;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public class SignupController {
     @GetMapping // http://localhost:8080/registro
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
-        return "signup";
+        return "public/signup";
     }
 
     @PostMapping // http://localhost:8080/registro
@@ -48,8 +47,8 @@ public class SignupController {
         }
         if (nameEntry == null && emailEntry == null && nifEntry == null){
             userService.saveUser(user);
-            return "signupSuccess";
+            return "public/signupSuccess";
         }
-        return "signup";
+        return "public/signup";
     }
 }

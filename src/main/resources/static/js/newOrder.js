@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-	if ($('#items-counter').text() == 0) {
-		let message = "<li id='empty' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>"
-		$('#cart-body').append(message);
-	}
-
 	// ADD ITEM CART
 	$(document).on('click', '#add', function() {
 
@@ -78,6 +73,8 @@ $(document).ready(function() {
 	$(document).on('click', '#empty-cart', function() {
 		// Remove all items from cart
 		$('#cart-body').empty();
+		let message = "<li id='empty' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>"
+		$('#cart-body').append(message);
 
 		// Update order total
 		$('#order-total').html(0);

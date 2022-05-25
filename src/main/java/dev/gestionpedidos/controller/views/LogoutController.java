@@ -1,16 +1,15 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/logout")
 public class LogoutController {
 
-	@GetMapping
+	@GetMapping(value = "/logout") // http://localhost:8080/logout
 	public String logout() {
-		return "logout";
+		return "public/logout";
 	}
 
 }

@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/clientes")
 public class ClientsController {
 
 	private final UserService userService;
@@ -16,9 +15,9 @@ public class ClientsController {
 		this.userService = userService;
 	}
 
-	@GetMapping
+	@GetMapping(value = "/admin/clientes") // http://localhost:8080/admin/clientes
 	public String showClientsList(Model model) {
 		model.addAttribute("clients", this.userService.getUsers());
-		return "clients";
+		return "admin/clients";
 	}
 }

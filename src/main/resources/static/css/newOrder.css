@@ -91,7 +91,7 @@ table input {
 
 #cart-body {
 	max-height: 290px;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #cart-body li:hover {

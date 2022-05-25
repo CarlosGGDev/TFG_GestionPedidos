@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.model.Category;
 import dev.gestionpedidos.service.CategoryService;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/productos")
 public class ProductsListController {
 
     private final CategoryService categoryService;
@@ -17,10 +16,15 @@ public class ProductsListController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping // http://localhost:8080/productos
-    public String showProductsList(Model model) {
+    @GetMapping(value = "/productos") // http://localhost:8080/productos
+    public String showPublicProductsList(Model model) {
+        return "public/products";
+    }
+
+    @GetMapping(value = "/admin/productos") // http://localhost:8080/admin/productos
+    public String showAdminProductsList(Model model) {
         model.addAttribute("categories", this.categoryService.getCategories());
         model.addAttribute("category", new Category());
-        return "products";
+        return "admin/products";
     }
 }

@@ -23,13 +23,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <!-- JS -->
-    <script th:if="${session.user.role.toString() == 'ROLE_USER'}" th:src="@{/js/products.js}"></script>
-    <script th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" th:src="@{/js/productsAdmin.js}"></script>
+    <script th:src="@{/js/productsAdmin.js}"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
     <!-- HEADER -->
-    <header th:replace="fragments/fragments :: header"></header>
+    <header th:replace="fragments/fragments :: admin-header"></header>
 
     <!-- CONTENT -->
     <section>
@@ -41,8 +40,8 @@
                     <th>PRODUCTO</th>
                     <th>CATEGORÍA</th>
                     <th>PRECIO KG</th>
-                    <th th:if="${session.user.role.toString() == 'ROLE_ADMIN'}"></th>
-                    <th th:if="${session.user.role.toString() == 'ROLE_ADMIN'}"></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>

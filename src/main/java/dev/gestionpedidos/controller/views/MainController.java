@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.OrderService;
@@ -23,7 +23,7 @@ public class MainController {
 		this.orderService = orderService;
 	}
 
-	@GetMapping
+	@GetMapping // http://localhost:8080/
 	public ModelAndView showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session) {
 		// Si no hay un usuario guardado en la sesion, lo guarda (solo cuando se inicia sesion por primera vez).
 		// Si hay un usuario guardado, no lo vuelve a guardar, de esta forma cuando se actualizan los datos del perfil y se guarda
@@ -39,11 +39,11 @@ public class MainController {
 		ModelAndView main;
 
 		if (user.getRole().name().equals("ROLE_ADMIN")) {
-			main = new ModelAndView("mainAdmin");
+			main = new ModelAndView("admin/main");
 			main.addObject("pendingOrders", orderService.getPendingOrders().get());
 			main.addObject("sentOrders", orderService.getSentOrders().get());
 		} else {
-			main = new ModelAndView("main");
+			main = new ModelAndView("public/main");
 			main.addObject("pendingOrders", orderService.getCustomerPendingOrders(user.getId()).get());
 			main.addObject("deliveredOrders", orderService.getCustomerDeliveredOrders(user.getId()).get());
 		}

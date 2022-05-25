@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.service.UserService;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/perfil")
 public class ProfileController {
 
 	private final UserService userService;
@@ -21,9 +20,14 @@ public class ProfileController {
 		this.userService = userService;
 	}
 
-	@GetMapping
-	public String showProfile() {
-		return "profile";
+	@GetMapping(value = "/perfil") // http://localhost:8080/perfil
+	public String showPublicProfile() {
+		return "public/profile";
+	}
+
+	@GetMapping(value = "/admin/perfil") // http://localhost:8080/admin/perfil
+	public String showAdminProfile() {
+		return "admin/profile";
 	}
 
 	@PostMapping // http://localhost:8080/registro
@@ -55,11 +59,14 @@ public class ProfileController {
 			// Es necesario volver a guardar el usuario en la sesion, ya que ahora el usuario ha cambiado,
 			// si no al ir al menu no encuentra los datos del usuario "original" y da error
 			session.setAttribute("user", user);
-
-			// TODO: este return se puede quitar?
-			return "redirect:/perfil";
 		}
-		return "profile";
+
+		/*if (user.getRole().toString() == "ROLE_ADMIN") {
+			return "admin/profile";
+		}
+		return "public/profile";*/
+		// TOREV: comprobar si devuelve bien la vista de admin o user al actualizar el perfil
+		return sessionUser.getRole().toString().equals("ROLE_USER") ? "public/profile" : "admin/profile";
 	}
 
 }

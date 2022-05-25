@@ -7,43 +7,76 @@
 </head>
 <body>
 
-	<!-- HEADER -->
-	<header th:fragment="header" class="p-0">
+	<!-- DEFAULT HEADER -->
+	<header th:fragment="default-header" class="p-0">
 		<!-- NAV BAR -->
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
 			<div class="container-fluid">
-				<img id="logo" class="me-3" th:src="@{/img/logo.png}">
-				<div class="collapse navbar-collapse" id="collapseMenu">
+				<img th:id="logo" class="me-3" th:src="@{/img/logo.png}">
+				<div class="collapse navbar-collapse" th:id="collapseMenu">
 					<ul class="navbar-nav mb-2 mb-md-0 fs-5">
-						<li th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" class="nav-item">
-							<a th:href="@{/}" class="nav-link">Hoy</a>
-						</li>
-						<li th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" class="nav-item">
-							<a th:href="@{/pedidos/historial}" class="nav-link">Historial</a>
-						</li>
-						<li th:if="${session.user.role.toString() == 'ROLE_USER'}" class="nav-item">
+						<li class="nav-item">
 							<a th:href="@{/}" class="nav-link">Pedidos</a>
 						</li>
 						<li class="nav-item">
 							<a th:href="@{/productos}" class="nav-link">Productos</a>
 						</li>
-						<li th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" class="nav-item">
-							<a th:href="@{/clientes}" class="nav-link">Clientes</a>
-						</li>
 					</ul>
 					<ul class="ms-auto navbar-nav">
-						<!-- ADMIN TAG NAME -->
-						<li th:if="${session.user.role.toString() == 'ROLE_ADMIN'}" class="nav-item d-flex align-items-center">
-							<span id="admin-tag">ADMINISTRADOR</span>
-						</li>
 						<!-- PROFILE -->
 						<li class="nav-item">
-							<a th:href="@{/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
+							<a th:href="@{/perfil}"><i th:id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
 						</li>
 						<!-- LOGOUT -->
 						<li class="nav-item d-flex align-items-center">
 							<form th:action="@{/logout}" method="post">
-								<button id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
+								<button th:id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+				<!-- COLLAPSE BUTTON -->
+				<button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+	<!-- ADMIN HEADER -->
+	<header th:fragment="admin-header" class="p-0">
+		<!-- NAV BAR -->
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark p-2 py-3">
+			<div class="container-fluid">
+				<img th:id="logo" class="me-3" th:src="@{/img/logo.png}">
+				<div class="collapse navbar-collapse" th:id="collapseMenu">
+					<ul class="navbar-nav mb-2 mb-md-0 fs-5">
+						<li class="nav-item">
+							<a th:href="@{/}" class="nav-link">Hoy</a>
+						</li>
+						<li class="nav-item">
+							<a th:href="@{/admin/pedidos/historial}" class="nav-link">Historial</a>
+						</li>
+						<li class="nav-item">
+							<a th:href="@{/admin/productos}" class="nav-link">Productos</a>
+						</li>
+						<li class="nav-item">
+							<a th:href="@{/admin/clientes}" class="nav-link">Clientes</a>
+						</li>
+					</ul>
+					<ul class="ms-auto navbar-nav">
+						<!-- ADMIN TAG NAME -->
+						<li class="nav-item d-flex align-items-center">
+							<span id="admin-tag">ADMINISTRADOR</span>
+						</li>
+						<!-- PROFILE -->
+						<li class="nav-item">
+							<a th:href="@{/admin/perfil}"><i id="btn-profile" class="bi bi-person-circle me-3 text-light"></i></a>
+						</li>
+						<!-- LOGOUT -->
+						<li class="nav-item d-flex align-items-center">
+							<form th:action="@{/logout}" method="post">
+								<button th:id="btn-logout" type="submit" class="btn btn-outline-light text-light">Cerrar sesión</button>
 							</form>
 						</li>
 					</ul>

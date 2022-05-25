@@ -1,4 +1,4 @@
-package dev.gestionpedidos.controller;
+package dev.gestionpedidos.controller.views;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,6 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 			}
 			model.addAttribute("errorMessage", message);
 		}
-		return "error";
+		return "public/error";
 	}
-
 }
