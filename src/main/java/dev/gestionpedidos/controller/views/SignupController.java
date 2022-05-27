@@ -11,41 +11,44 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @Controller
-@RequestMapping(value = "/registro")
 public class SignupController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public SignupController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping // http://localhost:8080/registro
+    @GetMapping(value = "/registro") // http://localhost:8080/registro
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
         return "public/signup";
     }
 
-    @PostMapping // http://localhost:8080/registro
-    public String signUp(@Valid @ModelAttribute User user, BindingResult result, Model model) {
-        User nameEntry = userService.findByName(user.getName());
-        User emailEntry = userService.findByEmail(user.getEmail());
-        User nifEntry = userService.findByNif(user.getNif());
+    @PostMapping(value = "/registro") // http://localhost:8080/registro
+    public String signUp(@Valid @ModelAttribute User user,
+                         BindingResult result,
+                         Model model) {
+        Optional<User> nameEntry = userService.findByName(user.getName());
+        Optional<User> emailEntry = userService.findByEmail(user.getEmail());
+        Optional<User> nifEntry = userService.findByNif(user.getNif());
 
         if (result.hasErrors()) {
             return "redirect:/registro";
         }
-        if (nameEntry != null) {
+        if (nameEntry.isPresent()) {
             model.addAttribute("nameError", "El nombre ya existe");
         }
-        if (emailEntry != null) {
+        if (emailEntry.isPresent()) {
             model.addAttribute("emailError", "El email ya existe");
         }
-        if (nifEntry != null) {
+        if (nifEntry.isPresent()) {
             model.addAttribute("nifError", "El NIF ya existe");
         }
-        if (nameEntry == null && emailEntry == null && nifEntry == null){
+        if (nameEntry.isEmpty() && emailEntry.isEmpty() && nifEntry.isEmpty()){
             userService.saveUser(user);
             return "public/signupSuccess";
         }

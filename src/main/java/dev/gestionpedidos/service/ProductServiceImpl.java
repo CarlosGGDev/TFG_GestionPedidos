@@ -12,17 +12,13 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    // CONSTRUCTORS
-
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    // CRUD METHODS
-
     @Override
-    public List<Product> getProducts() {
-        return productRepository.findAll();
+    public Optional<List<Product>> getProducts() {
+        return Optional.of(productRepository.findAll());
     }
 
     @Override
@@ -31,27 +27,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<List<Product>> getProductsByCategory(int categoryId) {
-        return productRepository.getProductsByCategory(categoryId);
+    public Optional<Product> saveProduct(Product product) {
+        return Optional.of(productRepository.save(product));
     }
 
     @Override
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
+    public Optional<Product> editProduct(Product product) {
+        return Optional.of(this.productRepository.save(product));
     }
 
     @Override
-    public Product editProduct(Product product) {
-        return this.productRepository.save(product);
-    }
-
-    @Override
-    public Optional<Product> deleteProduct(int productId) {
+    public void deleteProduct(int productId) {
         Optional<Product> productOpt = getProduct(productId);
         if (productOpt.isPresent()) {
             productRepository.deleteById(productId);
         }
-        return productOpt;
     }
 
 }

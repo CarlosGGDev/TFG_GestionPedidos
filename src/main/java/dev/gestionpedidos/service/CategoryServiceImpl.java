@@ -1,7 +1,6 @@
 package dev.gestionpedidos.service;
 
 import dev.gestionpedidos.model.Category;
-import dev.gestionpedidos.model.Product;
 import dev.gestionpedidos.repository.CategoryRepository;
 import java.util.List;
 import java.util.Optional;
@@ -22,21 +21,20 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getCategories() {
-		return this.categoryRepository.findAll();
+	public Optional<List<Category>> getCategories() {
+		return Optional.of(this.categoryRepository.findAll());
 	}
 
 	@Override
-	public Optional<Category> saveCategory(Category category) {
-		return Optional.of(this.categoryRepository.save(category));
+	public void saveCategory(Category category) {
+		this.categoryRepository.save(category);
 	}
 
 	@Override
-	public Optional<Category> deleteCategory(int categoryId) {
+	public void deleteCategory(int categoryId) {
 		Optional<Category> categoryOpt = getCategory(categoryId);
 		if (categoryOpt.isPresent()) {
 			categoryRepository.deleteById(categoryId);
 		}
-		return categoryOpt;
 	}
 }

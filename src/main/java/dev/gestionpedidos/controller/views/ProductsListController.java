@@ -5,7 +5,6 @@ import dev.gestionpedidos.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ProductsListController {
@@ -23,7 +22,7 @@ public class ProductsListController {
 
     @GetMapping(value = "/admin/productos") // http://localhost:8080/admin/productos
     public String showAdminProductsList(Model model) {
-        model.addAttribute("categories", this.categoryService.getCategories());
+        model.addAttribute("categories", this.categoryService.getCategories().get());
         model.addAttribute("category", new Category());
         return "admin/products";
     }

@@ -1,17 +1,6 @@
-/* COMMON */
-
 * {
 	color: rgb(71, 71, 71) !important;
 }
-
-/* LOGO */
-
-#logo {
-	width: 50px !important;
-	height: 50px !important;
-}
-
-/* BODY */
 
 body {
 	background-color: rgb(240, 240, 240) !important;

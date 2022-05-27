@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 	$('#form').submit(function(event) {
-
 		let password = $('#password').val();
 		let confirmPassword = $('#confirm-password').val();
 
@@ -17,7 +16,6 @@ $(document).ready(function() {
 				}
 			}
 		}
-
 	});
 
 	$('#password, #confirm-password').on('keyup', function () {
@@ -31,7 +29,6 @@ $(document).ready(function() {
 			$('#icon-check').attr('hidden', true);
 			$('#icon-alert').attr('hidden', false);
 		}
-
 	});
 
 });

@@ -4,7 +4,6 @@ import dev.gestionpedidos.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OrdersListController {
@@ -17,7 +16,7 @@ public class OrdersListController {
 
 	@GetMapping(value = "/admin/pedidos/historial") // http://localhost:8080/admin/pedidos/historial
 	public String showOrdersList(Model model) {
-		model.addAttribute("orders", this.orderService.getOrders());
+		model.addAttribute("orders", this.orderService.getOrders().get());
 		return "admin/orders";
 	}
 }

@@ -12,7 +12,9 @@ import org.springframework.security.core.authority.AuthorityUtils;
 public class AuthenticationSuccessHandler implements org.springframework.security.web.authentication.AuthenticationSuccessHandler {
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
+	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
+										HttpServletResponse httpServletResponse,
+										Authentication authentication) throws IOException {
 
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 

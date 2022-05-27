@@ -24,13 +24,12 @@ public class CategoryController {
 
 	@PostMapping(value = "/categorias/nueva") // http://localhost:8080/categorias/nueva
 	public void saveCategory(HttpServletResponse response, @ModelAttribute Category category) throws IOException {
-		Optional<Category> categoryOpt = this.categoryService.saveCategory(category);
+		this.categoryService.saveCategory(category);
 		response.sendRedirect("/admin/productos");
 	}
 
 	@DeleteMapping(value = "/categorias/{categoryId}") // http://localhost:8080/categorias/1
-	public ResponseEntity<Category> deleteCategory(@PathVariable("categoryId") int categoryId) {
-		Optional<Category> categoryOpt = this.categoryService.deleteCategory(categoryId);
-		return ResponseEntity.of(categoryOpt);
+	public void deleteCategory(@PathVariable("categoryId") int categoryId) {
+		this.categoryService.deleteCategory(categoryId);
 	}
 }

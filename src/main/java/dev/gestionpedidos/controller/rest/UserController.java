@@ -17,20 +17,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/usuarios") // http://localhost:8080/usuarios
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.getUsers());
-    }
-
-    @GetMapping(value = "/usuarios/{userId}") // http://localhost:8080/usuarios/1
-    public ResponseEntity<User> getUser(@PathVariable("userId") int userId) {
-        Optional<User> userOpt = userService.getUser(userId);
-        return ResponseEntity.of(userOpt);
-    }
-
     @DeleteMapping(value = "/usuarios/{userId}") // http://localhost:8080/usuarios/1
-    public ResponseEntity<User> deleteUser(@PathVariable("userId") int userId) {
-        Optional<User> userOpt = userService.deleteUser(userId);
-        return ResponseEntity.of(userOpt);
+    public void deleteUser(@PathVariable("userId") int userId) {
+        userService.deleteUser(userId);
     }
 }

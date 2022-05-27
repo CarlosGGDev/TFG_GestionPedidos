@@ -1,6 +1,8 @@
 package dev.gestionpedidos.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,9 +10,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
-    // PROPERTIES
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,21 +44,5 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(length = 10, nullable = false)
     private Role role = Role.ROLE_USER;
-
-    // CONSTRUCTORS
-
-    public User() {
-    }
-
-    public User(String nif, String name, String email, String phone, String address, int zipcode, String town, String password) {
-        this.nif = nif;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.town = town;
-        this.password = password;
-    }
 
 }

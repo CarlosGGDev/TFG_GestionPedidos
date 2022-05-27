@@ -1,6 +1,8 @@
 package dev.gestionpedidos.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,9 +10,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categories")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
-
-    // PROPERTIES
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +20,5 @@ public class Category {
 
     @Column(length = 70, nullable = false)
     private String name;
-
-    // CONSTRUCTORS
-
-    public Category() {
-    }
-
-    public Category(String name) {
-        this.name = name;
-    }
 
 }

@@ -4,7 +4,6 @@ import dev.gestionpedidos.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class NewOrderController {
@@ -15,9 +14,9 @@ public class NewOrderController {
 		this.productService = productService;
 	}
 
-	@GetMapping(value = "/nuevo_pedido") // http://localhost:8080/nuevo/pedido
+	@GetMapping(value = "/nuevo_pedido") // http://localhost:8080/nuevo_pedido
 	public String showNewOrder(Model model) {
-		model.addAttribute("products", this.productService.getProducts());
+		model.addAttribute("products", this.productService.getProducts().get());
 		return "public/newOrder";
 	}
 

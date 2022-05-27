@@ -1,10 +1,6 @@
-/* COMMON */
-
 * {
 	color: rgb(71, 71, 71) !important;
 }
-
-/* BODY */
 
 body {
 	background-color: rgb(240, 240, 240) !important;
@@ -21,67 +17,4 @@ body {
 
 .custom-title h4, .custom-title span {
 	color: rgb(243, 243, 243) !important;
-}
-
-/* TABLE */
-
-table {
-	margin-top: 40px;
-	background-color: white !important;
-	overflow: hidden;
-	border-radius: 5px;
-	border: none;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-table thead tr {
-	border-bottom: 1px solid #818181 !important;
-}
-
-table thead {
-	background-color: rgb(206, 206, 206) !important;
-}
-
-table tbody td {
-	padding: 12px 8px !important;
-}
-
-table th, td {
-	padding: 5px;
-	vertical-align: middle;
-	text-align: center;
-}
-
-table tr:last-of-type {
-	border-bottom: hidden;
-}
-
-table tbody tr:hover {
-	background-color: rgba(255, 245, 233);
-}
-
-.btn-custom {
-	border-radius: 5px !important;
-	background-color: rgb(237, 237, 237) !important;
-}
-
-.btn-custom:hover {
-	background-color: rgb(255, 219, 176) !important;
-}
-
-.pending-order {
-	margin: 20px 0px;
-	padding: 10px;
-	border: 1px solid lightgray;
-	border-radius: 5px;
-	font-size: 1.1em;
-}
-
-@media screen and (max-width: 767px) {
-	#profile-icon {
-		margin: 10px 0px;
-	}
-	#btn-logout {
-		margin: 15px 0px 25px 0px;
-	}
 }

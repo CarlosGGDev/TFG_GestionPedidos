@@ -11,8 +11,6 @@ import java.util.Optional;
 @RestController
 public class ProductController {
 
-    // TODO: anotaciones @Valid para validar campos
-
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -21,22 +19,21 @@ public class ProductController {
 
     @PostMapping(value = "/productos/listado") // http://localhost:8080/productos/listado
     public ResponseEntity<List<Product>> getProducts() {
-        return ResponseEntity.ok(productService.getProducts());
+        return ResponseEntity.of(productService.getProducts());
     }
 
     @PostMapping(value = "/productos/nuevo") // http://localhost:8080/productos/nuevo
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.saveProduct(product));
+        return ResponseEntity.of(productService.saveProduct(product));
     }
 
     @PostMapping(value = "/productos/editar") // http://localhost:8080/productos/editar
     public ResponseEntity<Product> editProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.editProduct(product));
+        return ResponseEntity.of(productService.editProduct(product));
     }
 
     @DeleteMapping(value = "/productos/{productId}") // http://localhost:8080/productos/1
-    public ResponseEntity<Product> deleteProduct(@PathVariable("productId") int productId) {
-        Optional<Product> productOpt = productService.deleteProduct(productId);
-        return ResponseEntity.of(productOpt);
+    public void deleteProduct(@PathVariable("productId") int productId) {
+        productService.deleteProduct(productId);
     }
 }

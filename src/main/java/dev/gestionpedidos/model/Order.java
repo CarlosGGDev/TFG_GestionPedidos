@@ -1,7 +1,10 @@
 package dev.gestionpedidos.model;
 
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,9 +13,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
-
-    // PROPERTIES
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,23 +37,9 @@ public class Order {
 
     private String comment;
 
-    // TOREV: una lista con los detalles por cada factura
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<OrderDetail> orderDetails;
 
     private double total;
-
-    // CONSTRUCTORS
-
-    public Order() {
-    }
-
-    public Order(User user, LocalDateTime orderDate, String status, String comment, double total) {
-        this.user = user;
-        this.orderDate = orderDate;
-        this.status = status;
-        this.comment = comment;
-        this.total = total;
-    }
 
 }

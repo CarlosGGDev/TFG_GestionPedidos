@@ -71,9 +71,9 @@
 								<label class="form-label" for="name">NOMBRE</label>
 								<input id="name" class="form-control" type="text" name="name"
 									   maxlength="50"
-									   pattern="^[A-Za-z0-9\.-]{1,50}$"
+									   pattern="^[A-Za-zÀÈÌÒÙÁÉÍÓÚàèìòùáéíóúÇçÜüñ0-9 \.-]{2,50}$"
 									   oninput="this.setCustomValidity('')"
-									   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras sin acentos\nNúmeros\nPuntos o guiones')"
+									   oninvalid="this.setCustomValidity('Solo puede contener:\nLetras (mínimo 2)\nNúmeros\nPuntos o guiones\nEspacios en blanco')"
 									   placeholder="Escribe tu nombre" required />
 								<div th:if="${nameError}" class="field-error">
 									<small th:text="${nameError}"></small>

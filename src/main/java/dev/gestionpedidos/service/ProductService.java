@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-	List<Product> getProducts();
+	Optional<List<Product>> getProducts();
 	Optional<Product> getProduct(int productId);
-	Optional<List<Product>> getProductsByCategory(int categoryId);
-	Product saveProduct(Product product);
-	Product editProduct(Product product);
-	Optional<Product> deleteProduct(int productId);
+	Optional<Product> saveProduct(Product product);
+	Optional<Product> editProduct(Product product);
+	void deleteProduct(int productId);
 }

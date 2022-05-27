@@ -25,8 +25,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> getOrders() {
-		return this.orderRepository.findAll();
+	public Optional<List<Order>> getOrders() {
+		return Optional.of(this.orderRepository.findAll());
 	}
 
 	@Override
@@ -40,16 +40,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Optional<List<Order>> getDeliveredOrders() {
-		return this.orderRepository.getDeliveredOrders();
-	}
-
-	@Override
-	public Optional<List<Order>> getCustomerOrders(int userId) {
-		return this.orderRepository.getCustomerOrders(userId);
-	}
-
-	@Override
 	public Optional<List<Order>> getCustomerPendingOrders(int userId) {
 		return this.orderRepository.getCustomerPendingOrders(userId);
 	}
@@ -60,8 +50,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order saveOrder(Order order) {
-		return this.orderRepository.save(order);
+	public Optional<Order> saveOrder(Order order) {
+		return Optional.of(this.orderRepository.save(order));
 	}
 
 	@Override
@@ -75,11 +65,10 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Optional<Order> deleteOrder(int orderId) {
+	public void deleteOrder(int orderId) {
 		Optional<Order> orderOpt = getOrder(orderId);
 		if (orderOpt.isPresent()) {
 			this.orderRepository.deleteById(orderId);
 		}
-		return orderOpt;
 	}
 }

@@ -14,11 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
-    private final AuthenticationSuccessHandler successHandler;
 
-    public SecurityConfiguration(UserDetailsService userDetailsService, AuthenticationSuccessHandler successHandler) {
+    public SecurityConfiguration(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.successHandler = successHandler;
     }
 
     @Bean
@@ -48,7 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .formLogin()
                         .loginPage("/acceso")
                         .loginProcessingUrl("/acceso")
-//                        .successHandler(successHandler)
                         .defaultSuccessUrl("/", true)
                         .failureUrl("/acceso?error=true")
                     .and()

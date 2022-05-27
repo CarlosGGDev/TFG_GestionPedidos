@@ -1,15 +1,13 @@
-/* LOGO */
-
-#logo {
-	width: 50px !important;
-	height: 50px !important;
-}
-
 /* NAV BAR */
 
 nav {
 	color: rgba(243, 243, 243) !important;
 	box-shadow: 0px 2px 8px 3px rgba(143, 143, 143, .75);
+}
+
+#logo {
+	width: 50px !important;
+	height: 50px !important;
 }
 
 ul a {
@@ -51,4 +49,15 @@ footer {
 
 footer * {
 	color: #e3e3e3 !important;
+}
+
+/* @MEDIA */
+
+@media screen and (max-width: 767px) {
+    #profile-icon {
+        margin: 10px 0px;
+    }
+    #btn-logout {
+        margin: 15px 0px 25px 0px;
+    }
 }

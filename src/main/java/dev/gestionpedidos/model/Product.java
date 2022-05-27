@@ -1,6 +1,8 @@
 package dev.gestionpedidos.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,9 +10,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
-
-    // PROPERTIES
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +27,5 @@ public class Product {
 
     @Column(nullable = false)
     private double price;
-
-    // CONSTRUCTORS
-
-    public Product() {
-    }
-
-    public Product(String name, Category category, double price) {
-        this.name = name;
-        this.category = category;
-        this.price = price;
-    }
 
 }

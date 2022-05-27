@@ -4,7 +4,6 @@ import dev.gestionpedidos.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ClientsController {
@@ -17,7 +16,7 @@ public class ClientsController {
 
 	@GetMapping(value = "/admin/clientes") // http://localhost:8080/admin/clientes
 	public String showClientsList(Model model) {
-		model.addAttribute("clients", this.userService.getUsers());
+		model.addAttribute("clients", this.userService.getUsers().get());
 		return "admin/clients";
 	}
 }

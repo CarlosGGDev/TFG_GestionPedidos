@@ -44,11 +44,13 @@
                 <tbody>
                     <th:block th:each="product : ${products}">
                         <tr>
-                            <td id="td-id" th:text="${product.id}"></td>
-                            <td id="td-name" th:text="${product.name}"></td>
-                            <td id="td-price" th:text="${product.price}"></td>
-                            <td id="td-quantity"><input type="number" value="0" min="0" max="99"> Kg</td>
-                            <td><button id="add" class="btn btn-sm btn-custom"><i class="bi bi-basket3"></i></button></td>
+                            <td th:text="${product.id}"></td>
+                            <td th:text="${product.name}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td><input type="number" value="0" min="0" max="99"> Kg</td>
+                            <td>
+                                <button id="add" class="btn btn-sm btn-custom"><i class="bi bi-basket3"></i></button>
+                            </td>
                         </tr>
                     </th:block>
                 </tbody>
@@ -67,13 +69,13 @@
                     <b class="col-1">&nbsp;</b>
                 </li>
                 <div id="cart-body">
-                    <li id='empty' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>
+                    <li id='empty-bag-message' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>
                     <!-- CART ITEMS -->
                 </div>
                 <div class="list-group-item py-3 d-flex justify-content-between">
                     <b class="col-4">TOTAL</b>
                     <span class="col-3"></span>
-                    <b class="col-3"><span id="order-total">0</span> €</b>
+                    <b class="col-3"><span id="order-total">0.00</span> €</b>
                     <span class="col-1"></span>
                 </div>
             </ul>
@@ -111,7 +113,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Pedido realizado con éxito</h5>
-                        <button type="button" class="btn btn-dark btn-sm text-light close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p class="fs-5">Gracias por tu compra!</p>

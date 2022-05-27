@@ -1,6 +1,8 @@
 package dev.gestionpedidos.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,9 +10,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "orders_details")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDetail {
-
-    // PROPERTIES
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,18 +34,5 @@ public class OrderDetail {
 
     @Column(nullable = false)
     private double total;
-
-    // CONSTRUCTORS
-
-    public OrderDetail() {
-    }
-
-    public OrderDetail(Order order, Product product, int quantity, double price, double total) {
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-        this.total = total;
-    }
 
 }

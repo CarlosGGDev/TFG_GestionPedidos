@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -17,13 +19,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-	// TOREV: el metodo busca por email, pero se llama byUsername porque lo implementa por defecto la interfaz
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = this.userRepository.findByEmail(email);
-		if (user == null) {
+		Optional<User> userOpt = this.userRepository.findByEmail(email);
+		if (userOpt.isEmpty()) {
 			throw new UsernameNotFoundException("Usuario no encontrado");
 		}
-		return new UserDetailsAuth(user);
+		return new UserDetailsAuth(userOpt.get());
 	}
 }

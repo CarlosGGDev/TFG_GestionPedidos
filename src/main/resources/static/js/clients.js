@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 const token = $("meta[name='_csrf']").attr("content");
 
-// REQUEST REMOVE ORDER
+// REQUEST REMOVE CLIENT
 function requestRemoveClient(clientId) {
 	$.ajax({
 		type: "DELETE",

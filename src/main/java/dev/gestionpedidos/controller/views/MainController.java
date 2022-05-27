@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/")
 public class MainController {
 
-	final private UserService userService;
-	final private OrderService orderService;
+	private final UserService userService;
+	private final OrderService orderService;
 
 	public MainController(UserService userService, OrderService orderService) {
 		this.userService = userService;
@@ -31,7 +31,7 @@ public class MainController {
 		// que habia iniciado sesion, pero al cambiar los datos del perfil da error.
 		User user;
 		if (session.getAttribute("user") == null) {
-			user = userService.findByName(userDetails.getUsername());
+			user = userService.findByName(userDetails.getUsername()).get();
 		} else {
 			user = (User) session.getAttribute("user");
 		}
