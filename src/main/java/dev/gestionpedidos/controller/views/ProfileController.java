@@ -28,7 +28,7 @@ public class ProfileController {
 
 	@GetMapping(value = "/admin/perfil") // http://localhost:8080/admin/perfil
 	public String showAdminProfile() {
-		return "admin/profile";
+		return "admin/profileAdmin";
 	}
 
 	@PostMapping(value = "/perfil") // http://localhost:8080/registro
@@ -39,10 +39,10 @@ public class ProfileController {
 		user.setId(sessionUser.getId());
 		user.setRole(sessionUser.getRole());
 
-		Optional<User> nameEntry = userService.findByName(user.getName());
-		Optional<User> emailEntry = userService.findByEmail(user.getEmail());
-		Optional<User> nifEntry = userService.findByNif(user.getNif());
-		Boolean valid = true;
+		Optional<User> nameEntry = this.userService.findByName(user.getName());
+		Optional<User> emailEntry = this.userService.findByEmail(user.getEmail());
+		Optional<User> nifEntry = this.userService.findByNif(user.getNif());
+		boolean valid = true;
 
 		if (nameEntry.isPresent() && nameEntry.get().getId() != user.getId()) {
 			model.addAttribute("nameError", "El nombre ya existe");
@@ -57,7 +57,7 @@ public class ProfileController {
 			valid = false;
 		}
 		if (valid) {
-			userService.saveUser(user);
+			this.userService.saveUser(user);
 
 			// Es necesario volver a guardar el usuario en la sesion, ya que ahora el usuario ha cambiado,
 			// si no al ir al menu no encuentra los datos del usuario "original" y da error

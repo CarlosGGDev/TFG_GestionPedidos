@@ -17,6 +17,6 @@ public class ClientsController {
 	@GetMapping(value = "/admin/clientes") // http://localhost:8080/admin/clientes
 	public String showClientsList(Model model) {
 		model.addAttribute("clients", this.userService.getUsers().get());
-		return "admin/clients";
+		return "admin/clientsAdmin";
 	}
 }

@@ -41,7 +41,7 @@
                 <div class="col-12">
                     <div>
                         <h4 class="d-inline">Pedidos pendientes</h4>
-                        <span class="fs-5" th:text="| (${pendingOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
+                        <span class="fs-5 ms-2" th:text="| (${pendingOrders.size})|"></span>
                     </div>
                     <p th:if="${pendingOrders.size == 0}" class="my-3">No hay pedidos pendientes</p>
                     <table th:if="${pendingOrders.size > 0}" class="table table-stripped mt-4">
@@ -161,7 +161,7 @@
                 <div class="col-12">
                     <div>
                         <h4 class="d-inline">Pedidos enviados</h4>
-                        <span class="fs-5" th:text="| (${sentOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
+                        <span class="fs-5 ms-2" th:text="| (${sentOrders.size})|"></span>
                     </div>
                     <p th:if="${sentOrders.size == 0}" class="my-3">No hay pedidos enviados</p>
                     <table th:if="${sentOrders.size > 0}" class="table table-stripped mt-4">

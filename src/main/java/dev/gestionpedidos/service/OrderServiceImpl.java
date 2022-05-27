@@ -11,13 +11,9 @@ public class OrderServiceImpl implements OrderService {
 
 	private final OrderRepository orderRepository;
 
-	// CONSTRUCTORS
-
 	public OrderServiceImpl(OrderRepository orderRepository) {
 		this.orderRepository = orderRepository;
 	}
-
-	// CRUD METHODS
 
 	@Override
 	public Optional<Order> getOrder(int orderId) {

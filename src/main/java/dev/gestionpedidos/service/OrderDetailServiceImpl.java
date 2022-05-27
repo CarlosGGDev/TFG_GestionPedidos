@@ -1,6 +1,6 @@
 package dev.gestionpedidos.service;
 
-import dev.gestionpedidos.DTO.OrderDetailDTO;
+import dev.gestionpedidos.dto.OrderDetailDTO;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		int quantity = orderDetailDTO.getQuantity();
 		double price = orderDetailDTO.getPrice();
 		double total = orderDetailDTO.getTotal();
-		jdbcTemplate.update("INSERT INTO orders_details (order_id, product_id, quantity, price, total) VALUES (" + orderId + "," +
+		this.jdbcTemplate.update("INSERT INTO orders_details (order_id, product_id, quantity, price, total) VALUES (" + orderId + "," +
 																													    productId + "," +
 																													    quantity + "," +
 																														price + "," +

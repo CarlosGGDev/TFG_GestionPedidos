@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
@@ -32,9 +31,9 @@ public class SignupController {
     public String signUp(@Valid @ModelAttribute User user,
                          BindingResult result,
                          Model model) {
-        Optional<User> nameEntry = userService.findByName(user.getName());
-        Optional<User> emailEntry = userService.findByEmail(user.getEmail());
-        Optional<User> nifEntry = userService.findByNif(user.getNif());
+        Optional<User> nameEntry = this.userService.findByName(user.getName());
+        Optional<User> emailEntry = this.userService.findByEmail(user.getEmail());
+        Optional<User> nifEntry = this.userService.findByNif(user.getNif());
 
         if (result.hasErrors()) {
             return "redirect:/registro";
@@ -49,7 +48,7 @@ public class SignupController {
             model.addAttribute("nifError", "El NIF ya existe");
         }
         if (nameEntry.isEmpty() && emailEntry.isEmpty() && nifEntry.isEmpty()){
-            userService.saveUser(user);
+            this.userService.saveUser(user);
             return "public/signupSuccess";
         }
         return "public/signup";

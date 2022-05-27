@@ -1,6 +1,5 @@
 package dev.gestionpedidos.service;
 
-import dev.gestionpedidos.model.Role;
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,12 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<List<User>> getUsers() {
-        return Optional.of(userRepository.findAll());
+        return Optional.of(this.userRepository.findAll());
     }
 
     @Override
     public Optional<User> getUser(int userId) {
-        return userRepository.findById(userId);
+        return this.userRepository.findById(userId);
     }
 
     @Override
@@ -47,15 +46,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        this.userRepository.save(user);
     }
 
     @Override
     public void deleteUser(int userId) {
         Optional<User> userOpt = getUser(userId);
         if (userOpt.isPresent()) {
-            userRepository.deleteById(userId);
+            this.userRepository.deleteById(userId);
         }
     }
 

@@ -24,6 +24,6 @@ public class ProductsListController {
     public String showAdminProductsList(Model model) {
         model.addAttribute("categories", this.categoryService.getCategories().get());
         model.addAttribute("category", new Category());
-        return "admin/products";
+        return "admin/productsAdmin";
     }
 }

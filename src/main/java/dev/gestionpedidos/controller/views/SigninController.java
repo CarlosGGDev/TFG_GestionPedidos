@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SigninController {
 
-    private final UserService userService;
-
-    public SigninController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping(value = "/acceso") // http://localhost:8080/acceso
     public String showSignInForm(Model model) {
         model.addAttribute("user", new User());

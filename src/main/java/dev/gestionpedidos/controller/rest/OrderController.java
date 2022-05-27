@@ -27,10 +27,8 @@ public class OrderController {
 		if (order.getShippingAddress() == null) {
 			order.setShippingAddress(user.getAddress());
 		}
-		Optional<Order> savedOrderOpt = orderService.saveOrder(order);
-		if (savedOrderOpt.isPresent()) {
-			session.setAttribute("orderId", savedOrderOpt.get().getId());
-		}
+		Optional<Order> savedOrderOpt = this.orderService.saveOrder(order);
+		savedOrderOpt.ifPresent(value -> session.setAttribute("orderId", value.getId()));
 		return ResponseEntity.of(savedOrderOpt);
 	}
 
@@ -56,6 +54,6 @@ public class OrderController {
 
 	@DeleteMapping(value = "/pedidos/{orderId}") // http://localhost:8080/pedidos/1
 	public void deleteOrder(@PathVariable("orderId") int orderId) {
-		orderService.deleteOrder(orderId);
+		this.orderService.deleteOrder(orderId);
 	}
 }

@@ -1,4 +1,4 @@
-package dev.gestionpedidos.DTO;
+package dev.gestionpedidos.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

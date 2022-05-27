@@ -1,6 +1,6 @@
 package dev.gestionpedidos.controller.rest;
 
-import dev.gestionpedidos.DTO.OrderDetailDTO;
+import dev.gestionpedidos.dto.OrderDetailDTO;
 import dev.gestionpedidos.service.OrderDetailService;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +20,6 @@ public class OrderDetailController {
 	public void saveOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO, HttpSession session) {
 		int orderId = (int) session.getAttribute("orderId");
 		orderDetailDTO.setOrder_id(orderId);
-		orderDetailService.saveOrderDetail(orderDetailDTO);
+		this.orderDetailService.saveOrderDetail(orderDetailDTO);
 	}
 }

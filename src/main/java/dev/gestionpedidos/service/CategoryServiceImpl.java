@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public void deleteCategory(int categoryId) {
 		Optional<Category> categoryOpt = getCategory(categoryId);
 		if (categoryOpt.isPresent()) {
-			categoryRepository.deleteById(categoryId);
+			this.categoryRepository.deleteById(categoryId);
 		}
 	}
 }

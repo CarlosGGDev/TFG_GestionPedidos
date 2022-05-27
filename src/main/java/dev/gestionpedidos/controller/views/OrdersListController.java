@@ -17,6 +17,6 @@ public class OrdersListController {
 	@GetMapping(value = "/admin/pedidos/historial") // http://localhost:8080/admin/pedidos/historial
 	public String showOrdersList(Model model) {
 		model.addAttribute("orders", this.orderService.getOrders().get());
-		return "admin/orders";
+		return "admin/ordersAdmin";
 	}
 }

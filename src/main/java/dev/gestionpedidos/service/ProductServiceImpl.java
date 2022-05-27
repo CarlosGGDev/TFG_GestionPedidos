@@ -18,17 +18,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<List<Product>> getProducts() {
-        return Optional.of(productRepository.findAll());
+        return Optional.of(this.productRepository.findAll());
     }
 
     @Override
     public Optional<Product> getProduct(int productId) {
-        return productRepository.findById(productId);
+        return this.productRepository.findById(productId);
     }
 
     @Override
     public Optional<Product> saveProduct(Product product) {
-        return Optional.of(productRepository.save(product));
+        return Optional.of(this.productRepository.save(product));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int productId) {
         Optional<Product> productOpt = getProduct(productId);
         if (productOpt.isPresent()) {
-            productRepository.deleteById(productId);
+            this.productRepository.deleteById(productId);
         }
     }
 
