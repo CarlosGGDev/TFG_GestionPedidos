@@ -2,42 +2,13 @@ $(document).ready(function() {
 
 	// ADD ITEM CART
 	$(document).on('click', '#add', function() {
-
 		if ($(this).closest('tr').children('td:nth-child(4)').children('input').val() > 0) {
 		    if ($('#empty-bag-message')) {
 		        $('#empty-bag-message').remove();
 		    }
 
-			let id = $(this).closest('tr').children('td:nth-child(1)').text();
-			let name = $(this).closest('tr').children('td:nth-child(2)').text();
-			let price = $(this).closest('tr').children('td:nth-child(3)').text();
-			let quantity = $(this).closest('tr').children('td:nth-child(4)').children('input').val();
-			let productTotal = (price * quantity).toFixed(2);
-
-            // UPDATE CART ITEMS
-            // If exist an element with id="id", updates data, if not, creates a new element <li>
-			if (document.getElementById(`${id}`)) {
-				updatesItemQuantityTotal(id, quantity, price);
-			} else {
-				let li = `<li id="${id}" class="list-group-item d-flex justify-content-between">
-							<span class="col-4" hidden>${id}</span>
-							<span class="col-4" hidden>${price}</span>
-							<span class="col-4">${name}</span>
-							<span class="col-3 text-center">${quantity}</span>
-							<span class="col-3">${productTotal} €</span>
-							<button id="remove" class="btn btn-sm btn-custom col-1"><i class="bi bi-trash3"></i></button>
-						</li>`;
-
-				// Add element <li>
-				$('#cart-body').append(li);
-
-				// Call function to update total
-				// If is a new item, the price to add to the total is the new items cost
-				updateOrderTotal(parseFloat(productTotal));
-
-				// Increment items cart counter
-				updateCounter(+1);
-			}
+		    let row = $(this).closest('tr');
+		    addItemToCart(row);
 		}
 	});
 
@@ -77,7 +48,7 @@ $(document).ready(function() {
 	$(document).on('click', '#confirm-order', function() {
 		if ($('#items-counter').html() > 0) {
 			if (confirm('¿Deseas confirmar el pedido?')) {
-			    // GENERATE ORDER
+			    // CREATE ORDER
                 let orderTotal = getOrderTotal();
 				let order = generateOrder(orderTotal);
                 requestOrder(order);
@@ -92,6 +63,44 @@ const token = $("meta[name='_csrf']").attr("content");
 function addEmptyBagMessage() {
 	let message = "<li id='empty-bag-message' class='bg-white p-3 text-muted'>Tu cesta está vacía</li>"
     $('#cart-body').append(message);
+}
+
+// ADD ITEM TO CART
+function addItemToCart(row) {
+    let id = $(row).closest('tr').children('td:nth-child(1)').text();
+    let name = $(row).closest('tr').children('td:nth-child(2)').text();
+    let price = $(row).closest('tr').children('td:nth-child(3)').text();
+    let quantity = $(row).closest('tr').children('td:nth-child(4)').children('input').val();
+    let productTotal = (price * quantity).toFixed(2);
+
+    // UPDATE CART ITEMS
+    // If exist an element with id="id", updates data, if not, creates a new element <li>
+    if (document.getElementById(`${id}`)) {
+    	updatesItemQuantityTotal(id, quantity, price);
+    } else {
+        createNewCartItem(id, name, price, quantity, productTotal);
+
+    	// UPDATE TOTAL
+    	// If is a new item, the price to add to the total is the new items cost
+    	updateOrderTotal(parseFloat(productTotal));
+
+    	// Increment items cart counter
+    	updateCounter(+1);
+    }
+}
+
+function createNewCartItem(id, name, price, quantity, productTotal) {
+    let li = `<li id="${id}" class="list-group-item d-flex justify-content-between">
+                  <span class="col-4" hidden>${id}</span>
+                  <span class="col-4" hidden>${price}</span>
+                  <span class="col-4">${name}</span>
+                  <span class="col-3 text-center">${quantity}</span>
+                  <span class="col-3">${productTotal} €</span>
+                  <button id="remove" class="btn btn-sm btn-custom col-1"><i class="bi bi-trash3"></i></button>
+              </li>`;
+
+    // Add element <li>
+    $('#cart-body').append(li);
 }
 
 // UPDATE ITEMS BAG COUNTER

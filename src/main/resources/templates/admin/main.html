@@ -152,21 +152,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- MODAL ORDER REMOVED -->
-        <div th:id="order-removed" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="fs-5">El pedido se ha eliminado correctamente.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </section>
 
     <!-- SENT ORDERS -->
@@ -287,8 +272,21 @@
                 </div>
             </div>
         </div>
-
     </section>
+
+    <!-- MODAL ORDER REMOVED -->
+    <div th:id="order-removed" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fs-5">El pedido se ha eliminado correctamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer th:replace="fragments/fragments :: footer"></footer>

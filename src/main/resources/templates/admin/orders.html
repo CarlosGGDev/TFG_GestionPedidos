@@ -60,12 +60,6 @@
                     <h4 class="d-inline">Historial de pedidos</h4>
                 </div>
                 <div class="col-12">
-                    <!--
-                    <div>
-                        <h4 class="d-inline">Pedidos pendientes</h4>
-                        <span class="fs-5" th:text="| (${pendingOrders.size})|"></span>&nbsp;&nbsp;&nbsp;
-                    </div>
-                    -->
                     <p th:if="${orders.size == 0}" class="my-3">No hay pedidos</p>
                     <table th:if="${orders.size > 0}" class="table table-stripped mt-2">
                         <thead>
