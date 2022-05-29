@@ -7,9 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Controller to manage an HTTP request to return a resource.
+ * Return a custom HTML file with HTTP errors
+ */
 @Controller
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
+	/**
+	 * Controller that returns a view. The error information is sent with a Model object.
+	 * According to the HTTP error, the error message changes.
+	 * The error is obtained from RequestDispatcher, which communicates with servlet container.
+	 * @param model Object to send data to the view
+	 * @return HTML file
+	 */
 	@RequestMapping(value = "/error")
 	public String handleError(HttpServletRequest request, Model model) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

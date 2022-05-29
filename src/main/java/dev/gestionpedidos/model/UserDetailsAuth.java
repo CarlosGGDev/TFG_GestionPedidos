@@ -8,6 +8,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * User Details Auth object.
+ * This object is managed by Spring Security to allow
+ * access to the application.
+ */
 public class UserDetailsAuth implements UserDetails {
 
 	private final User user;
@@ -16,6 +21,10 @@ public class UserDetailsAuth implements UserDetails {
 		this.user = user;
 	}
 
+	/**
+	 * Gets the authorities granted to logged user
+	 * @return List with authorities granted
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<Role> roles = Set.of(user.getRole());

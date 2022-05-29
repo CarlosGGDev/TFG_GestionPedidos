@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * User object.
+ * Is a foreign key in Order object
+ */
 @Entity
 @Table(name = "users")
 @Getter @Setter

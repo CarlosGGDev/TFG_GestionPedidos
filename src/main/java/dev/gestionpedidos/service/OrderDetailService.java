@@ -1,7 +1,7 @@
 package dev.gestionpedidos.service;
 
-import dev.gestionpedidos.dto.OrderDetailDTO;
+import dev.gestionpedidos.dto.OrderDetailDto;
 
 public interface OrderDetailService {
-	void saveOrderDetail(OrderDetailDTO orderDetailDTO);
+	void saveOrderDetail(OrderDetailDto orderDetailDTO);
 }

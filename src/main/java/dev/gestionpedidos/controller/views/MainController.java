@@ -8,9 +8,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controller to manage an HTTP request to return a resource.
+ * Return an HTML files depending on user role
+ */
 @Controller
 public class MainController {
 
@@ -22,12 +25,20 @@ public class MainController {
 		this.orderService = orderService;
 	}
 
+	/**
+	 * Controller that returns a view. This is the controller where the user is redirected when login.
+	 * If there is no user saved in session, saves a user with data from database.
+	 * If there is a user saved, gets its. This allows to update user profile, go back to main page and update
+	 * the user session with new data. If not re-save a user,when this view is opens, the user session has the
+	 * old data.
+	 *
+	 * According to user role, returns a different view
+	 * @param userDetails Object with user information managed by Spring Security
+	 * @param session Http session
+	 * @return
+	 */
 	@GetMapping(value = "/") // http://localhost:8080/
 	public ModelAndView showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session) {
-		// Si no hay un usuario guardado en la sesion, lo guarda (solo cuando se inicia sesion por primera vez).
-		// Si hay un usuario guardado, no lo vuelve a guardar, de esta forma cuando se actualizan los datos del perfil y se guarda
-		// el nuevo usuario en la sesion, puede recuperar los datos del usuario, si no da error, ya que intenta recuperar los datos del usuario
-		// que habia iniciado sesion, pero al cambiar los datos del perfil da error.
 		User user;
 		if (session.getAttribute("user") == null) {
 			user = this.userService.findByName(userDetails.getUsername()).get();
@@ -48,5 +59,4 @@ public class MainController {
 		}
 		return main;
 	}
-
 }

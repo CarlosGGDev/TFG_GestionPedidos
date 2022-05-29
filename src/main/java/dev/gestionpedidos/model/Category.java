@@ -1,12 +1,14 @@
 package dev.gestionpedidos.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * Category object.
+ * Is a foreign key in Product object
+ */
+@Builder
 @Entity
 @Table(name = "categories")
 @Getter @Setter

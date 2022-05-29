@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * User Details service implementation.
+ * This class is used by Spring Security to authenticate users.
+ * The User repository is injected as dependency at controller level.
+ * Methods invoke the repository to persist data.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -19,6 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
+	/**
+	 * Get user by email
+	 * @param email the username identifying the user whose data is required.
+	 * @return UserDetailsAuth object
+	 * @throws UsernameNotFoundException
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional<User> userOpt = this.userRepository.findByEmail(email);

@@ -1,11 +1,15 @@
 package dev.gestionpedidos.service;
 
-import dev.gestionpedidos.dto.OrderDetailDTO;
+import dev.gestionpedidos.dto.OrderDetailDto;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Order Detail service implementation.
+ * The Jdbc Template and Data Source are injected as dependencies at controller level.
+ */
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
 
@@ -18,9 +22,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		jdbcTemplate.setDataSource(dataSource);
 	}
 
+	/**
+	 * Saves an order detail.
+	 * Get a plain object order detail dto and persist data with JDBC.
+	 * @param orderDetailDTO
+	 */
 	@Override
 	@Transactional
-	public void saveOrderDetail(OrderDetailDTO orderDetailDTO) {
+	public void saveOrderDetail(OrderDetailDto orderDetailDTO) {
 		int orderId = orderDetailDTO.getOrder_id();
 		int productId = orderDetailDTO.getProduct_id();
 		int quantity = orderDetailDTO.getQuantity();

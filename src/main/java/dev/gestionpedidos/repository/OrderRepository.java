@@ -3,12 +3,19 @@ package dev.gestionpedidos.repository;
 import dev.gestionpedidos.model.Order;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Order repository.
+ * Access the database to persist orders data.
+ * Extends from the JpaInterface which includes methods to access the database.
+ * In addition, custom methods are created for certain requirements using JPQL.
+ */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 

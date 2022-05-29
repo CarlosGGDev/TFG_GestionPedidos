@@ -7,6 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Product object.
+ * Is a complex object wit a nested objects.
+ * Contains a Category object.
+ * Their relationships are mapped by JPA.
+ */
 @Entity
 @Table(name = "products")
 @Getter @Setter

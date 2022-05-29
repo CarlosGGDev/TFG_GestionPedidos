@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller to manage requests of categories
+ */
 @RestController
 public class OrderController {
 
@@ -19,7 +22,12 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 
-	// TODO: docu - este metodo al devovler ResponseEntity.ok desde javascript se puede hacer la funcion en caso de success
+	/**
+	 * POST controller for save an order. When this URL receives a request, the service saves an order.
+	 * @param order Order to be saved
+	 * @param session Http session
+	 * @return
+	 */
 	@PostMapping(value = "/pedidos") // http://localhost:8080/pedidos
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -32,8 +40,14 @@ public class OrderController {
 		return ResponseEntity.of(savedOrderOpt);
 	}
 
-	// TODO: poner en documentacion que estos dos metodos se llaman en funcion de los parametros de la request.
-	//  Los dos son de tipo POST pero segun los parametros entrara por uno u otro, y devuelve una redireccion
+	/**
+	 * POST controller for edit order status.
+	 * When this URL receives a request, the service edits an order status
+	 * @param response Http response
+	 * @param orderId The id of the order to be edited
+	 * @param status New order status to be saved
+	 * @throws IOException
+	 */
 	@PostMapping(value = "/pedidos/editar",
 				 params = {"orderId", "status"}) // http://localhost:8080/pedidos/editar
 	public void editOrderStatus(HttpServletResponse response,
@@ -43,6 +57,14 @@ public class OrderController {
 		response.sendRedirect("/");
 	}
 
+	/**
+	 * POST controller for edit order comment.
+	 * When this URL receives a request, the service edits an order comment.
+	 * @param response Http response
+	 * @param orderId The id of the order to be edited
+	 * @param comment New order comment to be saved
+	 * @throws IOException
+	 */
 	@PostMapping(value = "/pedidos/editar",
 				 params = {"orderId", "comment"}) // http://localhost:8080/pedidos/editar
 	public void editOrderComment(HttpServletResponse response,
@@ -52,6 +74,11 @@ public class OrderController {
 		response.sendRedirect("/");
 	}
 
+	/**
+	 * DELETE controller for delete order. When this URL receives a request, the service deletes an order.
+	 * The controller receives the parameters in path
+	 * @param orderId The id of the order to be deleted
+	 */
 	@DeleteMapping(value = "/pedidos/{orderId}") // http://localhost:8080/pedidos/1
 	public void deleteOrder(@PathVariable("orderId") int orderId) {
 		this.orderService.deleteOrder(orderId);

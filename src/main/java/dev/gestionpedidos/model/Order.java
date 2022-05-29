@@ -2,14 +2,18 @@ package dev.gestionpedidos.model;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Order object.
+ * Is a complex object wit a nested objects.
+ * Contains a User and a list of Order Details objects.
+ * Their relationships are mapped by JPA.
+ */
+@Builder
 @Entity
 @Table(name = "orders")
 @Getter @Setter

@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
+/**
+ * Controller to manage an HTTP request to return a resource.
+ * Return an HTML file with sign up form
+ */
 @Controller
 public class SignupController {
 
@@ -21,12 +25,32 @@ public class SignupController {
         this.userService = userService;
     }
 
+    /**
+     * Controller that returns a view with sign up form.
+     * Send a User object and binds it to the form
+     * @param model Object to send data to the view
+     * @return HTML file
+     */
     @GetMapping(value = "/registro") // http://localhost:8080/registro
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
         return "public/signup";
     }
 
+    /**
+     * POST controller to control user registration.
+     * To check that the new user information doesnt'exist in database, it does
+     * a search for each value. It allow us to show a specific message for each
+     * field, and know what value exists.
+     *
+     * If the registrarion has errors, they are displayed in each field.
+     * If the registration is correct, the user is redirected to a success page.
+     *
+     * @param user User to be saved
+     * @param result Object with possible errors
+     * @param model Object to bind data between controller and view
+     * @return HTML file
+     */
     @PostMapping(value = "/registro") // http://localhost:8080/registro
     public String signUp(@Valid @ModelAttribute User user,
                          BindingResult result,

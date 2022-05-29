@@ -4,44 +4,63 @@ import dev.gestionpedidos.model.Category;
 import dev.gestionpedidos.repository.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 class CategoryServiceImplTest {
 
-    @Mock
-    CategoryRepository categoryRepository;
+    public static final String NAME = "Name";
+    public static final int ONE = 1;
 
-    @InjectMocks
-    CategoryServiceImpl categoryService;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private CategoryService categoryService;
+
+    Category categoryDummy = Category.builder()
+            .id(ONE)
+            .name(NAME)
+            .build();
+
+    List<Category> categoriesDummy = List.of(categoryDummy);
 
     @Test
     void should_return_all_categories() {
+        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesDummy));
+        List<Category> categories = this.categoryService.getCategories().get();
 
+        assertThat(categories).isNotNull();
+        assertEquals(this.categoriesDummy, categories);
     }
 
     @Test
-    void should_return_one_categorie() {
-        when(this.categoryService.getCategory(anyInt())).thenReturn(Optional.of(new Category()));
+    void should_return_one_category() {
+        when(this.categoryService.getCategory(anyInt())).thenReturn(Optional.of(this.categoryDummy));
+        Category category = this.categoryService.getCategory(anyInt()).get();
+
+        assertThat(category).isNotNull();
+        assertEquals(this.categoryDummy, category);
     }
 
     @Test
-    void should_save_categorie() {
-
+    void should_save_category() {
+        doNothing().when(this.categoryService).saveCategory(this.categoryDummy);
+        this.categoryService.saveCategory(this.categoryDummy);
+        verify(this.categoryService, times(ONE)).saveCategory(this.categoryDummy);
     }
 
     @Test
-    void should_delete_categorie() {
-
+    void should_delete_category() {
+        doNothing().when(this.categoryService).deleteCategory(ONE);
+        this.categoryService.deleteCategory(ONE);
+        verify(this.categoryService, times(ONE)).deleteCategory(ONE);
     }
-
 }

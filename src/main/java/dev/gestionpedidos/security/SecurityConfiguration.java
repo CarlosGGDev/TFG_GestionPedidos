@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * This class collects the security configuration of the application.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -19,11 +22,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * A bean of passsword encoder.
+     * @return An instance of password encoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configures the manager authenticator to control the users authentications.
+     * Uses a User Details Service to manage the authentication.
+     * @param auth the {@link AuthenticationManagerBuilder} to use
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -31,6 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .passwordEncoder(this.passwordEncoder());
     }
 
+    /**
+     * Configures the access of HTTP requests to application resources.
+     * @param httpSecurity the {@link HttpSecurity} to modify
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
