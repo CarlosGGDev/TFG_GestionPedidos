@@ -1,6 +1,7 @@
 package dev.gestionpedidos.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
  * User object.
  * Is a foreign key in Order object
  */
+@Builder
 @Entity
 @Table(name = "users")
 @Getter @Setter

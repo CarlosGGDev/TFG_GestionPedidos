@@ -1,6 +1,7 @@
 package dev.gestionpedidos.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import javax.persistence.*;
  * Contains a Category object.
  * Their relationships are mapped by JPA.
  */
+@Builder
 @Entity
 @Table(name = "products")
 @Getter @Setter

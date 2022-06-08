@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void deleteUser(int userId) {
-        Optional<User> userOpt = getUser(userId);
+        Optional<User> userOpt = this.getUser(userId);
         if (userOpt.isPresent()) {
             this.userRepository.deleteById(userId);
         }

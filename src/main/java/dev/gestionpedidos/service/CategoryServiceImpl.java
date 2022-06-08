@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 */
 	@Override
 	public void deleteCategory(int categoryId) {
-		Optional<Category> categoryOpt = getCategory(categoryId);
+		Optional<Category> categoryOpt = this.getCategory(categoryId);
 		if (categoryOpt.isPresent()) {
 			this.categoryRepository.deleteById(categoryId);
 		}

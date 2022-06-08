@@ -1,10 +1,13 @@
 package dev.gestionpedidos.service;
 
 import dev.gestionpedidos.model.Order;
+import dev.gestionpedidos.model.OrderDetail;
+import dev.gestionpedidos.model.Role;
 import dev.gestionpedidos.model.User;
 import dev.gestionpedidos.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -16,6 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * OrderService class test cases
+ */
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
@@ -25,145 +31,225 @@ class OrderServiceImplTest {
     public static final String STATUS = "Status";
     public static final String PENDING = "pendiente";
     public static final String SHIPPED = "enviado";
+    public static final String DELIVERED = "entregado";
     public static final String COMMENT = "Comment";
     public static final double TOTAL = 10;
+    public static final int USER_ID = 1;
+    public static final String NIF = "A00000000";
+    public static final String EMAIL = "email@gmail.com";
+    public static final String PHONE = "636123456";
+    public static final String ADDRESS = "C/ Test, 4";
+    public static final int ZIPCODE = 07001;
+    public static final String TOWN = "Palma";
+    public static final String PASSWORD = "123";
 
     @Mock
     private OrderRepository orderRepository;
-    @Mock
-    private OrderService orderService;
+    @InjectMocks
+    private OrderServiceImpl orderService;
 
-    @Test
-    void should_return_all_orders() {
-        Order orderDummy = Order.builder()
-                .id(ONE)
-                .user(new User())
-                .orderDate(LocalDateTime.now())
-                .shippingAddress(SHIPPING_ADDRESS)
-                .status(STATUS)
-                .comment(COMMENT)
-                .orderDetails(List.of())
-                .total(TOTAL)
-                .build();
+    User user = User.builder()
+        .id(USER_ID)
+        .nif(NIF)
+        .name(NAME)
+        .email(EMAIL)
+        .phone(PHONE)
+        .address(ADDRESS)
+        .zipcode(ZIPCODE)
+        .town(TOWN)
+        .password(PASSWORD)
+        .role(Role.ROLE_USER)
+        .build();
 
-        List<Order> ordersDummy = List.of(orderDummy);
+    Order order = Order.builder()
+        .id(ONE)
+        .user(this.user)
+        .orderDate(LocalDateTime.now())
+        .shippingAddress(SHIPPING_ADDRESS)
+        .status(STATUS)
+        .comment(COMMENT)
+        .orderDetails(List.of(new OrderDetail()))
+        .total(TOTAL)
+        .build();
 
-        when(this.orderService.getOrders()).thenReturn(Optional.of(ordersDummy));
-        List<Order> orders = this.orderService.getOrders().get();
+    List<Order> orders = List.of(this.order);
 
-        assertThat(orders).isNotNull();
-        assertEquals(ordersDummy, orders);
-    }
+    Order pendingOrder = Order.builder()
+        .id(ONE)
+        .user(user)
+        .orderDate(LocalDateTime.now())
+        .shippingAddress(SHIPPING_ADDRESS)
+        .status(PENDING)
+        .comment(COMMENT)
+        .orderDetails(List.of(new OrderDetail()))
+        .total(TOTAL)
+        .build();
 
-    @Test
-    void should_return_all_pending_orders() {
-        Order pendingOrderDummy = Order.builder()
-                .id(ONE)
-                .user(new User())
-                .orderDate(LocalDateTime.now())
-                .shippingAddress(SHIPPING_ADDRESS)
-                .status(PENDING)
-                .comment(COMMENT)
-                .orderDetails(List.of())
-                .total(TOTAL)
-                .build();
+    List<Order> pendingOrders = List.of(this.pendingOrder);
 
-        List<Order> pendingOrdersDummy = List.of(pendingOrderDummy);
+    Order sentOrder = Order.builder()
+        .id(ONE)
+        .user(user)
+        .orderDate(LocalDateTime.now())
+        .shippingAddress(SHIPPING_ADDRESS)
+        .status(SHIPPED)
+        .comment(COMMENT)
+        .orderDetails(List.of(new OrderDetail()))
+        .total(TOTAL)
+        .build();
 
-        when(this.orderService.getOrders()).thenReturn(Optional.of(pendingOrdersDummy));
-        List<Order> pendingOrders = this.orderService.getPendingOrders().get();
+    List<Order> sentOrders = List.of(this.sentOrder);
 
-        assertThat(pendingOrders).isNotNull();
-        assertEquals(pendingOrdersDummy, pendingOrders);
-    }
+    Order customerPendingOrder = Order.builder()
+        .id(ONE)
+        .user(user)
+        .orderDate(LocalDateTime.now())
+        .shippingAddress(SHIPPING_ADDRESS)
+        .status(PENDING)
+        .comment(COMMENT)
+        .orderDetails(List.of(new OrderDetail()))
+        .total(TOTAL)
+        .build();
 
-    @Test
-    void should_return_all_sent_orders() {
-        Order sentOrderDummy = Order.builder()
-                .id(ONE)
-                .user(new User())
-                .orderDate(LocalDateTime.now())
-                .shippingAddress(SHIPPING_ADDRESS)
-                .status(SHIPPED)
-                .comment(COMMENT)
-                .orderDetails(List.of())
-                .total(TOTAL)
-                .build();
+    List<Order> customerPendingOrders = List.of(this.customerPendingOrder);
 
-        List<Order> sentOrdersDummy = List.of(sentOrderDummy);
+    Order customerDeliveredOrder = Order.builder()
+        .id(ONE)
+        .user(user)
+        .orderDate(LocalDateTime.now())
+        .shippingAddress(SHIPPING_ADDRESS)
+        .status(DELIVERED)
+        .comment(COMMENT)
+        .orderDetails(List.of(new OrderDetail()))
+        .total(TOTAL)
+        .build();
 
-        when(this.orderService.getSentOrders()).thenReturn(Optional.of(sentOrdersDummy));
-        List<Order> sentOrders = this.orderService.getSentOrders().get();
+    List<Order> customerDeliveredOrders = List.of(this.customerDeliveredOrder);
 
-        assertThat(sentOrders).isNotNull();
-        assertEquals(sentOrdersDummy, sentOrders);
-    }
-/*
-    @Test
-    void should_return_all_customer_pending_orders() {
-        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesFake));
-        List<Category> categories = this.categoryService.getCategories().get();
-
-        assertThat(categories).isNotNull();
-        assertEquals(this.categoriesFake, categories);
-    }
-
-    @Test
-    void should_return_all_customer_sent_orders() {
-        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesFake));
-        List<Category> categories = this.categoryService.getCategories().get();
-
-        assertThat(categories).isNotNull();
-        assertEquals(this.categoriesFake, categories);
-    }
-
-    @Test
-    void should_return_all_customer_delviered_orders() {
-        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesFake));
-        List<Category> categories = this.categoryService.getCategories().get();
-
-        assertThat(categories).isNotNull();
-        assertEquals(this.categoriesFake, categories);
-    }
-
+    /**
+     * Check that the service returns an order
+     */
     @Test
     void should_return_one_order() {
-        when(this.categoryService.getCategory(anyInt())).thenReturn(Optional.of(this.categoryFake));
-        Category category = this.categoryService.getCategory(anyInt()).get();
+        when(this.orderRepository.findById(ONE)).thenReturn(Optional.of(this.order));
 
-        assertThat(category).isNotNull();
-        assertEquals(this.categoryFake, category);
+        Optional<Order> order = this.orderService.getOrder(ONE);
+
+        assertEquals(order.get(), this.order);
     }
 
+    /**
+     * Check that the service returns all orders
+     */
     @Test
-    void should_save_order() {
-        doNothing().when(this.categoryService).saveCategory(this.categoryFake);
-        this.categoryService.saveCategory(this.categoryFake);
-        verify(this.categoryService, times(ONE)).saveCategory(this.categoryFake);
+    void should_return_all_orders() {
+        when(this.orderRepository.findAll()).thenReturn(this.orders);
+
+        Optional<List<Order>> orders = this.orderService.getOrders();
+
+        assertEquals(orders.get(), this.orders);
     }
 
+    /**
+     * Check that the service returns all orders with status 'pendiente'
+     */
     @Test
-    void should_edit_order_status() {
-        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesFake));
-        List<Category> categories = this.categoryService.getCategories().get();
+    void should_return_all_pending_orders() {
+        when(this.orderRepository.getPendingOrders()).thenReturn(Optional.of(this.pendingOrders));
 
-        assertThat(categories).isNotNull();
-        assertEquals(this.categoriesFake, categories);
+        Optional<List<Order>> orders = this.orderService.getPendingOrders();
+
+        assertEquals(orders.get(), this.pendingOrders);
+        assertThat(orders.get().get(0).getStatus().equals(PENDING));
     }
 
+    /**
+     * Check that the service returns all orders with status 'enviado'
+     */
     @Test
-    void should_edit_order_comment() {
-        when(this.categoryService.getCategories()).thenReturn(Optional.of(this.categoriesFake));
-        List<Category> categories = this.categoryService.getCategories().get();
+    void should_return_all_sent_orders() {
+        when(this.orderRepository.getSentOrders()).thenReturn(Optional.of(this.sentOrders));
 
-        assertThat(categories).isNotNull();
-        assertEquals(this.categoriesFake, categories);
+        Optional<List<Order>> orders = this.orderService.getSentOrders();
+
+        assertEquals(orders.get(), this.sentOrders);
+        assertThat(orders.get().get(0).getStatus().equals(SHIPPED));
     }
 
+    /**
+     * Check that the service returns all orders from a customer whose status is 'pendiente'
+     */
     @Test
-    void should_delete_order() {
-        doNothing().when(this.categoryService).deleteCategory(ONE);
-        this.categoryService.deleteCategory(ONE);
-        verify(this.categoryService, times(ONE)).deleteCategory(ONE);
-    }*/
+    void should_return_customer_pending_orders() {
+        when(this.orderRepository.getCustomerPendingOrders(ONE)).thenReturn(Optional.of(this.customerPendingOrders));
+
+        Optional<List<Order>> orders = this.orderService.getCustomerPendingOrders(ONE);
+
+        assertEquals(orders.get(), this.customerPendingOrders);
+        assertThat(orders.get().get(0).getUser().equals(this.user));
+        assertThat(orders.get().get(0).getStatus().equals(PENDING));
+    }
+
+    /**
+     * Check that the service returns all orders from a customer whose status is 'entregado'
+     */
+    @Test
+    void should_return_customer_delivered_orders() {
+        when(this.orderRepository.getCustomerDeliveredOrders(ONE)).thenReturn(Optional.of(this.customerDeliveredOrders));
+
+        Optional<List<Order>> orders = this.orderService.getCustomerDeliveredOrders(ONE);
+
+        assertEquals(orders.get(), this.customerDeliveredOrders);
+        assertThat(orders.get().get(0).getUser().equals(this.user));
+        assertThat(orders.get().get(0).getStatus().equals(DELIVERED));
+    }
+
+    /**
+     * Check that the service saves an order
+     */
+    @Test
+    void should_save_one_order() {
+        when(this.orderRepository.save(this.order)).thenReturn(this.order);
+
+        Optional<Order> order = this.orderService.saveOrder(this.order);
+
+        assertEquals(order.get(), this.order);
+    }
+
+    /**
+     * Check that the service edits the status of an order
+     */
+    @Test
+    void should_edit_one_order_status() {
+        doNothing().when(this.orderRepository).editOrderStatus(ONE, STATUS);
+
+        this.orderService.editOrderStatus(ONE, STATUS);
+
+        verify(this.orderRepository, times(1)).editOrderStatus(ONE, STATUS);
+    }
+
+    /**
+     * Check that the service edits the comment of an order
+     */
+    @Test
+    void should_edit_one_order_comment() {
+        doNothing().when(this.orderRepository).editOrderComment(ONE, COMMENT);
+
+        this.orderService.editOrderComment(ONE, COMMENT);
+
+        verify(this.orderRepository, times(1)).editOrderComment(ONE, COMMENT);
+    }
+
+    /**
+     * Check that the service deletes an order
+     */
+    @Test
+    void should_delete_one_order() {
+        when(this.orderService.getOrder(ONE)).thenReturn(Optional.of(this.order));
+        doNothing().when(this.orderRepository).deleteById(ONE);
+
+        this.orderService.deleteOrder(ONE);
+
+        verify(this.orderRepository, times(1)).deleteById(ONE);
+    }
 }

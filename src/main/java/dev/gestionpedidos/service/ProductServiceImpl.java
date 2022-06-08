@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public void deleteProduct(int productId) {
-        Optional<Product> productOpt = getProduct(productId);
+        Optional<Product> productOpt = this.getProduct(productId);
         if (productOpt.isPresent()) {
             this.productRepository.deleteById(productId);
         }
