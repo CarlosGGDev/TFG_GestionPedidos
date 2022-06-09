@@ -166,6 +166,7 @@ class OrderServiceImplTest {
     /**
      * Check that the service returns all orders with status 'enviado'
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     void should_return_all_sent_orders() {
         when(this.orderRepository.getSentOrders()).thenReturn(Optional.of(this.sentOrders));

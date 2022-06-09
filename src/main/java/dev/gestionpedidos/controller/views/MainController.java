@@ -35,7 +35,7 @@ public class MainController {
 	 * According to user role, returns a different view
 	 * @param userDetails Object with user information managed by Spring Security
 	 * @param session Http session
-	 * @return
+	 * @return ModelAndView object
 	 */
 	@GetMapping(value = "/") // http://localhost:8080/
 	public ModelAndView showMain(@AuthenticationPrincipal UserDetails userDetails, HttpSession session) {

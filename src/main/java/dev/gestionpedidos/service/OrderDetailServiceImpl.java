@@ -25,7 +25,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	/**
 	 * Saves an order detail.
 	 * Get a plain object order detail dto and persist data with JDBC.
-	 * @param orderDetailDTO
+	 * @param orderDetailDTO Order detail object
 	 */
 	@Override
 	@Transactional

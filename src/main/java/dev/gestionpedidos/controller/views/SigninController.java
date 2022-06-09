@@ -1,7 +1,6 @@
 package dev.gestionpedidos.controller.views;
 
 import dev.gestionpedidos.model.User;
-import dev.gestionpedidos.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

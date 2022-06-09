@@ -23,7 +23,7 @@ public class OrderDetailController {
 	 * POST controller for save an order detail. When this URL receives a request, the service saves an order detail.
 	 * This controllers receives a DTO object, not an entity of Order Detail
 	 * @param orderDetailDTO - Order detail to be saved
-	 * @param session
+	 * @param session - Http session
 	 */
 	@PostMapping(value = "/pedidos/detalle")// http://localhost:8080/pedidos/detalle
 	public void saveOrderDetail(@RequestBody OrderDetailDto orderDetailDTO, HttpSession session) {

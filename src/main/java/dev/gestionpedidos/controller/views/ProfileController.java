@@ -87,7 +87,7 @@ public class ProfileController {
 			this.userService.saveUser(user);
 			session.setAttribute("user", user);
 		}
-		return sessionUser.getRole().toString().equals("ROLE_USER") ? "public/profile" : "admin/profile";
+		return sessionUser.getRole().toString().equals("ROLE_USER") ? "public/profile" : "admin/profileAdmin";
 	}
 
 }

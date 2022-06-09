@@ -12,7 +12,6 @@ public class LogoutController {
 
 	/**
 	 * Controller that returns a view. When the user logs out, is redirected to this view
-	 * @return
 	 */
 	@GetMapping(value = "/logout") // http://localhost:8080/logout
 	public String logout() {

@@ -8,8 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
-
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
@@ -25,13 +23,10 @@ class OrderDetailServiceImplTest {
     private static final int QUANTITY = 1;
     private static final double PRICE = 1.5;
     private static final double TOTAL = 1.5;
-    private static final String EMPTY = "";
     private static final String SQL = "INSERT INTO orders_details (order_id, product_id, quantity, price, total) VALUES (1,1,1,1.5,1.5);";
 
     @Mock
     JdbcTemplate jdbcTemplate;
-    @Mock
-    DataSource dataSource;
     @InjectMocks
     OrderDetailServiceImpl orderDetailService;
 

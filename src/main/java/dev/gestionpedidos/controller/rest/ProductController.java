@@ -42,7 +42,7 @@ public class ProductController {
      * POST controller for edit a product. When this URL receives a request, the service edits a product.
      * The product is not updated, the repository find a product with the same id, and replaces it.
      * @param product New product to be saved
-     * @return
+     * @return ResponseEntity object with the result
      */
     @PostMapping(value = "/productos/editar") // http://localhost:8080/productos/editar
     public ResponseEntity<Product> editProduct(@RequestBody Product product) {

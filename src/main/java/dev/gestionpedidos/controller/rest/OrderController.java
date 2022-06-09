@@ -26,7 +26,7 @@ public class OrderController {
 	 * POST controller for save an order. When this URL receives a request, the service saves an order.
 	 * @param order Order to be saved
 	 * @param session Http session
-	 * @return
+	 * @return ResponseEntity object with the result
 	 */
 	@PostMapping(value = "/pedidos") // http://localhost:8080/pedidos
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order, HttpSession session) {
