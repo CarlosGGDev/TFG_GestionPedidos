@@ -16,7 +16,7 @@ Antes de poder desarrollar y/o desplegar la aplicación en local es necesario te
 Clonar en Intellij IDEA Community el proyecto desde el repositorio de GitHub - https://github.com/CarlosGGDev/TFG_GestionPedidos.git <br />
 Será necesario también importar la base de datos desde el archivo .sql
 
-## Build en local
+## Compilación
 Una vez importado el proyecto recargar los proyectos Maven haciendo click en 'Reload' 
 en la pestaña de Maven situada en la parte superior derecha.
 
